@@ -1,0 +1,30 @@
+/* modules/integrations/integrations.css — reglas propias de este módulo. Los tokens viven en globals.css. */
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes ribbonA{from{transform:translateX(0)}to{transform:translateX(-33.3333%)}}
+@keyframes ribbonB{from{transform:translateX(-33.3333%)}to{transform:translateX(0)}}
+.ribbon:hover>div{animation-play-state:paused}
+.mqtrack{display:flex;gap:52px;width:max-content;animation:marquee 46s linear infinite}
+.mqmask{-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+
+.integ{max-width:var(--maxw);margin:0 auto;padding:84px 24px}
+.integ-head{max-width:640px}
+.integ-groups{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:38px 0 0;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.integ-group{background:var(--grafito);padding:26px 22px 30px;transition:background .4s}
+.integ-group:hover{background:var(--grafito-2)}
+.integ-group-cat{font-family:var(--fm);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ambar)}
+.integ-group-note{font-size:13.5px;color:var(--crema-dim);margin:12px 0 0;text-wrap:pretty}
+.integ-group-logos{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0 0}
+.integ-logo{position:relative;width:34px;height:34px;flex:none;border-radius:9px;background:var(--panel);border:1px solid var(--line)}
+.integ-group-names{font-family:var(--fm);font-size:10px;letter-spacing:.4px;color:var(--piedra);margin:12px 0 0;text-wrap:pretty}
+
+.integ-ribbons{margin:34px -24px 0;padding:0 24px;display:flex;flex-direction:column;gap:14px;overflow:hidden}
+.integ-chip{display:inline-flex;align-items:center;gap:12px;flex:none;padding:12px 20px 12px 13px;border-radius:14px;background:rgba(28,32,41,.9);border:1px solid var(--line-2)}
+.integ-chip-logo{position:relative;width:36px;height:36px;flex:none;border-radius:9px;background:var(--grafito);border:1px solid var(--line)}
+.integ-chip-name{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--crema);white-space:nowrap}
+
+.integ-count{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;margin:30px 0 0}
+.integ-count-n{font-family:var(--fh);font-weight:700;font-size:30px;letter-spacing:-.8px;color:var(--ambar)}
+.integ-count-l{font-family:var(--fm);font-size:11px;letter-spacing:1px;color:var(--piedra)}
+
+@media(max-width:1100px){ .integ-groups{grid-template-columns:1fr 1fr} }
+@media(max-width:640px){ .integ-groups{grid-template-columns:1fr} }

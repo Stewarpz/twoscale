@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Twoscale.IA · Automatización, IA y software a la medida</title>
+<meta name="description" content="Automatizamos ventas, atención y operaciones con IA práctica: workflows, agentes, chatbots de WhatsApp, webs y sistemas a la medida.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+<!-- 1. Tokens de marca, reset y utilidades compartidas -->
+<link rel="stylesheet" href="globals.css">
+
+<!-- 2. Broadsheet, encapsulado bajo .bs (solo para las maquetas de cliente) -->
+<link rel="stylesheet" href="vendor/broadsheet.css">
+
+<!-- 3. CSS de cada módulo. Orden irrelevante: no se pisan entre sí. -->
+<link rel="stylesheet" href="modules/header/header.css">
+<link rel="stylesheet" href="modules/intro/intro.css">
+<link rel="stylesheet" href="modules/hero/hero.css">
+<link rel="stylesheet" href="modules/metrics/metrics.css">
+<link rel="stylesheet" href="modules/chat-demo/chat-demo.css">
+<link rel="stylesheet" href="modules/integrations/integrations.css">
+<link rel="stylesheet" href="modules/process/process.css">
+<link rel="stylesheet" href="modules/services/services.css">
+<link rel="stylesheet" href="modules/workflow/workflow.css">
+<link rel="stylesheet" href="modules/mockups/mockups.css">
+<link rel="stylesheet" href="modules/industries/industries.css">
+<link rel="stylesheet" href="modules/about/about.css">
+<link rel="stylesheet" href="modules/cases/cases.css">
+<link rel="stylesheet" href="modules/contact/contact.css">
+<link rel="stylesheet" href="modules/footer/footer.css">
+<link rel="stylesheet" href="modules/agent/agent.css">
+</head>
+
+<body>
+<!-- Barra de progreso de lectura -->
+<div class="scrollbar"></div>
+
+<!-- ==========================================================
+     Esqueleto. Cada <div data-module> es un punto de montaje:
+     app.js inyecta el HTML del módulo y ejecuta su mount().
+     ========================================================== -->
+<div class="shell">
+
+  <div data-module="header"></div>
+
+  <main class="shell-main">
+    <!-- Inicio -->
+    <div data-page="home">
+      <div data-module="intro"></div>
+      <div data-module="hero"></div>
+      <div data-module="metrics"></div>
+      <div data-module="chat-demo"></div>
+      <div data-module="integrations"></div>
+      <div data-module="process"></div>
+    </div>
+
+    <!-- Servicios: método → prueba → sector -->
+    <div data-page="servicios" hidden>
+      <div data-module="services"></div>
+      <div data-module="workflow"></div>
+      <div data-module="mockups"></div>
+      <div data-module="industries"></div>
+    </div>
+
+    <div data-page="nosotros" hidden><div data-module="about"></div></div>
+    <div data-page="casos"    hidden><div data-module="cases"></div></div>
+    <div data-page="contacto" hidden><div data-module="contact"></div></div>
+  </main>
+
+  <div data-module="footer"></div>
+</div>
+
+<!-- Agente de prospección, flotante y fuera del flujo -->
+<div data-module="agent"></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

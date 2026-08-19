@@ -1,0 +1,13 @@
+/* modules/intro/intro.css — reglas propias de este módulo. Los tokens viven en globals.css. */
+@keyframes introOut{0%{opacity:1;transform:scale(1);filter:blur(0)}100%{opacity:0;transform:scale(.94);filter:blur(6px)}}
+@keyframes cueBob{0%,100%{transform:translateY(0);opacity:.75}50%{transform:translateY(7px);opacity:1}}
+.introdissolve{animation:introOut linear both;animation-timeline:scroll(root);animation-range:0 74vh}
+
+.intro{position:relative;height:100vh;min-height:540px;overflow:hidden;background:var(--grafito)}
+.intro-fade{position:absolute;inset:0}
+.intro-halo{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:74vw;max-width:940px;aspect-ratio:2.6/1;background:radial-gradient(ellipse,rgba(75,59,209,.52),rgba(240,169,62,.13) 42%,transparent 74%);pointer-events:none}
+.intro-canvas{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(92vw,1120px);aspect-ratio:4.6/1}
+.intro-foot{position:absolute;left:0;right:0;bottom:8%;display:flex;flex-direction:column;align-items:center;gap:16px;padding:0 24px}
+.intro-tag{font-family:var(--fm);font-size:11.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--piedra);text-align:center;text-wrap:pretty}
+.intro-cue{font-family:var(--fm);font-size:16px;color:var(--ambar);animation:cueBob 2.2s ease-in-out infinite}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}

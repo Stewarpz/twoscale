@@ -1,0 +1,96 @@
+/* ===========================================================
+   globals.css — tokens de marca, reset y utilidades compartidas
+   Twoscale.IA · toda regla propia de un módulo vive en su carpeta
+   =========================================================== */
+:root{
+  --grafito:#14161C; --grafito-2:#191C24; --panel:#1C2029; --panel-2:#222633;
+  --line:rgba(247,244,238,.10); --line-2:rgba(247,244,238,.18);
+  --indigo:#4B3BD1; --indigo-2:#6455E4; --indigo-soft:rgba(75,59,209,.16);
+  --ambar:#F0A93E; --ambar-soft:rgba(240,169,62,.14);
+  --piedra:#8B8D98; --crema:#F7F4EE; --crema-dim:#C9C7C0;
+  --fh:'Space Grotesk',system-ui,sans-serif; --fb:'Manrope',system-ui,sans-serif; --fm:'Space Mono',ui-monospace,monospace;
+  --maxw:1200px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--grafito);color:var(--crema);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
+a{color:var(--ambar);text-decoration:none}
+a:hover{color:var(--indigo-2)}
+::selection{background:var(--indigo);color:#fff}
+:focus-visible{outline:2px solid var(--ambar);outline-offset:3px;border-radius:4px}
+input,button,textarea,select{font-family:inherit}
+@keyframes revealIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes revLeft{from{opacity:0;transform:translateX(-46px)}to{opacity:1;transform:none}}
+@keyframes revRight{from{opacity:0;transform:translateX(46px)}to{opacity:1;transform:none}}
+@keyframes revScale{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:none}}
+@keyframes revFade{from{opacity:0}to{opacity:1}}
+@keyframes revBlur{from{opacity:0;filter:blur(14px);transform:translateY(20px)}to{opacity:1;filter:blur(0);transform:none}}
+[data-reveal]{animation:revealIn .9s cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 24%}
+[data-reveal="left"]{animation-name:revLeft}
+[data-reveal="right"]{animation-name:revRight}
+[data-reveal="scale"]{animation-name:revScale}
+[data-reveal="fade"]{animation-name:revFade}
+[data-reveal="blur"]{animation-name:revBlur}
+[data-stagger]>*{animation:revealIn .85s cubic-bezier(.2,.7,.2,1) both;animation-timeline:view();animation-range:entry 0% cover 26%}
+@supports not (animation-timeline: view()){
+  [data-reveal],[data-stagger]>*{animation:revealIn .8s ease both}
+}
+@keyframes progressGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.scrollbar{position:fixed;top:0;left:0;right:0;height:2px;z-index:80;background:linear-gradient(90deg,var(--indigo-2),var(--ambar));transform-origin:0 50%;animation:progressGrow linear both;animation-timeline:scroll(root);pointer-events:none}
+@keyframes driftUp{from{transform:translateY(70px)}to{transform:translateY(-70px)}}
+@keyframes driftDown{from{transform:translateY(-60px)}to{transform:translateY(60px)}}
+.parallax-a{animation:driftUp linear both;animation-timeline:scroll(root)}
+.parallax-b{animation:driftDown linear both;animation-timeline:scroll(root)}
+@keyframes fadeOnScroll{from{opacity:1}to{opacity:.15}}
+.fade-out-scroll{animation:fadeOnScroll linear both;animation-timeline:view();animation-range:exit 0% exit 90%}
+@supports not (animation-timeline: scroll(root)){.scrollbar,.parallax-a,.parallax-b,.fade-out-scroll{animation:none}.scrollbar{display:none}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+@supports not (animation-timeline: view()){.steprail{animation:railGrow 1.4s ease both}}
+@media (prefers-reduced-motion: reduce){.steprail,.leakdrop,.buildbar,.daysweep,.orbitdot{animation:none!important}}
+@media (prefers-reduced-motion: reduce){.mocktrack,.aidachip,.appbar{animation:none!important}}
+@supports not (animation-timeline: scroll(root)){.introdissolve{animation:none}}
+@media (prefers-reduced-motion: reduce){.introdissolve{animation:none!important}.introcue{animation:none!important}}
+@media (prefers-reduced-motion: reduce){.ribbon>div{animation:none!important}}
+@media (prefers-reduced-motion: reduce){.mqtrack{animation:none}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion: reduce){.agent-dodge,.agent-rest{transition:none}}
+@media(max-width:1100px){
+  .mainnav{display:none!important}
+  .menu-btn{display:inline-grid!important}
+  .herogrid,.chatgrid,.appsgrid,.contactgrid,.logingrid,.proofgrid,.livegrid{grid-template-columns:1fr!important;gap:28px!important}
+  .indgrid{grid-template-columns:1fr!important}
+  .svcgrid{grid-template-columns:1fr!important;gap:26px!important}
+  .svcrail{position:static!important;display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px!important}
+  .webgrid,.aigrid,.valgrid,.pillargrid{grid-template-columns:1fr 1fr!important}
+  .aboutgrid,.calgrid{grid-template-columns:1fr!important;gap:24px!important}
+  .footgrid{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:820px){
+  .packgrid,.casegrid{grid-template-columns:1fr!important}
+  .sipocgrid{grid-template-columns:1fr 1fr!important}
+}
+@media(max-width:640px){
+  .metricgrid,.webgrid,.aigrid,.valgrid,.pillargrid{grid-template-columns:1fr 1fr!important}
+  .svcstory,.forkrow{grid-template-columns:1fr!important;flex-direction:column!important;align-items:stretch!important;gap:20px!important}
+  .velgrid,.kpigrid{grid-template-columns:1fr 1fr!important}
+  .integ3,.procgrid{grid-template-columns:1fr!important}
+  .introcue{margin-top:2px}
+  .svcrail{grid-template-columns:repeat(2,1fr)!important}
+  .bscgrid,.sipocgrid{grid-template-columns:1fr!important}
+  .aidarow{flex-direction:column!important}
+  .aidarow>div:first-child{width:100%!important;flex-direction:row!important;flex-wrap:wrap;padding-top:0!important;gap:14px!important}
+  .approw,.dashrow{flex-direction:column!important}
+  .dashrow>div:first-child{width:100%!important}
+  .approw>div:first-child{width:100%!important;flex-direction:row!important;flex-wrap:wrap;border-right:none!important}
+  .kpirow{grid-template-columns:1fr 1fr!important}
+  .footgrid{grid-template-columns:1fr!important}
+}
+@media(max-width:460px){
+  .metricgrid,.aigrid,.valgrid,.pillargrid,.velgrid,.kpigrid,.svcrail{grid-template-columns:1fr!important}
+}
+@media (prefers-reduced-motion: reduce){
+  [data-reveal]{animation:none!important;opacity:1!important;transform:none!important}
+  .flowdot,.floaty,.gridbg{animation:none!important}
+  html{scroll-behavior:auto}
+}

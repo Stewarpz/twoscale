@@ -1,0 +1,35 @@
+/* modules/header/header.css — barra superior, selector de idioma y cajón móvil.
+   Los colores y tipografías salen de globals.css. */
+
+.hdr{position:sticky;top:0;z-index:60;background:rgba(20,22,28,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hdr-inner{max-width:var(--maxw);margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;gap:20px}
+
+.hdr-brand{font-family:var(--fh);font-weight:700;font-size:22px;letter-spacing:-.5px;color:var(--crema);white-space:nowrap;text-decoration:none}
+.hdr-brand:hover{color:var(--crema)}
+.hdr-brand-dot{color:var(--ambar)}
+
+.hdr-links{display:flex;gap:2px;margin-left:8px;flex-wrap:wrap;flex:1}
+.hdr-link{font-family:var(--fh);font-weight:500;font-size:13.5px;padding:8px 11px;border-radius:8px;white-space:nowrap;color:var(--piedra);text-decoration:none;background:transparent;transition:color .25s,background .25s}
+.hdr-link:hover{color:var(--crema);background:var(--panel)}
+.hdr-link[aria-current="page"]{color:var(--crema);background:var(--panel)}
+
+.hdr-actions{display:flex;align-items:center;gap:10px;margin-left:auto}
+.hdr-lang{font-family:var(--fm);font-size:12px;letter-spacing:1px;color:var(--piedra);background:transparent;border:1px solid var(--line-2);border-radius:8px;padding:7px 10px;cursor:pointer;transition:color .25s,border-color .25s}
+.hdr-lang:hover{color:var(--crema);border-color:var(--ambar)}
+
+.hdr-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--fh);font-weight:600;font-size:14px;color:var(--grafito);background:var(--ambar);padding:10px 16px;border-radius:10px;white-space:nowrap;text-decoration:none;transition:background .25s}
+.hdr-cta:hover{background:#ffbe5c;color:var(--grafito)}
+
+.hdr-burger{width:42px;height:42px;place-items:center;border-radius:10px;background:var(--panel);border:1px solid var(--line-2);color:var(--crema);cursor:pointer;font-size:18px}
+
+.hdr-drawer{border-top:1px solid var(--line);background:var(--grafito-2);padding:10px 24px 18px;display:flex;flex-direction:column;gap:2px}
+.hdr-drawer a{font-family:var(--fh);font-weight:600;font-size:16px;padding:12px 8px;border-radius:8px;color:var(--crema-dim);text-decoration:none}
+.hdr-drawer a:hover{color:var(--ambar)}
+.hdr-drawer .hdr-cta{margin-top:8px;justify-content:center}
+
+.menu-btn{display:none}
+@media(max-width:1100px){
+  .hdr-links{display:none}
+  .hdr-cta.mainnav{display:none}
+  .menu-btn{display:inline-grid}
+}

@@ -1,0 +1,52 @@
+/* modules/agent/agent.css — reglas propias de este módulo. Los tokens viven en globals.css. */
+.agent-dodge{opacity:0;visibility:hidden;pointer-events:none;transform:translateY(14px) scale(.92);transition:opacity .4s ease,transform .4s cubic-bezier(.2,.7,.2,1),visibility 0s linear .4s}
+.agent-rest{opacity:1;visibility:visible;transform:none;transition:opacity .4s ease,transform .4s cubic-bezier(.2,.7,.2,1),visibility 0s}
+
+/* --- lanzador --- */
+.ag-launcher{position:fixed;right:22px;bottom:22px;z-index:70;display:flex;align-items:center;gap:11px;padding:12px 18px 12px 13px;border:none;border-radius:999px;cursor:pointer;background:linear-gradient(150deg,var(--ambar),#dd8f22);color:var(--grafito);box-shadow:0 18px 44px -14px rgba(240,169,62,.75)}
+.ag-launcher:hover{background:linear-gradient(150deg,#ffc367,#e89a2b)}
+.ag-launcher-icon{position:relative;width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:50%;background:rgba(20,22,28,.14)}
+.ag-launcher-label{font-family:var(--fh);font-weight:600;font-size:14px;white-space:nowrap}
+.ag-online{position:absolute;top:-1px;right:-1px;width:9px;height:9px;border-radius:50%;background:#3ec46a;border:2px solid var(--ambar)}
+.ag-online-lg{top:-2px;right:-2px;width:10px;height:10px;border-color:#1F2530}
+
+/* --- panel --- */
+.ag-panel{position:fixed;right:22px;bottom:22px;z-index:71;width:min(384px,calc(100vw - 32px));background:linear-gradient(168deg,#1F2530,#141821);border:1px solid var(--line-2);border-radius:22px;box-shadow:0 42px 96px -30px rgba(0,0,0,.9);overflow:hidden;display:flex;flex-direction:column;max-height:min(640px,calc(100vh - 44px))}
+.ag-head{display:flex;align-items:center;gap:11px;padding:15px 16px;background:linear-gradient(180deg,rgba(240,169,62,.14),transparent);border-bottom:1px solid var(--line)}
+.ag-avatar{position:relative;width:38px;height:38px;flex:none;display:grid;place-items:center;border-radius:12px;background:linear-gradient(150deg,var(--ambar),#d98b22);color:var(--grafito)}
+.ag-id{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ag-name{font-family:var(--fh);font-weight:600;font-size:14.5px}
+.ag-role{font-family:var(--fm);font-size:10px;letter-spacing:.3px;color:#5fd07a}
+.ag-close{width:30px;height:30px;flex:none;display:grid;place-items:center;border-radius:9px;background:transparent;border:1px solid var(--line-2);color:var(--piedra);cursor:pointer;font-size:14px;line-height:1;transition:color .25s,border-color .25s}
+.ag-close:hover{color:var(--crema);border-color:var(--ambar)}
+
+.ag-progress{height:2px;background:var(--line);flex:none}
+.ag-progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--indigo-2),var(--ambar));transition:width .5s cubic-bezier(.2,.7,.2,1)}
+
+.ag-log{flex:1;min-height:0;overflow-y:auto;padding:18px 16px;display:flex;flex-direction:column;gap:11px;background:radial-gradient(ellipse at 85% 0%,rgba(75,59,209,.12),transparent 62%)}
+.ag-bot{align-self:flex-start;max-width:86%;background:#1B2029;border:1px solid var(--line);border-radius:16px 16px 16px 5px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:var(--crema)}
+.ag-you{align-self:flex-end;max-width:86%;background:linear-gradient(150deg,#5B4BE0,var(--indigo));border-radius:16px 16px 5px 16px;padding:12px 14px;font-size:13.5px;line-height:1.5;color:#fff}
+.ag-typing{align-self:flex-start;display:flex;gap:5px;background:#1B2029;border:1px solid var(--line);border-radius:16px 16px 16px 5px;padding:13px 15px}
+.ag-typing i{width:7px;height:7px;border-radius:50%;background:var(--ambar);animation:blink 1.1s infinite}
+.ag-typing i:nth-child(2){animation-delay:.18s}
+.ag-typing i:nth-child(3){animation-delay:.36s}
+
+.ag-summary{background:rgba(240,169,62,.09);border:1px solid var(--ambar);border-radius:14px;padding:15px 16px;margin-top:4px}
+.ag-summary-t{font-family:var(--fm);font-size:9.5px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ambar)}
+.ag-summary-row{display:grid;grid-template-columns:82px 1fr;gap:11px;align-items:baseline;margin-top:8px}
+.ag-summary-k{font-family:var(--fm);font-size:9.5px;letter-spacing:.5px;color:var(--piedra)}
+.ag-summary-v{font-size:13px;color:var(--crema);text-wrap:pretty}
+
+.ag-foot{flex:none;border-top:1px solid var(--line);background:rgba(28,32,41,.6);padding:13px 16px}
+.ag-opts{display:flex;flex-wrap:wrap;gap:7px}
+.ag-opt{font-family:var(--fh);font-weight:600;font-size:12.5px;color:var(--crema);background:rgba(75,59,209,.16);border:1px solid var(--indigo);border-radius:999px;padding:9px 14px;cursor:pointer;transition:background .25s,color .25s}
+.ag-opt:hover{background:var(--indigo);color:#fff}
+.ag-form{display:flex;gap:8px}
+.ag-input{flex:1;min-width:0;background:var(--grafito);border:1px solid var(--line-2);border-radius:11px;padding:11px 13px;color:var(--crema);font-size:13.5px;font-family:inherit;outline:none}
+.ag-send{flex:none;width:42px;border:none;border-radius:11px;background:var(--ambar);color:var(--grafito);cursor:pointer;font-size:15px;line-height:1}
+.ag-done{display:flex;flex-direction:column;gap:8px}
+.ag-done-cta{text-align:center;font-family:var(--fh);font-weight:600;font-size:14px;color:var(--grafito);background:var(--ambar);padding:12px 16px;border-radius:11px;text-decoration:none}
+.ag-done-cta:hover{background:#ffbe5c;color:var(--grafito)}
+.ag-again{font-family:var(--fm);font-size:10.5px;color:var(--piedra);background:none;border:none;cursor:pointer;padding:2px}
+.ag-again:hover{color:var(--ambar)}
+.ag-note{font-family:var(--fm);font-size:10px;color:var(--piedra);text-align:center;margin:0}
