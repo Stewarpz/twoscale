@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Áurea — Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<style>/* latin-ext */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/4f3e4121-5295-4f7f-9bba-02b1c686d722.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/99b0e6dd-43e3-4e1f-a4d4-e2439e4c1f28.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/de4513e0-d3e3-47f3-9ff9-896c8374355b.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Instrument Serif';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/faacba8f-ca35-48d8-b155-56179fd27e53.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/142d8a10-852c-46d3-bf08-2504e68a5bee.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/c3cb1abb-a592-4d4d-ac19-2f316c4c6a98.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/215ff5d3-41a8-44c2-b5f1-593403eea884.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/142d8a10-852c-46d3-bf08-2504e68a5bee.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/c3cb1abb-a592-4d4d-ac19-2f316c4c6a98.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/215ff5d3-41a8-44c2-b5f1-593403eea884.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/142d8a10-852c-46d3-bf08-2504e68a5bee.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/c3cb1abb-a592-4d4d-ac19-2f316c4c6a98.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/215ff5d3-41a8-44c2-b5f1-593403eea884.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/142d8a10-852c-46d3-bf08-2504e68a5bee.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/c3cb1abb-a592-4d4d-ac19-2f316c4c6a98.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/215ff5d3-41a8-44c2-b5f1-593403eea884.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/6e10186d-d558-445c-9942-e1000850f880.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/ae0644e8-879b-49f9-8e22-2a466367f3a6.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/a3f8e25d-47f3-4dc6-92fb-418ae9a26bea.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/623f8ea1-e1fd-461e-8b3d-b83aa217be17.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/9b1443d8-1802-425b-8726-318bc7776d7f.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/7e90d267-0f68-47b8-97a1-247f030dd875.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/020334a3-ab1a-4cc3-872d-6092af7cb45f.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/be84ecd1-e6a9-4046-8975-bd40b0893412.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Space Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("assets/fonts/2b22d8f2-bc9d-43dc-96dd-5ec6b8680bec.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<style>
+/* ============================================================
+   ÁUREA · Sistema operativo para clínicas estéticas (DEMO)
+   Paleta y tipografía armonizadas con Twoscale.IA — producto distinto.
+   Autocontenido. Sin dependencias. Modo híbrido: recorrido + interactivo.
+   ============================================================ */
+
+.aurea-app *{margin:0;padding:0;box-sizing:border-box}
+
+.aurea-app{
+  /* ---- Design tokens ---- */
+  --porcelain:#F6F1EC;      /* lienzo, sibling de la crema Twoscale */
+  --surface:#FFFFFF;        /* tarjetas */
+  --surface-2:#FBF8F4;      /* superficies suaves */
+  --ink:#1C1A22;            /* casi negro con leve tinte ciruela */
+  --ink-soft:#3A3742;
+  --muted:#8B8892;          /* texto secundario */
+  --line:rgba(28,26,34,.08);
+  --line-2:rgba(28,26,34,.14);
+  --rosewood:#8A4E62;       /* acento primario — reemplaza el índigo */
+  --rosewood-deep:#6E3B4D;
+  --rosewood-tint:rgba(138,78,98,.10);
+  --champagne:#C29A54;      /* destaque premium — puente con el ámbar */
+  --champagne-soft:rgba(194,154,84,.14);
+  --sage:#6F8C77;           /* estados positivos / confirmado */
+  --sage-soft:rgba(111,140,119,.14);
+  --coral:#C2685A;          /* negativo, muy medido */
+
+  --r-lg:20px; --r-md:14px; --r-sm:10px;
+  --shadow-card:0 1px 2px rgba(28,26,34,.04), 0 8px 24px -12px rgba(28,26,34,.10);
+  --shadow-pop:0 12px 40px -12px rgba(28,26,34,.28);
+
+  --f-serif:'Instrument Serif', Georgia, serif;
+  --f-sans:'Space Grotesk', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --f-mono:'Space Mono', ui-monospace, monospace;
+
+  position:relative;
+  display:grid;
+  grid-template-columns:236px 1fr;
+  height:700px;
+  max-width:1160px;
+  margin:0 auto;
+  background:var(--porcelain);
+  border:1px solid var(--line);
+  border-radius:22px;
+  overflow:hidden;
+  font-family:var(--f-sans);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  box-shadow:0 40px 120px -50px rgba(28,26,34,.45);
+  user-select:none;
+  opacity:0;
+  transform:scale(.965);
+  transition:opacity .75s ease, transform .75s cubic-bezier(.2,.8,.2,1);
+}
+.aurea-app.in{opacity:1;transform:scale(1)}
+
+/* ---- resting glow: pulso sutil que capta el ojo en visión periférica ---- */
+.aurea-wrap{position:relative;max-width:1160px;margin:0 auto;border-radius:22px}
+.aurea-wrap::after{
+  content:"";position:absolute;inset:-3px;border-radius:24px;pointer-events:none;
+  animation:aurea-breathe 4.4s ease-in-out infinite;
+}
+@keyframes aurea-breathe{
+  0%,100%{box-shadow:0 0 0 0 rgba(194,154,84,.16)}
+  50%{box-shadow:0 0 24px 3px rgba(194,154,84,.30)}
+}
+
+/* ============ SIDEBAR ============ */
+.aurea-app .side{
+  background:var(--ink);
+  color:#EDE7E0;
+  padding:22px 16px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  position:relative;
+}
+.aurea-app .brand{display:flex;align-items:center;gap:11px;padding:6px 8px 22px}
+.aurea-app .brand-mark{
+  width:34px;height:34px;border-radius:10px;flex:none;
+  background:linear-gradient(150deg,var(--champagne),var(--rosewood));
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--f-serif);font-size:22px;font-style:italic;color:#fff;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);
+}
+.aurea-app .brand-name{font-family:var(--f-serif);font-size:24px;line-height:1;letter-spacing:.01em}
+.aurea-app .brand-sub{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;color:#8E8880;margin-top:3px}
+
+.aurea-app .nav-label{font-family:var(--f-mono);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:#6E6A64;padding:14px 8px 8px}
+.aurea-app .nav-item{
+  display:flex;align-items:center;gap:12px;
+  padding:11px 12px;border-radius:11px;cursor:pointer;
+  font-size:14px;font-weight:500;color:#C9C3BC;
+  transition:background .2s, color .2s;
+  position:relative;
+}
+.aurea-app .nav-item svg{width:18px;height:18px;flex:none;stroke:currentColor;stroke-width:1.6;fill:none}
+.aurea-app .nav-item:hover{background:rgba(255,255,255,.05);color:#EDE7E0}
+.aurea-app .nav-item.active{background:rgba(255,255,255,.07);color:#fff}
+.aurea-app .nav-item.active::before{
+  content:"";position:absolute;left:-16px;top:9px;bottom:9px;width:3px;
+  background:linear-gradient(var(--champagne),var(--rosewood));border-radius:0 3px 3px 0;
+}
+.aurea-app .nav-item .badge{
+  margin-left:auto;font-family:var(--f-mono);font-size:10px;font-weight:600;
+  background:var(--rosewood);color:#fff;border-radius:100px;padding:1px 7px;
+}
+
+.aurea-app .side-foot{margin-top:auto;padding-top:16px;border-top:1px solid rgba(255,255,255,.08)}
+.aurea-app .user{display:flex;align-items:center;gap:11px;padding:8px}
+.aurea-app .avatar{
+  width:34px;height:34px;border-radius:50%;flex:none;
+  background:linear-gradient(140deg,var(--rosewood),var(--rosewood-deep));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:600;letter-spacing:.02em;
+}
+.aurea-app .user-name{font-size:13px;font-weight:500;color:#EDE7E0}
+.aurea-app .user-role{font-size:11px;color:#807A73}
+
+/* ============ MAIN ============ */
+.aurea-app .main{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+
+.aurea-app .topbar{
+  display:flex;align-items:center;gap:16px;
+  padding:16px 26px;border-bottom:1px solid var(--line);
+  background:rgba(246,241,236,.7);backdrop-filter:blur(6px);flex:none;
+}
+.aurea-app .search{
+  display:flex;align-items:center;gap:9px;
+  background:var(--surface);border:1px solid var(--line);border-radius:11px;
+  padding:9px 13px;width:280px;color:var(--muted);font-size:13px;
+}
+.aurea-app .search svg{width:15px;height:15px;stroke:var(--muted);stroke-width:1.7;fill:none}
+.aurea-app .top-clinic{margin-left:2px}
+.aurea-app .top-clinic .tc-name{font-size:13px;font-weight:600}
+.aurea-app .top-clinic .tc-date{font-family:var(--f-mono);font-size:10.5px;color:var(--muted);letter-spacing:.02em}
+.aurea-app .top-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+.aurea-app .bell{position:relative;cursor:pointer}
+.aurea-app .bell svg{width:19px;height:19px;stroke:var(--ink-soft);stroke-width:1.6;fill:none}
+.aurea-app .bell .dot{position:absolute;top:-1px;right:-1px;width:7px;height:7px;border-radius:50%;background:var(--rosewood);border:1.5px solid var(--porcelain)}
+.aurea-app .top-avatar{
+  width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(140deg,var(--rosewood),var(--rosewood-deep));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600;
+}
+
+.aurea-app .content{flex:1;overflow:hidden;position:relative;z-index:1}
+.aurea-app .view{
+  position:absolute;inset:0;padding:26px;overflow:auto;
+  display:flex;flex-direction:column;
+  opacity:0;transform:translateY(8px);pointer-events:none;
+  transition:opacity .45s ease, transform .45s ease;
+}
+.aurea-app .view.show{opacity:1;transform:none;pointer-events:auto}
+.aurea-app .view::-webkit-scrollbar{width:8px}
+.aurea-app .view::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:8px}
+
+.aurea-app .view-head{margin-bottom:20px;flex:none}
+.aurea-app .eyebrow{font-family:var(--f-mono);font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--rosewood);margin-bottom:7px}
+.aurea-app .view-title{font-family:var(--f-serif);font-size:32px;line-height:1;letter-spacing:.005em}
+.aurea-app .view-sub{font-size:13px;color:var(--muted);margin-top:6px}
+
+/* ---- KPI cards ---- */
+.aurea-app .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+.aurea-app .kpi{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);
+  padding:16px 17px;box-shadow:var(--shadow-card);position:relative;overflow:hidden;
+}
+.aurea-app .kpi .k-label{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.aurea-app .kpi .k-val{font-family:var(--f-serif);font-size:38px;line-height:1;margin-top:12px;letter-spacing:.01em}
+.aurea-app .kpi .k-val .k-unit{font-family:var(--f-sans);font-size:15px;color:var(--muted);margin-left:2px}
+.aurea-app .kpi .k-delta{display:inline-flex;align-items:center;gap:4px;margin-top:11px;font-size:11.5px;font-weight:600;font-family:var(--f-mono)}
+.aurea-app .kpi .k-delta.up{color:var(--sage)}
+.aurea-app .kpi .k-delta.down-good{color:var(--sage)}
+.aurea-app .kpi .k-spark{position:absolute;right:14px;top:16px;width:52px;height:20px;opacity:.9}
+
+/* ---- panel lower grid ---- */
+.aurea-app .panel-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:14px}
+.aurea-app .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card)}
+.aurea-app .card-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px}
+.aurea-app .card-title{font-size:14px;font-weight:600}
+.aurea-app .card-tag{font-family:var(--f-mono);font-size:10px;color:var(--muted);letter-spacing:.04em}
+
+/* revenue chart */
+.aurea-app .chart{padding:6px 18px 20px;height:190px;position:relative}
+.aurea-app .chart svg{width:100%;height:100%;overflow:visible}
+.aurea-app .chart .cx-lbl{font-family:var(--f-mono);font-size:9px;fill:var(--muted)}
+
+/* activity feed */
+.aurea-app .feed{padding:6px 8px 14px}
+.aurea-app .feed-item{
+  display:flex;gap:12px;padding:11px 12px;border-radius:11px;align-items:flex-start;
+  opacity:0;transform:translateX(8px);
+}
+.aurea-app .feed-item.in{opacity:1;transform:none;transition:opacity .5s, transform .5s}
+.aurea-app .feed-item:hover{background:var(--surface-2)}
+.aurea-app .fi-dot{width:30px;height:30px;border-radius:9px;flex:none;display:flex;align-items:center;justify-content:center}
+.aurea-app .fi-dot svg{width:15px;height:15px;stroke-width:1.7;fill:none}
+.aurea-app .fi-dot.ig{background:var(--rosewood-tint);color:var(--rosewood)}
+.aurea-app .fi-dot.pay{background:var(--sage-soft);color:var(--sage)}
+.aurea-app .fi-dot.rem{background:var(--champagne-soft);color:var(--champagne)}
+.aurea-app .fi-dot.rec{background:var(--rosewood-tint);color:var(--rosewood)}
+.aurea-app .fi-body{flex:1;min-width:0}
+.aurea-app .fi-txt{font-size:12.5px;font-weight:500;line-height:1.35}
+.aurea-app .fi-txt b{font-weight:600}
+.aurea-app .fi-meta{font-family:var(--f-mono);font-size:10px;color:var(--muted);margin-top:3px}
+
+/* ============ BANDEJA ============ */
+.aurea-app .inbox{display:grid;grid-template-columns:270px 1fr;gap:14px;flex:1;min-height:0}
+.aurea-app .conv-list{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:auto;box-shadow:var(--shadow-card)}
+.aurea-app .conv{display:flex;gap:11px;padding:13px 14px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .18s;align-items:flex-start}
+.aurea-app .conv:hover{background:var(--surface-2)}
+.aurea-app .conv.active{background:var(--rosewood-tint)}
+.aurea-app .conv-av{width:36px;height:36px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600}
+.aurea-app .conv-main{flex:1;min-width:0}
+.aurea-app .conv-top{display:flex;align-items:center;gap:6px}
+.aurea-app .conv-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aurea-app .chan{font-family:var(--f-mono);font-size:8px;letter-spacing:.06em;padding:2px 6px;border-radius:5px;text-transform:uppercase;font-weight:600}
+.aurea-app .chan.wa{background:var(--sage-soft);color:var(--sage)}
+.aurea-app .chan.ig{background:var(--rosewood-tint);color:var(--rosewood)}
+.aurea-app .chan.web{background:var(--champagne-soft);color:#9c7a3e}
+.aurea-app .conv-prev{font-size:11.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aurea-app .conv-time{font-family:var(--f-mono);font-size:9px;color:var(--muted);flex:none}
+.aurea-app .conv-unread{width:8px;height:8px;border-radius:50%;background:var(--rosewood);flex:none;margin-top:5px}
+
+.aurea-app .thread{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);display:flex;flex-direction:column;box-shadow:var(--shadow-card);overflow:hidden}
+.aurea-app .thread-head{display:flex;align-items:center;gap:11px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.aurea-app .th-name{font-size:14px;font-weight:600}
+.aurea-app .th-status{font-family:var(--f-mono);font-size:10px;color:var(--sage);display:flex;align-items:center;gap:5px}
+.aurea-app .th-status::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--sage)}
+.aurea-app .sl-ring{margin-left:auto;display:flex;align-items:center;gap:9px}
+.aurea-app .sl-ring .slr-txt{text-align:right}
+.aurea-app .sl-ring .slr-k{font-family:var(--f-mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.aurea-app .sl-ring .slr-v{font-family:var(--f-mono);font-size:13px;font-weight:600;color:var(--champagne)}
+
+.aurea-app .msgs{flex:1;overflow:auto;padding:20px 18px 76px;display:flex;flex-direction:column;gap:12px}
+.aurea-app .msg{max-width:76%;opacity:0;transform:translateY(8px)}
+.aurea-app .msg.in{opacity:1;transform:none;transition:opacity .4s, transform .4s}
+.aurea-app .msg .bubble{padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5}
+.aurea-app .msg.them{align-self:flex-start}
+.aurea-app .msg.them .bubble{background:var(--surface-2);border:1px solid var(--line);border-bottom-left-radius:4px}
+.aurea-app .msg.me{align-self:flex-end}
+.aurea-app .msg.me .bubble{background:var(--ink);color:#EDE7E0;border-bottom-right-radius:4px}
+.aurea-app .msg .m-meta{font-family:var(--f-mono);font-size:9px;color:var(--muted);margin-top:5px;display:flex;align-items:center;gap:6px}
+.aurea-app .msg.me .m-meta{justify-content:flex-end}
+.aurea-app .ia-tag{background:linear-gradient(120deg,var(--champagne),var(--rosewood));color:#fff;font-family:var(--f-mono);font-size:8px;font-weight:600;letter-spacing:.08em;padding:2px 6px;border-radius:5px}
+.aurea-app .slots{display:flex;gap:8px;margin-top:8px}
+.aurea-app .slot{
+  border:1px solid var(--rosewood);color:var(--rosewood);background:var(--surface);
+  font-family:var(--f-sans);font-size:12px;font-weight:600;padding:7px 12px;border-radius:9px;cursor:pointer;
+  transition:background .18s, color .18s, transform .12s;
+}
+.aurea-app .slot:hover{background:var(--rosewood-tint)}
+.aurea-app .slot.picked{background:var(--rosewood);color:#fff}
+.aurea-app .typing{display:none;align-self:flex-start;padding:11px 14px;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;border-bottom-left-radius:4px}
+.aurea-app .typing.on{display:flex;gap:4px}
+.aurea-app .typing i{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:aurea-blink 1.2s infinite}
+.aurea-app .typing i:nth-child(2){animation-delay:.2s}
+.aurea-app .typing i:nth-child(3){animation-delay:.4s}
+@keyframes aurea-blink{0%,60%,100%{opacity:.3}30%{opacity:1}}
+
+/* ============ AGENDA ============ */
+.aurea-app .cal{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);overflow:hidden;flex:1;min-height:0;display:flex;flex-direction:column}
+.aurea-app .cal-head{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.aurea-app .cal-nav{display:flex;gap:6px}
+.aurea-app .cal-arrow{width:28px;height:28px;border:1px solid var(--line);border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--muted)}
+.aurea-app .cal-arrow svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.8;fill:none}
+.aurea-app .cal-title{font-size:14px;font-weight:600}
+.aurea-app .cal-legend{margin-left:auto;display:flex;gap:14px;font-family:var(--f-mono);font-size:10px;color:var(--muted)}
+.aurea-app .cal-legend span{display:flex;align-items:center;gap:5px}
+.aurea-app .cal-legend .lg{width:8px;height:8px;border-radius:3px}
+.aurea-app .cal-grid{flex:1;display:grid;grid-template-columns:46px repeat(6,1fr);overflow:auto;position:relative}
+.aurea-app .cal-col{border-right:1px solid var(--line);position:relative;min-height:100%}
+.aurea-app .cal-col:last-child{border-right:none}
+.aurea-app .cal-daylabel{position:sticky;top:0;background:var(--surface);z-index:2;padding:9px 0;text-align:center;border-bottom:1px solid var(--line)}
+.aurea-app .cal-dname{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.aurea-app .cal-dnum{font-size:15px;font-weight:600;margin-top:2px}
+.aurea-app .cal-dnum.today{color:var(--rosewood)}
+.aurea-app .cal-hours{border-right:1px solid var(--line)}
+.aurea-app .cal-hour{height:52px;padding:4px 6px 0;text-align:right;font-family:var(--f-mono);font-size:9px;color:var(--muted);border-bottom:1px solid var(--line)}
+.aurea-app .cal-slot{height:52px;border-bottom:1px solid var(--line);position:relative}
+.aurea-app .appt{
+  position:absolute;left:4px;right:4px;top:4px;
+  border-radius:8px;padding:6px 8px;font-size:10.5px;line-height:1.25;overflow:hidden;
+  border-left:3px solid;cursor:pointer;
+}
+.aurea-app .appt .a-svc{font-weight:600}
+.aurea-app .appt .a-pac{color:var(--ink-soft);font-size:9.5px;margin-top:1px}
+.aurea-app .appt.confirmed{background:var(--sage-soft);border-color:var(--sage)}
+.aurea-app .appt.reminded{background:var(--champagne-soft);border-color:var(--champagne)}
+.aurea-app .appt.pending{background:var(--rosewood-tint);border-color:var(--rosewood)}
+.aurea-app .appt.pop{animation:aurea-pop .6s cubic-bezier(.2,1.2,.3,1) both}
+@keyframes aurea-pop{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
+.aurea-app .appt .a-chip{display:inline-block;font-family:var(--f-mono);font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;margin-top:3px;padding:1px 5px;border-radius:4px;font-weight:600}
+.aurea-app .appt.confirmed .a-chip{background:var(--sage);color:#fff}
+
+/* ============ FACTURACIÓN ============ */
+.aurea-app .fact-wrap{display:grid;grid-template-columns:1fr 260px;gap:14px;flex:1;min-height:0}
+.aurea-app .fact-main{padding:20px 22px;overflow:auto}
+.aurea-app .fact-main .card-head{padding:0 0 16px}
+.aurea-app .fact-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.aurea-app .fact-row span{color:var(--muted)}
+.aurea-app .fact-total{display:flex;justify-content:space-between;align-items:baseline;padding:14px 0 6px}
+.aurea-app .fact-total span{font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.aurea-app .fact-total b{font-family:var(--f-serif);font-size:30px}
+
+.aurea-app .fact-pay{
+  margin-top:16px;padding:16px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);
+  display:flex;align-items:flex-start;gap:16px;opacity:0;transform:translateY(6px);
+  transition:opacity .5s ease, transform .5s ease;
+}
+.aurea-app .fact-pay.on{opacity:1;transform:none}
+.aurea-app .qr-wrap{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px}
+.aurea-app .qr-box{width:72px;height:72px;flex:none;border-radius:8px;background:#fff;border:1px solid var(--line-2);padding:5px;position:relative}
+.aurea-app .qr-box svg{width:100%;height:100%;display:block}
+.aurea-app .qr-badge{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:20px;height:20px;border-radius:5px;background:var(--ink);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #fff;
+}
+.aurea-app .qr-badge svg{width:12px;height:12px;stroke:#EDE7E0;stroke-width:1.8;fill:none}
+.aurea-app .qr-exp{font-family:var(--f-mono);font-size:9px;color:var(--muted)}
+.aurea-app .qr-exp b{color:var(--rosewood)}
+.aurea-app .pay-amount{font-family:var(--f-serif);font-size:24px;line-height:1;margin-bottom:6px}
+.aurea-app .pay-badge{display:inline-block;font-family:var(--f-mono);font-size:9px;font-weight:700;letter-spacing:.08em;background:var(--ink);color:#EDE7E0;padding:3px 8px;border-radius:6px;margin-bottom:6px}
+.aurea-app .pay-txt{font-size:12.5px;color:var(--ink-soft)}
+.aurea-app .pay-link{font-family:var(--f-mono);font-size:11px;color:var(--rosewood);margin-top:4px}
+.aurea-app .pay-ref{font-family:var(--f-mono);font-size:10px;color:var(--muted);margin-top:5px}
+
+.aurea-app .fact-verify{
+  margin-top:12px;display:flex;align-items:center;gap:8px;
+  font-family:var(--f-mono);font-size:11px;color:var(--muted);
+  opacity:0;height:0;overflow:hidden;transition:opacity .35s ease;
+}
+.aurea-app .fact-verify.on{opacity:1;height:auto}
+.aurea-app .fv-dot{width:7px;height:7px;border-radius:50%;background:var(--champagne);flex:none;animation:aurea-blink 1s infinite}
+
+.aurea-app .fact-paid{
+  margin-top:16px;opacity:0;transform:scale(.97);
+  transition:opacity .4s ease, transform .4s cubic-bezier(.3,1.2,.3,1);
+}
+.aurea-app .fact-paid.on{opacity:1;transform:scale(1)}
+.aurea-app .fact-paid .fp-ic{width:22px;height:22px;border-radius:50%;flex:none;background:var(--sage);display:flex;align-items:center;justify-content:center}
+.aurea-app .fact-paid .fp-ic svg{width:13px;height:13px;stroke:#fff;stroke-width:2.4;fill:none}
+
+/* ---- comprobante: recibo con borde perforado, tipografía de impresora ---- */
+.aurea-app .comprobante{
+  border:1px dashed var(--line-2);border-radius:12px;padding:16px 18px;background:var(--surface);
+  font-family:var(--f-mono);
+}
+.aurea-app .cp-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.aurea-app .cp-brand{font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.aurea-app .cp-folio{font-size:11px;font-weight:700;margin-top:3px}
+.aurea-app .cp-dl{width:24px;height:24px;border-radius:7px;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex:none}
+.aurea-app .cp-dl svg{width:13px;height:13px;stroke:var(--ink-soft);stroke-width:1.8;fill:none}
+.aurea-app .cp-ok{
+  display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--sage);
+  padding-bottom:10px;margin-bottom:8px;border-bottom:1px dashed var(--line-2);
+}
+.aurea-app .cp-row{display:flex;justify-content:space-between;font-size:10.5px;padding:4px 0;color:var(--ink-soft)}
+.aurea-app .cp-row span{color:var(--muted)}
+.aurea-app .cp-row b{font-weight:600;color:var(--ink)}
+.aurea-app .cp-total{margin-top:6px;padding-top:8px;border-top:1px dashed var(--line-2)}
+.aurea-app .cp-total b{font-family:var(--f-serif);font-size:18px;font-weight:400}
+
+.aurea-app .fact-list{padding:6px 4px 76px;overflow:auto}
+.aurea-app .fact-list .card-head{padding:14px 14px 10px}
+.aurea-app .fitem{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line)}
+.aurea-app .fitem:last-child{border-bottom:none}
+.aurea-app .fitem-av{width:28px;height:28px;border-radius:50%;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:600}
+.aurea-app .fitem-body{flex:1;min-width:0}
+.aurea-app .fitem-name{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.aurea-app .fitem-val{font-family:var(--f-mono);font-size:10.5px;color:var(--muted)}
+.aurea-app .chip{font-family:var(--f-mono);font-size:8.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:100px;flex:none}
+.aurea-app .chip.paid{background:var(--sage-soft);color:var(--sage)}
+.aurea-app .chip.wait{background:var(--champagne-soft);color:#9c7a3e}
+
+/* ---- integraciones (dentro de Automatizaciones) ---- */
+.aurea-app .flow-integrations{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.aurea-app .fi-lbl{font-family:var(--f-mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.aurea-app .int-chip{
+  display:inline-flex;align-items:center;gap:6px;padding:5px 10px 5px 6px;border-radius:100px;
+  background:var(--surface-2);border:1px solid var(--line);font-size:11px;font-weight:600;color:var(--ink-soft);
+}
+.aurea-app .int-chip svg{width:14px;height:14px;stroke:var(--rosewood);stroke-width:1.7;fill:none}
+
+/* ============ AUTOMATIZACIONES ============ */
+.aurea-app .auto-wrap{display:grid;grid-template-columns:1fr 300px;gap:16px;flex:1;min-height:0}
+.aurea-app .flow{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:26px 24px;position:relative;overflow:auto}
+.aurea-app .flow-title{font-size:14px;font-weight:600;margin-bottom:4px}
+.aurea-app .flow-sub{font-size:12px;color:var(--muted);margin-bottom:26px}
+.aurea-app .flow-line{display:flex;flex-direction:column;gap:0}
+.aurea-app .node{
+  display:flex;align-items:center;gap:14px;padding:14px 16px;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:12px;
+  position:relative;opacity:.4;transition:opacity .5s, border-color .5s, box-shadow .5s, transform .5s;
+}
+.aurea-app .node.lit{opacity:1;border-color:var(--rosewood);box-shadow:0 6px 20px -10px rgba(138,78,98,.5);transform:translateX(2px)}
+.aurea-app .node-ic{width:38px;height:38px;border-radius:10px;flex:none;display:flex;align-items:center;justify-content:center;background:var(--surface);border:1px solid var(--line)}
+.aurea-app .node.lit .node-ic{background:linear-gradient(140deg,var(--rosewood),var(--rosewood-deep));border-color:transparent}
+.aurea-app .node-ic svg{width:18px;height:18px;stroke:var(--muted);stroke-width:1.6;fill:none}
+.aurea-app .node.lit .node-ic svg{stroke:#fff}
+.aurea-app .node-body{flex:1}
+.aurea-app .node-name{font-size:13px;font-weight:600}
+.aurea-app .node-desc{font-size:11px;color:var(--muted);margin-top:2px}
+.aurea-app .node-metric{font-family:var(--f-mono);font-size:11px;font-weight:600;color:var(--champagne)}
+.aurea-app .connector{width:2px;height:16px;background:var(--line-2);margin-left:31px;transition:background .5s}
+.aurea-app .connector.lit{background:var(--rosewood)}
+
+.aurea-app .rules{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:20px 18px 76px;overflow:auto}
+.aurea-app .rules-title{font-size:13px;font-weight:600;margin-bottom:3px}
+.aurea-app .rules-sub{font-size:11px;color:var(--muted);margin-bottom:16px}
+.aurea-app .rule{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.aurea-app .rule:last-child{border-bottom:none}
+.aurea-app .rule-body{flex:1}
+.aurea-app .rule-name{font-size:12.5px;font-weight:500}
+.aurea-app .rule-meta{font-family:var(--f-mono);font-size:9.5px;color:var(--muted);margin-top:2px}
+.aurea-app .toggle{width:38px;height:22px;border-radius:100px;background:var(--line-2);position:relative;cursor:pointer;flex:none;transition:background .3s}
+.aurea-app .toggle::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .3s}
+.aurea-app .toggle.on{background:var(--sage)}
+.aurea-app .toggle.on::after{left:18px}
+
+/* ---- spotlight: oscurece el resto, deja iluminado solo lo narrado ---- */
+.aurea-app .spot-hole{
+  position:absolute;z-index:55;border-radius:14px;pointer-events:none;
+  opacity:0;
+  box-shadow:0 0 0 9999px rgba(20,18,22,.46), 0 0 0 1.5px rgba(194,154,84,.55), 0 0 30px 4px rgba(194,154,84,.18);
+  transition:top .6s cubic-bezier(.3,.9,.3,1), left .6s cubic-bezier(.3,.9,.3,1),
+             width .6s cubic-bezier(.3,.9,.3,1), height .6s cubic-bezier(.3,.9,.3,1),
+             opacity .45s ease;
+}
+.aurea-app .spot-hole.on{opacity:1}
+.aurea-app .zoom-focus{
+  position:relative;z-index:56;
+  transform:scale(1.035);
+  transition:transform .5s cubic-bezier(.3,.9,.3,1);
+}
+
+/* ============ FAKE CURSOR + OVERLAY ============ */
+.aurea-app .cursor{
+  position:absolute;left:0;top:0;width:22px;height:22px;z-index:60;
+  pointer-events:none;transform:translate(-50%,-50%);
+  filter:drop-shadow(0 3px 6px rgba(28,26,34,.35));
+  opacity:0;transition:opacity .3s;
+}
+.aurea-app .cursor.on{opacity:1}
+.aurea-app .cursor svg{width:100%;height:100%}
+.aurea-app .ripple{
+  position:absolute;z-index:59;width:12px;height:12px;border-radius:50%;
+  border:2px solid var(--rosewood);pointer-events:none;
+  transform:translate(-50%,-50%) scale(.4);opacity:0;
+}
+.aurea-app .ripple.go{animation:aurea-ripple .55s ease-out}
+@keyframes aurea-ripple{0%{opacity:.8;transform:translate(-50%,-50%) scale(.4)}100%{opacity:0;transform:translate(-50%,-50%) scale(3.4)}}
+
+/* ---- toast ---- */
+.aurea-app .toast{
+  position:absolute;bottom:24px;left:50%;z-index:70;
+  transform:translate(-50%,20px);opacity:0;
+  background:var(--ink);color:#EDE7E0;padding:12px 18px;border-radius:12px;
+  font-size:13px;font-weight:500;display:flex;align-items:center;gap:10px;
+  box-shadow:var(--shadow-pop);transition:opacity .35s, transform .35s;
+}
+.aurea-app .toast.show{opacity:1;transform:translate(-50%,0)}
+.aurea-app .toast .t-ic{width:22px;height:22px;border-radius:50%;background:var(--sage);display:flex;align-items:center;justify-content:center}
+.aurea-app .toast .t-ic svg{width:13px;height:13px;stroke:#fff;stroke-width:2.4;fill:none}
+
+/* ---- narration caption ---- */
+.aurea-app .cap{
+  position:absolute;left:20px;bottom:20px;z-index:72;max-width:330px;
+  background:var(--ink);color:#EDE7E0;padding:13px 17px;border-radius:13px;
+  opacity:0;transform:translateY(10px);pointer-events:none;
+  box-shadow:var(--shadow-pop);transition:opacity .4s ease, transform .4s ease;
+  border-left:3px solid var(--champagne);
+}
+.aurea-app .cap.show{opacity:1;transform:none}
+.aurea-app .cap-k{font-family:var(--f-mono);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne)}
+.aurea-app .cap-t{font-size:13px;margin-top:6px;line-height:1.45;font-weight:500}
+.aurea-app .cap-step{position:absolute;right:14px;top:12px;font-family:var(--f-mono);font-size:9px;color:#6E6A64}
+
+/* ---- mode pill ---- */
+.aurea-app .mode{
+  position:absolute;right:20px;bottom:20px;z-index:80;
+  display:flex;align-items:center;gap:10px;
+  background:var(--surface);border:1px solid var(--line-2);
+  padding:8px 8px 8px 15px;border-radius:100px;box-shadow:var(--shadow-pop);
+}
+.aurea-app .mode-txt{font-size:12px;font-weight:500;color:var(--ink-soft)}
+.aurea-app .mode-txt b{color:var(--rosewood);font-weight:600}
+.aurea-app .mode-btn{
+  border:none;background:var(--ink);color:#fff;cursor:pointer;
+  font-family:var(--f-sans);font-size:12px;font-weight:600;
+  padding:8px 15px;border-radius:100px;display:flex;align-items:center;gap:7px;
+  transition:background .2s;
+}
+.aurea-app .mode-btn:hover{background:var(--rosewood)}
+.aurea-app .mode-btn svg{width:13px;height:13px;stroke:currentColor;stroke-width:2;fill:none}
+
+/* ---- responsive: prioridad desktop, degradación limpia ---- */
+@media (max-width:820px){
+  .aurea-app{grid-template-columns:1fr;height:560px}
+  .aurea-app .side{position:absolute;inset:0 auto 0 0;width:212px;z-index:40;transform:translateX(-100%);transition:transform .3s;box-shadow:var(--shadow-pop)}
+  .aurea-app .side.open{transform:none}
+  .aurea-app .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .aurea-app .panel-grid,.aurea-app .inbox,.aurea-app .auto-wrap{grid-template-columns:1fr}
+  .aurea-app .inbox{height:auto}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .aurea-app *{animation-duration:.001s !important;transition-duration:.05s !important}
+  .aurea-app{opacity:1 !important;transform:none !important}
+  .aurea-wrap::after{animation:none !important;box-shadow:none !important}
+}
+</style>
+</head>
+<body style="margin:0;background:#EFE9E2;padding:28px 16px;font-family:'Space Grotesk',sans-serif">
+
+<!-- =================== APP =================== -->
+<div class="aurea-wrap">
+<div class="aurea-app" id="aurea" role="application" aria-label="Áurea — demostración de sistema para clínicas estéticas">
+
+  <!-- SIDEBAR -->
+  <aside class="side" id="side">
+    <div class="brand">
+      <div class="brand-mark">Á</div>
+      <div>
+        <div class="brand-name">Áurea</div>
+        <div class="brand-sub">Clinic OS</div>
+      </div>
+    </div>
+
+    <div class="nav-label">Operación</div>
+    <div class="nav-item active" data-view="panel">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+      Panel
+    </div>
+    <div class="nav-item" data-view="bandeja">
+      <svg viewBox="0 0 24 24"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v8A2.5 2.5 0 0 1 18.5 17H9l-4 3v-3H5.5A2.5 2.5 0 0 1 3 14.5z"></path></svg>
+      Bandeja
+      <span class="badge">3</span>
+    </div>
+    <div class="nav-item" data-view="agenda">
+      <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 3v4M16 3v4"></path></svg>
+      Agenda
+    </div>
+    <div class="nav-item" data-view="factura">
+      <svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"></path><path d="M8.5 8h7M8.5 12h7M8.5 16h4"></path></svg>
+      Facturación
+    </div>
+    <div class="nav-item" data-view="auto">
+      <svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M5 12H2M22 12h-3M6 6l-2-2M20 20l-2-2M6 18l-2 2M20 4l-2 2"></path><circle cx="12" cy="12" r="3.5"></circle></svg>
+      Automatizaciones
+    </div>
+
+    <div class="side-foot">
+      <div class="user">
+        <div class="avatar">CR</div>
+        <div>
+          <div class="user-name">Dra. Camila Restrepo</div>
+          <div class="user-role">Clínica Lumière</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4-4"></path></svg>
+        Buscar pacientes, citas…
+      </div>
+      <div class="top-clinic">
+        <div class="tc-name">Clínica Lumière · Sede Poblado</div>
+        <div class="tc-date">Jueves 14 · Ago 2026</div>
+      </div>
+      <div class="top-right">
+        <div class="bell"><svg viewBox="0 0 24 24"><path d="M6 9a6 6 0 1 1 12 0c0 5 2 6 2 6H4s2-1 2-6"></path><path d="M10 19a2 2 0 0 0 4 0"></path></svg><span class="dot"></span></div>
+        <div class="top-avatar">CR</div>
+      </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" id="content">
+
+      <!-- ========== PANEL ========== -->
+      <section class="view show" data-view="panel">
+        <div class="view-head">
+          <div class="eyebrow">Resumen de hoy</div>
+          <h1 class="view-title">Buenos días, Camila</h1>
+          <div class="view-sub">Tu clínica en una sola pantalla. Esto es lo que está pasando ahora mismo.</div>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="k-label">Ingresos de hoy</div>
+            <div class="k-val"><span class="k-unit">$</span><span class="cnt" data-to="5.3" data-mid="4.8" data-dec="1">4.8</span><span class="k-unit">M&nbsp;COP</span></div>
+            <div class="k-delta up">▲ 18% vs. ayer</div>
+          </div>
+          <div class="kpi">
+            <div class="k-label">Ocupación de agenda</div>
+            <div class="k-val"><span class="cnt" data-to="86" data-mid="82">82</span><span class="k-unit">%</span></div>
+            <div class="k-delta up">▲ 4 pts esta semana</div>
+          </div>
+          <div class="kpi">
+            <div class="k-label">Leads activos</div>
+            <div class="k-val"><span class="cnt" data-to="14">14</span></div>
+            <div class="k-delta up">▲ 6 sin responder ayer · 0 hoy</div>
+          </div>
+          <div class="kpi">
+            <div class="k-label">Tasa de no-show</div>
+            <div class="k-val"><span class="cnt" data-to="7.9" data-mid="8.4" data-dec="1">8.4</span><span class="k-unit">%</span></div>
+            <div class="k-delta down-good">▼ 0.5 pts con recordatorios</div>
+          </div>
+        </div>
+
+        <div class="panel-grid">
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Ingresos · últimos 7 días</div>
+              <div class="card-tag">COP · millones/día</div>
+            </div>
+            <div class="chart" id="revChart">
+              <svg viewBox="0 0 520 170" preserveAspectRatio="none" id="revSvg"></svg>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <div class="card-title">Actividad reciente</div>
+              <div class="card-tag" id="liveTag">● en vivo</div>
+            </div>
+            <div class="feed" id="feed">
+              <div class="feed-item" data-fi="new-lead">
+                <div class="fi-dot ig"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg></div>
+                <div class="fi-body"><div class="fi-txt"><b>Nuevo lead</b> por Instagram — “info de bótox”</div><div class="fi-meta">hace instantes · respondido por IA</div></div>
+              </div>
+              <div class="feed-item">
+                <div class="fi-dot pay"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg></div>
+                <div class="fi-body"><div class="fi-txt"><b>Pago recibido</b> · $320.000 — Ana Martínez</div><div class="fi-meta">hace 12 min · limpieza facial</div></div>
+              </div>
+              <div class="feed-item">
+                <div class="fi-dot rem"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></div>
+                <div class="fi-body"><div class="fi-txt"><b>Recordatorios enviados</b> · 6 citas de mañana</div><div class="fi-meta">hace 30 min · WhatsApp</div></div>
+              </div>
+              <div class="feed-item">
+                <div class="fi-dot rec"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 4v5h-5"></path></svg></div>
+                <div class="fi-body"><div class="fi-txt"><b>Recompra sugerida</b> · 3 pacientes cumplen 90 días</div><div class="fi-meta">hace 1 h · listo para enviar</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== BANDEJA ========== -->
+      <section class="view" data-view="bandeja">
+        <div class="view-head">
+          <div class="eyebrow">Bandeja unificada</div>
+          <h1 class="view-title">Todos tus canales, una conversación</h1>
+          <div class="view-sub">WhatsApp, Instagram y web en el mismo lugar. La IA responde en segundos, incluso de noche.</div>
+        </div>
+
+        <div class="inbox">
+          <div class="conv-list">
+            <div class="conv active" data-conv="valentina">
+              <div class="conv-av" style="background:linear-gradient(140deg,#8A4E62,#6E3B4D)">VR</div>
+              <div class="conv-main">
+                <div class="conv-top"><span class="conv-name">Valentina Ríos</span><span class="chan wa">WhatsApp</span></div>
+                <div class="conv-prev" id="convPrev">Hola, ¿cuánto cuesta el bótox? 💉</div>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px"><span class="conv-time">21:47</span><span class="conv-unread"></span></div>
+            </div>
+            <div class="conv" data-conv="sofia">
+              <div class="conv-av" style="background:linear-gradient(140deg,#6F8C77,#54705d)">SL</div>
+              <div class="conv-main">
+                <div class="conv-top"><span class="conv-name">Sofía Londoño</span><span class="chan ig">Instagram</span></div>
+                <div class="conv-prev">Perfecto, nos vemos el viernes ✨</div>
+              </div>
+              <span class="conv-time">20:12</span>
+            </div>
+            <div class="conv" data-conv="andres">
+              <div class="conv-av" style="background:linear-gradient(140deg,#C29A54,#9c7a3e)">AG</div>
+              <div class="conv-main">
+                <div class="conv-top"><span class="conv-name">Andrés Gómez</span><span class="chan web">Web</span></div>
+                <div class="conv-prev">¿Tienen disponibilidad para láser?</div>
+              </div>
+              <span class="conv-time">18:03</span>
+            </div>
+            <div class="conv" data-conv="mariana">
+              <div class="conv-av" style="background:linear-gradient(140deg,#8A4E62,#54705d)">MT</div>
+              <div class="conv-main">
+                <div class="conv-top"><span class="conv-name">Mariana Torres</span><span class="chan wa">WhatsApp</span></div>
+                <div class="conv-prev">Gracias, quedó agendada 🙌</div>
+              </div>
+              <span class="conv-time">16:40</span>
+            </div>
+          </div>
+
+          <div class="thread">
+            <div class="thread-head">
+              <div class="conv-av" style="width:34px;height:34px;background:linear-gradient(140deg,#8A4E62,#6E3B4D)">VR</div>
+              <div>
+                <div class="th-name">Valentina Ríos</div>
+                <div class="th-status">Lead nuevo · WhatsApp</div>
+              </div>
+              <div class="sl-ring">
+                <div class="slr-txt">
+                  <div class="slr-k">Respuesta</div>
+                  <div class="slr-v" id="slrV">0:00</div>
+                </div>
+                <svg width="34" height="34" viewBox="0 0 34 34">
+                  <circle cx="17" cy="17" r="14" fill="none" stroke="rgba(28,26,34,.10)" stroke-width="3"></circle>
+                  <circle id="slrArc" cx="17" cy="17" r="14" fill="none" stroke="#C29A54" stroke-width="3" stroke-linecap="round" stroke-dasharray="88" stroke-dashoffset="88" transform="rotate(-90 17 17)"></circle>
+                </svg>
+              </div>
+            </div>
+            <div class="msgs" id="msgs">
+              <!-- messages injected by JS for controlled timing -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== AGENDA ========== -->
+      <section class="view" data-view="agenda">
+        <div class="view-head">
+          <div class="eyebrow">Agenda de la semana</div>
+          <h1 class="view-title">Cada slot premium, ocupado</h1>
+          <div class="view-sub">Las citas confirmadas por la IA aparecen aquí al instante, con recordatorio automático.</div>
+        </div>
+
+        <div class="cal">
+          <div class="cal-head">
+            <div class="cal-nav">
+              <div class="cal-arrow"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"></path></svg></div>
+              <div class="cal-arrow"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"></path></svg></div>
+            </div>
+            <div class="cal-title">11 – 16 Agosto</div>
+            <div class="cal-legend">
+              <span><span class="lg" style="background:#6F8C77"></span>Confirmada</span>
+              <span><span class="lg" style="background:#C29A54"></span>Recordada</span>
+              <span><span class="lg" style="background:#8A4E62"></span>Pendiente</span>
+            </div>
+          </div>
+          <div class="cal-grid" id="calGrid">
+            <!-- hours + columns injected by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== FACTURACIÓN ========== -->
+      <section class="view" data-view="factura">
+        <div class="view-head">
+          <div class="eyebrow">Facturación</div>
+          <h1 class="view-title">El cobro también es automático</h1>
+          <div class="view-sub">La cita se convierte en factura sola. El pago se confirma sin que nadie llame a preguntar.</div>
+        </div>
+
+        <div class="fact-wrap">
+          <div class="fact-main card">
+            <div class="card-head">
+              <div class="card-title">Factura #A-1042</div>
+              <div class="card-tag" id="factStatus">Generando…</div>
+            </div>
+            <div class="fact-row"><span>Paciente</span><b>Valentina Ríos</b></div>
+            <div class="fact-row"><span>Servicio</span><b>Bótox · 20 unidades</b></div>
+            <div class="fact-row"><span>Fecha</span><b>Jue 14 Ago</b></div>
+            <div class="fact-total"><span>Total</span><b>$760.000</b></div>
+
+            <div class="fact-pay" id="factPay">
+              <div class="qr-wrap">
+                <div class="qr-box">
+                  <svg viewBox="0 0 41 41">
+                    <rect width="41" height="41" fill="#fff"></rect>
+                    <g fill="#1C1A22">
+                      <rect x="1" y="1" width="9" height="9"></rect><rect x="3" y="3" width="5" height="5" fill="#fff"></rect><rect x="5" y="5" width="1" height="1"></rect>
+                      <rect x="31" y="1" width="9" height="9"></rect><rect x="33" y="3" width="5" height="5" fill="#fff"></rect><rect x="35" y="5" width="1" height="1"></rect>
+                      <rect x="1" y="31" width="9" height="9"></rect><rect x="3" y="33" width="5" height="5" fill="#fff"></rect><rect x="5" y="35" width="1" height="1"></rect>
+                      <rect x="12" y="1" width="1" height="1"></rect><rect x="14" y="1" width="1" height="1"></rect><rect x="17" y="1" width="2" height="1"></rect><rect x="21" y="1" width="1" height="1"></rect><rect x="24" y="1" width="2" height="1"></rect><rect x="28" y="1" width="1" height="1"></rect>
+                      <rect x="12" y="3" width="1" height="1"></rect><rect x="15" y="3" width="2" height="1"></rect><rect x="19" y="3" width="1" height="1"></rect><rect x="22" y="3" width="1" height="1"></rect><rect x="26" y="3" width="1" height="1"></rect><rect x="29" y="3" width="1" height="1"></rect>
+                      <rect x="13" y="5" width="1" height="1"></rect><rect x="16" y="5" width="1" height="1"></rect><rect x="18" y="5" width="2" height="1"></rect><rect x="23" y="5" width="1" height="1"></rect><rect x="27" y="5" width="2" height="1"></rect>
+                      <rect x="12" y="7" width="2" height="1"></rect><rect x="17" y="7" width="1" height="1"></rect><rect x="20" y="7" width="1" height="1"></rect><rect x="25" y="7" width="1" height="1"></rect><rect x="29" y="7" width="1" height="1"></rect>
+                      <rect x="1" y="12" width="1" height="1"></rect><rect x="4" y="12" width="1" height="2"></rect><rect x="7" y="12" width="2" height="1"></rect><rect x="1" y="15" width="2" height="1"></rect><rect x="5" y="16" width="1" height="1"></rect><rect x="8" y="14" width="1" height="2"></rect>
+                      <rect x="1" y="18" width="1" height="1"></rect><rect x="3" y="19" width="2" height="1"></rect><rect x="7" y="18" width="1" height="2"></rect><rect x="1" y="21" width="2" height="1"></rect><rect x="5" y="22" width="2" height="1"></rect>
+                      <rect x="12" y="12" width="2" height="2"></rect><rect x="16" y="12" width="1" height="1"></rect><rect x="19" y="12" width="2" height="2"></rect><rect x="23" y="13" width="1" height="1"></rect><rect x="26" y="12" width="2" height="1"></rect><rect x="30" y="12" width="1" height="2"></rect>
+                      <rect x="14" y="15" width="1" height="1"></rect><rect x="17" y="15" width="2" height="1"></rect><rect x="21" y="16" width="1" height="1"></rect><rect x="24" y="15" width="1" height="2"></rect><rect x="28" y="16" width="2" height="1"></rect>
+                      <rect x="12" y="18" width="1" height="2"></rect><rect x="15" y="18" width="2" height="1"></rect><rect x="19" y="19" width="1" height="1"></rect><rect x="22" y="18" width="2" height="1"></rect><rect x="26" y="19" width="1" height="1"></rect><rect x="30" y="18" width="1" height="2"></rect>
+                      <rect x="13" y="21" width="1" height="1"></rect><rect x="16" y="22" width="1" height="1"></rect><rect x="20" y="21" width="1" height="2"></rect><rect x="24" y="21" width="2" height="1"></rect><rect x="28" y="21" width="1" height="1"></rect>
+                      <rect x="1" y="24" width="2" height="1"></rect><rect x="5" y="25" width="1" height="1"></rect><rect x="8" y="24" width="1" height="2"></rect><rect x="1" y="27" width="1" height="2"></rect><rect x="4" y="28" width="2" height="1"></rect><rect x="7" y="27" width="2" height="1"></rect>
+                      <rect x="12" y="24" width="1" height="1"></rect><rect x="15" y="25" width="2" height="1"></rect><rect x="19" y="24" width="1" height="2"></rect><rect x="22" y="25" width="1" height="1"></rect><rect x="26" y="24" width="2" height="2"></rect><rect x="30" y="25" width="1" height="1"></rect>
+                      <rect x="13" y="27" width="1" height="2"></rect><rect x="17" y="28" width="2" height="1"></rect><rect x="21" y="27" width="1" height="1"></rect><rect x="24" y="28" width="1" height="2"></rect><rect x="28" y="27" width="1" height="2"></rect>
+                      <rect x="12" y="31" width="2" height="1"></rect><rect x="16" y="31" width="1" height="2"></rect><rect x="19" y="32" width="2" height="1"></rect><rect x="23" y="31" width="1" height="1"></rect><rect x="26" y="32" width="2" height="1"></rect><rect x="30" y="31" width="1" height="2"></rect>
+                      <rect x="13" y="35" width="2" height="1"></rect><rect x="17" y="36" width="1" height="1"></rect><rect x="20" y="35" width="2" height="2"></rect><rect x="24" y="36" width="1" height="1"></rect><rect x="27" y="35" width="2" height="1"></rect>
+                      <rect x="32" y="12" width="1" height="1"></rect><rect x="35" y="12" width="2" height="2"></rect><rect x="38" y="12" width="1" height="1"></rect><rect x="32" y="15" width="2" height="1"></rect><rect x="36" y="16" width="1" height="1"></rect><rect x="39" y="14" width="1" height="2"></rect>
+                      <rect x="32" y="18" width="1" height="1"></rect><rect x="34" y="19" width="2" height="1"></rect><rect x="38" y="18" width="1" height="2"></rect><rect x="32" y="21" width="2" height="1"></rect><rect x="36" y="22" width="2" height="1"></rect>
+                      <rect x="32" y="24" width="1" height="2"></rect><rect x="35" y="25" width="1" height="1"></rect><rect x="38" y="24" width="1" height="2"></rect><rect x="32" y="27" width="2" height="1"></rect><rect x="35" y="28" width="2" height="1"></rect><rect x="39" y="27" width="1" height="2"></rect>
+                      <rect x="12" y="38" width="2" height="1"></rect><rect x="16" y="38" width="1" height="1"></rect><rect x="19" y="38" width="2" height="1"></rect><rect x="23" y="38" width="1" height="1"></rect><rect x="26" y="38" width="2" height="1"></rect><rect x="30" y="38" width="1" height="1"></rect>
+                      <rect x="32" y="31" width="1" height="2"></rect><rect x="35" y="32" width="2" height="1"></rect><rect x="38" y="31" width="1" height="1"></rect><rect x="32" y="35" width="2" height="1"></rect><rect x="36" y="36" width="1" height="1"></rect><rect x="39" y="35" width="1" height="2"></rect><rect x="32" y="38" width="1" height="1"></rect><rect x="35" y="38" width="2" height="1"></rect><rect x="38" y="38" width="1" height="1"></rect>
+                    </g>
+                  </svg>
+                  <div class="qr-badge"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2.5"></rect><path d="M2 9.5h20"></path></svg></div>
+                </div>
+                <div class="qr-exp" id="qrExp">Expira en <b>14:59</b></div>
+              </div>
+              <div class="pay-info">
+                <div class="pay-amount">$760.000</div>
+                <div class="pay-badge">TARJETA INTERNACIONAL</div>
+                <div class="pay-txt">Escanea o comparte el link para cobrar</div>
+                <div class="pay-link">pagos.aurea.link/A-1042</div>
+                <div class="pay-ref">Ref. 00483921</div>
+              </div>
+            </div>
+
+            <div class="fact-verify" id="factVerify">
+              <span class="fv-dot"></span> Verificando con el banco…
+            </div>
+
+            <div class="fact-paid comprobante" id="factPaid">
+              <div class="cp-head">
+                <div>
+                  <div class="cp-brand">ÁUREA · COMPROBANTE</div>
+                  <div class="cp-folio">Folio A-1042</div>
+                </div>
+                <div class="cp-dl"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4"></path><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path></svg></div>
+              </div>
+              <div class="cp-ok"><span class="fp-ic"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"></path></svg></span>Pago aprobado</div>
+              <div class="cp-row"><span>Método</span><b>Tarjeta internacional ····4471</b></div>
+              <div class="cp-row"><span>Autorización</span><b>837211</b></div>
+              <div class="cp-row"><span>Fecha</span><b>14 Ago 2026 · 3:42 p.m.</b></div>
+              <div class="cp-row cp-total"><span>Total pagado</span><b>$760.000</b></div>
+            </div>
+          </div>
+
+          <div class="fact-list card">
+            <div class="card-head"><div class="card-title">Facturas recientes</div></div>
+            <div class="fitem">
+              <div class="fitem-av" style="background:linear-gradient(140deg,#6F8C77,#54705d)">AM</div>
+              <div class="fitem-body"><div class="fitem-name">Ana Martínez</div><div class="fitem-val">$320.000</div></div>
+              <span class="chip paid">Pagada</span>
+            </div>
+            <div class="fitem">
+              <div class="fitem-av" style="background:linear-gradient(140deg,#6F8C77,#54705d)">SL</div>
+              <div class="fitem-body"><div class="fitem-name">Sofía Londoño</div><div class="fitem-val">$540.000</div></div>
+              <span class="chip paid">Pagada</span>
+            </div>
+            <div class="fitem">
+              <div class="fitem-av" style="background:linear-gradient(140deg,#C29A54,#9c7a3e)">AG</div>
+              <div class="fitem-body"><div class="fitem-name">Andrés Gómez</div><div class="fitem-val">$410.000</div></div>
+              <span class="chip wait">Pendiente</span>
+            </div>
+            <div class="fitem">
+              <div class="fitem-av" style="background:linear-gradient(140deg,#6F8C77,#54705d)">MT</div>
+              <div class="fitem-body"><div class="fitem-name">Mariana Torres</div><div class="fitem-val">$280.000</div></div>
+              <span class="chip paid">Pagada</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== AUTOMATIZACIONES ========== -->
+      <section class="view" data-view="auto">
+        <div class="view-head">
+          <div class="eyebrow">Motor de automatización</div>
+          <h1 class="view-title">La clínica trabaja sola</h1>
+          <div class="view-sub">Del primer mensaje a la recompra: un flujo que corre sin que nadie levante la mano.</div>
+        </div>
+
+        <div class="auto-wrap">
+          <div class="flow">
+            <div class="flow-title">Flujo · Captación a recompra</div>
+            <div class="flow-sub">Se ejecuta con cada lead nuevo, automáticamente.</div>
+            <div class="flow-line" id="flowLine">
+              <div class="node" data-node="0">
+                <div class="node-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"></circle><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"></path></svg></div>
+                <div class="node-body"><div class="node-name">Llega un lead</div><div class="node-desc">WhatsApp · Instagram · formulario web</div></div>
+              </div>
+              <div class="connector" data-conn="0"></div>
+              <div class="node" data-node="1">
+                <div class="node-ic"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 1 9 9c0 5-4 8-9 8a9 9 0 0 1-4-.9L3 21l1.1-4.5A9 9 0 0 1 12 3z"></path></svg></div>
+                <div class="node-body"><div class="node-name">La IA responde</div><div class="node-desc">Precios, disponibilidad y agenda</div></div>
+                <div class="node-metric">&lt; 60s</div>
+              </div>
+              <div class="connector" data-conn="1"></div>
+              <div class="node" data-node="2">
+                <div class="node-ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 3v4M16 3v4"></path></svg></div>
+                <div class="node-body"><div class="node-name">Cita agendada</div><div class="node-desc">Directo en tu calendario</div></div>
+              </div>
+              <div class="connector" data-conn="2"></div>
+              <div class="node" data-node="3">
+                <div class="node-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg></div>
+                <div class="node-body"><div class="node-name">Recordatorio 24h antes</div><div class="node-desc">Confirmar o reagendar en un toque</div></div>
+              </div>
+              <div class="connector" data-conn="3"></div>
+              <div class="node" data-node="4">
+                <div class="node-ic"><svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7"></path><path d="M21 4v5h-5"></path></svg></div>
+                <div class="node-body"><div class="node-name">Recompra a los 90 días</div><div class="node-desc">El bótox se vence — la IA reactiva</div></div>
+                <div class="node-metric">+$$$</div>
+              </div>
+            </div>
+
+            <div class="flow-integrations">
+              <span class="fi-lbl">Conectado con</span>
+              <span class="int-chip"><svg viewBox="0 0 24 24"><path d="M3 6.5A2.5 2.5 0 0 1 5.5 4h13A2.5 2.5 0 0 1 21 6.5v8A2.5 2.5 0 0 1 18.5 17H9l-4 3v-3H5.5A2.5 2.5 0 0 1 3 14.5z"></path></svg>WhatsApp</span>
+              <span class="int-chip"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"></circle></svg>Instagram</span>
+              <span class="int-chip"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 3v4M16 3v4"></path></svg>Google Calendar</span>
+              <span class="int-chip"><svg viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="13" rx="2"></rect><path d="M2 10h20M6 15h4"></path></svg>Stripe</span>
+            </div>
+          </div>
+
+          <div class="rules">
+            <div class="rules-title">Automatizaciones activas</div>
+            <div class="rules-sub">Enciende o apaga cada regla.</div>
+            <div class="rule">
+              <div class="rule-body"><div class="rule-name">Respuesta instantánea IA</div><div class="rule-meta">24/7 · todos los canales</div></div>
+              <div class="toggle on"></div>
+            </div>
+            <div class="rule">
+              <div class="rule-body"><div class="rule-name">Recordatorio 24h</div><div class="rule-meta">reduce no-show</div></div>
+              <div class="toggle on"></div>
+            </div>
+            <div class="rule">
+              <div class="rule-body"><div class="rule-name">Confirmación 1-clic</div><div class="rule-meta">WhatsApp</div></div>
+              <div class="toggle on"></div>
+            </div>
+            <div class="rule">
+              <div class="rule-body"><div class="rule-name">Recompra 90 días</div><div class="rule-meta">reactivación automática</div></div>
+              <div class="toggle" id="ruleRecompra"></div>
+            </div>
+            <div class="rule">
+              <div class="rule-body"><div class="rule-name">Reseña post-visita</div><div class="rule-meta">Google · a las 3h</div></div>
+              <div class="toggle on"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- SPOTLIGHT -->
+  <div class="spot-hole" id="spotHole"></div>
+
+  <!-- FAKE CURSOR + FX -->
+  <div class="cursor" id="cursor">
+    <svg viewBox="0 0 24 24" fill="none"><path d="M5 3l14 7-6 1.5L10 18z" fill="#1C1A22" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"></path></svg>
+  </div>
+  <div class="ripple" id="ripple"></div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">
+    <span class="t-ic"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 6"></path></svg></span>
+    <span id="toastTxt">Cita confirmada</span>
+  </div>
+
+  <!-- NARRATION CAPTION -->
+  <div class="cap" id="cap">
+    <div class="cap-step" id="capStep">1/6</div>
+    <div class="cap-k" id="capK">Panel</div>
+    <div class="cap-t" id="capT">Toda la clínica en una pantalla.</div>
+  </div>
+
+  <!-- MODE PILL -->
+  <div class="mode" id="mode">
+    <span class="mode-txt" id="modeTxt">Recorrido <b>automático</b></span>
+    <button class="mode-btn" id="modeBtn">
+      <svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9z"></path></svg>
+      <span id="modeBtnTxt">Pruébalo</span>
+    </button>
+  </div>
+
+</div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var app = document.getElementById('aurea');
+  var cursor = document.getElementById('cursor');
+  var ripple = document.getElementById('ripple');
+  var toast = document.getElementById('toast');
+  var toastTxt = document.getElementById('toastTxt');
+  var modeTxt = document.getElementById('modeTxt');
+  var modeBtn = document.getElementById('modeBtn');
+  var modeBtnTxt = document.getElementById('modeBtnTxt');
+  var content = document.getElementById('content');
+  var spotHole = document.getElementById('spotHole');
+  var spotZoomEl = null;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tourActive = false;
+  var userTookOver = false; // true solo cuando el visitante interactúa a propósito (no al hacer scroll)
+  var timers = [];
+  var rafId = null;
+  var curX = 120, curY = 120;
+
+  function T(fn, ms){ var id = setTimeout(fn, ms); timers.push(id); return id; }
+  function clearTimers(){ timers.forEach(clearTimeout); timers = []; if(rafId){cancelAnimationFrame(rafId); rafId=null;} }
+
+  /* -------- view switching -------- */
+  function setView(name){
+    var navs = app.querySelectorAll('.nav-item');
+    navs.forEach(function(n){ n.classList.toggle('active', n.dataset.view===name); });
+    var views = content.querySelectorAll('.view');
+    views.forEach(function(v){ v.classList.toggle('show', v.dataset.view===name); });
+    if(name==='bandeja') resetBandeja();
+    if(name==='auto') resetFlow();
+    if(name==='agenda') markToday();
+  }
+
+  /* -------- KPI count-up -------- */
+  function animateCount(el, from, to, dec, dur){
+    dec = dec||0; dur = dur||900;
+    if(reduce){ el.textContent = fmt(to,dec); return; }
+    var start = performance.now();
+    function tick(now){
+      var p = Math.min(1,(now-start)/dur);
+      var e = 1-Math.pow(1-p,3);
+      el.textContent = fmt(from+(to-from)*e, dec);
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  function fmt(n,dec){
+    if(dec>0) return n.toFixed(dec);
+    return Math.round(n).toLocaleString('es-CO');
+  }
+  function countKPIs(useMid){
+    app.querySelectorAll('#aurea .cnt').forEach(function(el){
+      var to = parseFloat(el.dataset.to);
+      var mid = el.dataset.mid ? parseFloat(el.dataset.mid) : to;
+      var dec = parseInt(el.dataset.dec||'0',10);
+      animateCount(el, 0, useMid?mid:to, dec, 1000);
+    });
+  }
+  function bumpKPIs(){
+    app.querySelectorAll('#aurea .cnt').forEach(function(el){
+      if(!el.dataset.mid) return;
+      var mid = parseFloat(el.dataset.mid), to = parseFloat(el.dataset.to);
+      var dec = parseInt(el.dataset.dec||'0',10);
+      var cur = parseFloat((el.textContent||'0').replace(/[^0-9.]/g,''))||mid;
+      animateCount(el, cur, to, dec, 1100);
+    });
+  }
+
+  /* -------- revenue chart -------- */
+  function drawChart(){
+    var svg = document.getElementById('revSvg');
+    if(!svg || svg.dataset.done) return;
+    svg.dataset.done = '1';
+    var data = [320,380,340,420,390,460,540];
+    var days = ['L','M','X','J','V','S','D'];
+    var W=520,H=170,pad=10, max=600;
+    var bw = (W-pad*2)/data.length;
+    var pts = data.map(function(v,i){
+      var x = pad + bw*i + bw/2;
+      var y = H-24 - (v/max)*(H-40);
+      return [x,y];
+    });
+    // area path
+    var d = 'M '+pts[0][0]+' '+(H-24);
+    pts.forEach(function(p){ d += ' L '+p[0]+' '+p[1]; });
+    d += ' L '+pts[pts.length-1][0]+' '+(H-24)+' Z';
+    var grad = '<defs><linearGradient id="rg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8A4E62" stop-opacity="0.26"/><stop offset="1" stop-color="#8A4E62" stop-opacity="0"/></linearGradient></defs>';
+    var area = '<path d="'+d+'" fill="url(#rg)"/>';
+    var lineD = 'M '+pts.map(function(p){return p[0]+' '+p[1];}).join(' L ');
+    var line = '<path d="'+lineD+'" fill="none" stroke="#8A4E62" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:1400;stroke-dashoffset:'+(reduce?0:1400)+'"><animate attributeName="stroke-dashoffset" from="1400" to="0" dur="1.1s" fill="freeze"/></path>';
+    var dots = pts.map(function(p,i){
+      var last = i===pts.length-1;
+      return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(last?4:2.6)+'" fill="'+(last?'#C29A54':'#8A4E62')+'"'+(last?' stroke="#fff" stroke-width="1.5"':'')+'/>';
+    }).join('');
+    var labels = days.map(function(dn,i){
+      return '<text class="cx-lbl" x="'+(pad+bw*i+bw/2)+'" y="'+(H-6)+'" text-anchor="middle">'+dn+'</text>';
+    }).join('');
+    svg.innerHTML = grad+area+line+dots+labels;
+  }
+
+  /* -------- agenda grid -------- */
+  function buildAgenda(){
+    var grid = document.getElementById('calGrid');
+    if(grid.dataset.done) return;
+    grid.dataset.done='1';
+    var hours = ['9','10','11','12','13','14','15','16'];
+    var days = [['Lun','11'],['Mar','12'],['Mié','13'],['Jue','14'],['Vie','15'],['Sáb','16']];
+    // hours column
+    var hcol = '<div class="cal-hours"><div class="cal-daylabel" style="visibility:hidden"><div class="cal-dnum">0</div></div>';
+    hours.forEach(function(h){ hcol += '<div class="cal-hour">'+h+':00</div>'; });
+    hcol += '</div>';
+    grid.innerHTML = hcol;
+    // appointments: [dayIndex, hourIndex, service, patient, status]
+    var appts = [
+      [0,0,'Limpieza facial','Ana M.','confirmed'],
+      [0,3,'Bótox','Laura P.','confirmed'],
+      [1,1,'Rellenos','Diana C.','reminded'],
+      [1,5,'Láser','Sofía L.','confirmed'],
+      [2,2,'Bótox','Camilo R.','pending'],
+      [3,0,'Peeling','Julia H.','confirmed'],
+      [3,4,'Consulta','Marta V.','reminded'],
+      [4,1,'Rellenos','Paula G.','confirmed'],
+      [4,6-2,'Láser','Andrés G.','pending'],
+      [5,2,'Limpieza facial','Rosa T.','confirmed']
+    ];
+    days.forEach(function(dy,di){
+      var col = document.createElement('div');
+      col.className='cal-col'; col.dataset.day=di;
+      var lbl = '<div class="cal-daylabel"><div class="cal-dname">'+dy[0]+'</div><div class="cal-dnum'+(di===3?' today':'')+'">'+dy[1]+'</div></div>';
+      col.innerHTML = lbl;
+      hours.forEach(function(h,hi){
+        var slot = document.createElement('div');
+        slot.className='cal-slot'; slot.dataset.h=hi;
+        col.appendChild(slot);
+      });
+      grid.appendChild(col);
+      appts.filter(function(a){return a[0]===di;}).forEach(function(a){
+        addAppt(col, a[1], a[2], a[3], a[4], false);
+      });
+    });
+  }
+  function addAppt(col, hi, svc, pac, status, pop){
+    var slots = col.querySelectorAll('.cal-slot');
+    var slot = slots[hi]; if(!slot) return;
+    var el = document.createElement('div');
+    el.className = 'appt '+status+(pop?' pop':'');
+    var chip = status==='confirmed' ? '<span class="a-chip">Confirmada</span>' : '';
+    el.innerHTML = '<div class="a-svc">'+svc+'</div><div class="a-pac">'+pac+'</div>'+chip;
+    el.style.height='48px';
+    slot.appendChild(el);
+    return el;
+  }
+  function markToday(){}
+
+  /* -------- bandeja thread -------- */
+  var bandejaBuilt = false;
+  function resetBandeja(){
+    var msgs = document.getElementById('msgs');
+    msgs.innerHTML='';
+    document.getElementById('slrV').textContent='0:00';
+    var arc = document.getElementById('slrArc');
+    arc.style.transition='none'; arc.style.strokeDashoffset='88';
+    bandejaBuilt=false;
+  }
+  function addMsg(who, html, meta, ia){
+    var msgs = document.getElementById('msgs');
+    var m = document.createElement('div');
+    m.className='msg '+who;
+    var metaHtml = meta ? '<div class="m-meta">'+(ia?'<span class="ia-tag">IA</span>':'')+meta+'</div>' : '';
+    m.innerHTML = '<div class="bubble">'+html+'</div>'+metaHtml;
+    msgs.appendChild(m);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ m.classList.add('in'); }); });
+    msgs.scrollTop = msgs.scrollHeight;
+    return m;
+  }
+  function showTyping(on){
+    var msgs = document.getElementById('msgs');
+    var t = msgs.querySelector('.typing');
+    if(on){
+      if(!t){ t=document.createElement('div'); t.className='typing on'; t.innerHTML='<i></i><i></i><i></i>'; msgs.appendChild(t); }
+      msgs.scrollTop = msgs.scrollHeight;
+    } else if(t){ t.remove(); }
+  }
+  // Speed-to-lead ring: fill over ~1.4s to represent "0:47"
+  function runSpeedRing(){
+    var arc = document.getElementById('slrArc');
+    var v = document.getElementById('slrV');
+    arc.style.transition='stroke-dashoffset 1.3s ease';
+    requestAnimationFrame(function(){ arc.style.strokeDashoffset='6'; });
+    var target=47, dur=1300, start=performance.now();
+    function tick(now){
+      var p=Math.min(1,(now-start)/dur);
+      var sec=Math.round(target*p);
+      v.textContent='0:'+(sec<10?'0':'')+sec;
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  /* -------- automatizaciones flow -------- */
+  function resetFlow(){
+    app.querySelectorAll('#flowLine .node').forEach(function(n){ n.classList.remove('lit'); });
+    app.querySelectorAll('#flowLine .connector').forEach(function(c){ c.classList.remove('lit'); });
+  }
+  function litFlow(step){
+    var node = app.querySelector('#flowLine .node[data-node="'+step+'"]');
+    if(node) node.classList.add('lit');
+    var conn = app.querySelector('#flowLine .connector[data-conn="'+(step-1)+'"]');
+    if(conn) conn.classList.add('lit');
+  }
+
+  /* -------- toast -------- */
+  function showToast(txt){
+    toastTxt.textContent = txt;
+    toast.classList.add('show');
+    T(function(){ toast.classList.remove('show'); }, 2600);
+  }
+
+  /* -------- fake cursor movement -------- */
+  /* -------- spotlight: foco cinematográfico sobre el elemento narrado --------
+     Antes calculaba la posición UNA sola vez. Si algo se movía después
+     (scroll interno, reflow, lo que sea), el hueco quedaba desencajado.
+     Ahora se re-mide en cada frame mientras está activo — imposible que
+     quede fuera de lugar, sin importar la causa del movimiento. */
+  var trackedEl = null, trackedPad = 8, trackRAF = null;
+  function positionSpotlightNow(){
+    if(!trackedEl || !trackedEl.isConnected){ spotlightOff(); return; }
+    var ar = app.getBoundingClientRect();
+    var r = trackedEl.getBoundingClientRect();
+    spotHole.style.top = (r.top-ar.top-trackedPad)+'px';
+    spotHole.style.left = (r.left-ar.left-trackedPad)+'px';
+    spotHole.style.width = (r.width+trackedPad*2)+'px';
+    spotHole.style.height = (r.height+trackedPad*2)+'px';
+  }
+  function trackLoop(){
+    if(!trackedEl){ trackRAF=null; return; }
+    positionSpotlightNow();
+    trackRAF = requestAnimationFrame(trackLoop);
+  }
+  function spotlightOn(el, opts){
+    if(reduce || !el) return;
+    opts = opts||{};
+    trackedEl = el;
+    trackedPad = opts.pad!=null ? opts.pad : 8;
+    positionSpotlightNow();
+    spotHole.classList.add('on');
+    if(!trackRAF) trackRAF = requestAnimationFrame(trackLoop);
+    if(opts.zoom){
+      if(spotZoomEl && spotZoomEl!==el) spotZoomEl.classList.remove('zoom-focus');
+      el.classList.add('zoom-focus');
+      spotZoomEl = el;
+    }
+  }
+  function spotlightOff(){
+    trackedEl = null;
+    if(trackRAF){ cancelAnimationFrame(trackRAF); trackRAF=null; }
+    spotHole.classList.remove('on');
+    if(spotZoomEl){ spotZoomEl.classList.remove('zoom-focus'); spotZoomEl=null; }
+  }
+
+  /* -------- bloqueo de scroll interno durante el recorrido --------
+     El cursor y el spotlight se calculan en coordenadas relativas al
+     widget. Eso es inmune al scroll de LA PÁGINA, pero no al scroll de
+     los contenedores internos (calendario, chat, factura) — si esos se
+     movían mientras el recorrido corría, el objetivo cambiaba de lugar
+     sin que lo supiéramos. Ahora se bloquean físicamente mientras el
+     recorrido automático está activo (el scroll programático nuestro,
+     como el del calendario, sigue funcionando; solo se bloquea el que
+     vendría de un scroll/gesto del visitante). */
+  var scrollLockTargets = null;
+  function getScrollLockTargets(){
+    if(!scrollLockTargets){
+      scrollLockTargets = [];
+      app.querySelectorAll('.view').forEach(function(v){ scrollLockTargets.push(v); });
+      ['calGrid','msgs'].forEach(function(id){ var e=document.getElementById(id); if(e) scrollLockTargets.push(e); });
+      var fm = app.querySelector('.fact-main'); if(fm) scrollLockTargets.push(fm);
+    }
+    return scrollLockTargets;
+  }
+  function lockInternalScroll(lock){
+    getScrollLockTargets().forEach(function(el){ el.style.overflow = lock ? 'hidden' : ''; });
+  }
+
+  function getCenter(el){
+    var ar = app.getBoundingClientRect();
+    var r = el.getBoundingClientRect();
+    return { x: r.left - ar.left + r.width/2, y: r.top - ar.top + r.height/2 };
+  }
+  function moveCursorTo(el, cb, offsetY){
+    if(!el){ if(cb) cb(); return; }
+    var c = getCenter(el);
+    var tx = c.x, ty = c.y + (offsetY||0);
+    var sx = curX, sy = curY;
+    var start = performance.now();
+    var dist = Math.hypot(tx-sx, ty-sy);
+    var dur = Math.min(1100, Math.max(420, dist*1.4));
+    if(reduce){ curX=tx; curY=ty; cursor.style.left=tx+'px'; cursor.style.top=ty+'px'; if(cb) cb(); return; }
+    function tick(now){
+      var p = Math.min(1,(now-start)/dur);
+      var e = p<0.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2; // easeInOutCubic
+      curX = sx+(tx-sx)*e; curY = sy+(ty-sy)*e;
+      cursor.style.left=curX+'px'; cursor.style.top=curY+'px';
+      if(p<1){ rafId=requestAnimationFrame(tick); }
+      else { curX=tx; curY=ty; if(cb) cb(); }
+    }
+    rafId = requestAnimationFrame(tick);
+  }
+  function doClick(cb){
+    ripple.style.left=curX+'px'; ripple.style.top=curY+'px';
+    ripple.classList.remove('go'); void ripple.offsetWidth; ripple.classList.add('go');
+    cursor.animate([{transform:'translate(-50%,-50%) scale(1)'},{transform:'translate(-50%,-50%) scale(.82)'},{transform:'translate(-50%,-50%) scale(1)'}],{duration:260});
+    T(cb, 220);
+  }
+  function clickNav(view, cb){
+    var nav = app.querySelector('.nav-item[data-view="'+view+'"]');
+    moveCursorTo(nav, function(){ doClick(function(){ setView(view); if(cb) cb(); }); });
+  }
+
+  /* ============ THE TOUR ============ */
+  function startTour(){
+    if(reduce){ enterInteractive(true); countKPIs(false); drawChart(); buildAgenda(); return; }
+    tourActive = true;
+    cursor.classList.add('on');
+    spotlightOff();
+    modeTxt.innerHTML = 'Recorrido <b>automático</b>';
+    modeBtnTxt.textContent = 'Pruébalo';
+    app.style.cursor='default';
+    // gate real pointer events + scroll interno durante el recorrido
+    content.style.pointerEvents='none';
+    lockInternalScroll(true);
+    app.querySelectorAll('.nav-item').forEach(function(n){n.style.pointerEvents='none';});
+
+    setView('panel');
+    curX=120; curY=120; cursor.style.left='120px'; cursor.style.top='120px';
+    resetFeedExtras();
+
+    // 1. Panel loads — entrada escalonada de las tarjetas + KPIs cuentan
+    var kpis = app.querySelectorAll('.kpi-grid .kpi');
+    kpis.forEach(function(k,i){
+      k.style.opacity='0'; k.style.transform='translateY(10px)';
+      k.style.transition='opacity .5s ease, transform .5s cubic-bezier(.2,.8,.2,1)';
+      T(function(){ k.style.opacity='1'; k.style.transform='none'; }, 80+i*110);
+    });
+    drawChart();
+    T(function(){ countKPIs(true); }, 300);
+    revealFeed();
+    T(function(){ showCap(1,'Panel','Toda la clínica en una pantalla: ingresos, ocupación, leads y no-shows en tiempo real.'); }, 900);
+    T(function(){ spotlightOn(app.querySelector('.kpi'), {pad:10, zoom:true}); }, 1100);
+    T(function(){ pulseLead(); spotlightOn(app.querySelector('#feed .feed-item[data-fi="new-lead"]'), {pad:8, zoom:true}); }, 2600);
+    T(function(){ showCap(2,'Entra un lead','Son las 9:47 p.m. Alguien pregunta por bótox en WhatsApp. Nadie del equipo está disponible.'); }, 3600);
+    T(function(){ spotlightOff(); }, 5700);
+    // segundo latido: otro evento en vivo mientras el visitante lee — la operación no se detiene
+    T(function(){
+      showToast('Recordatorio automático enviado · 6 citas de mañana');
+      pushLiveFeedItem('rem','<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>','<b>Recordatorio enviado</b> a Valentina R. · confirma en 1 toque','justo ahora · WhatsApp');
+    }, 6300);
+    T(function(){ spotlightOn(app.querySelector('#feed .feed-item'), {pad:8, zoom:true}); }, 6500);
+    T(function(){ spotlightOff(); }, 9700);
+
+    // 2. -> Bandeja
+    T(function(){
+      clickNav('bandeja', function(){ playBandeja(); });
+    }, 10600);
+  }
+
+  function revealFeed(){
+    var items = app.querySelectorAll('#feed .feed-item');
+    items.forEach(function(it,i){ T(function(){ it.classList.add('in'); }, 200+i*160); });
+  }
+  function pulseLead(){
+    var lead = app.querySelector('#feed .feed-item[data-fi="new-lead"]');
+    if(lead) lead.animate([{background:'rgba(138,78,98,0)'},{background:'rgba(138,78,98,.14)'},{background:'rgba(138,78,98,0)'}],{duration:1400});
+  }
+  function pushLiveFeedItem(dotClass, iconSvg, html, meta){
+    var feed = document.getElementById('feed');
+    if(!feed) return;
+    var it = document.createElement('div');
+    it.className = 'feed-item feed-live-added';
+    it.innerHTML = '<div class="fi-dot '+dotClass+'">'+iconSvg+'</div><div class="fi-body"><div class="fi-txt">'+html+'</div><div class="fi-meta">'+meta+'</div></div>';
+    feed.insertBefore(it, feed.firstChild);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ it.classList.add('in'); }); });
+    it.animate([{background:'rgba(194,154,84,0)'},{background:'rgba(194,154,84,.16)'},{background:'rgba(194,154,84,0)'}],{duration:1600});
+    return it;
+  }
+  function resetFeedExtras(){
+    app.querySelectorAll('#feed .feed-live-added').forEach(function(it){ it.remove(); });
+  }
+
+  function playBandeja(){
+    // conversation choreography — con aire para leer cada mensaje
+    spotlightOff();
+    runSpeedRing();
+    T(function(){ showCap(3,'Bandeja unificada','WhatsApp, Instagram y web en un solo lugar. La IA contesta sola: precio real y horarios. Tardó <b>47 segundos</b>.'); }, 400);
+    T(function(){ spotlightOn(document.querySelector('.sl-ring'), {pad:10, zoom:true}); }, 500);
+    T(function(){ addMsg('them','Hola 👋 ¿Cuánto cuesta el bótox?','Valentina · 21:47',false); }, 600);
+    T(function(){ showTyping(true); }, 2000);
+    T(function(){ spotlightOff(); }, 2900);
+    T(function(){
+      showTyping(false);
+      addMsg('me','¡Hola Valentina! El bótox va desde <b>$38.000 por unidad</b>. La mayoría de pacientes usa entre 20 y 40 unidades según la zona. ¿Te gustaría agendar una valoración sin costo?','Áurea · respondió en 0:47','',true);
+    }, 3000);
+    T(function(){ showTyping(true); }, 5800);
+    T(function(){
+      showTyping(false);
+      var m = addMsg('me','Tengo estos horarios disponibles esta semana 👇','Áurea','',true);
+      var slots = document.createElement('div'); slots.className='slots';
+      slots.innerHTML='<button class="slot" data-slot="jue">Jue · 3:00 PM</button><button class="slot" data-slot="vie">Vie · 10:30 AM</button>';
+      m.querySelector('.bubble').appendChild(slots);
+    }, 7000);
+    // 3. pick a slot
+    T(function(){
+      var slot = app.querySelector('.slot[data-slot="jue"]');
+      moveCursorTo(slot, function(){
+        doClick(function(){
+          if(slot) slot.classList.add('picked');
+          T(function(){
+            addMsg('them','Perfecto, el jueves a las 3 ✨','Valentina · 21:48',false);
+          }, 700);
+          T(function(){
+            showTyping(true);
+          }, 1900);
+          T(function(){
+            showTyping(false);
+            addMsg('me','¡Listo! Tu cita quedó <b>confirmada</b> para el jueves 3:00 PM. Te enviaré un recordatorio un día antes 💌','Áurea','',true);
+            showToast('Cita confirmada · Valentina R. · Jue 3:00 PM');
+          }, 3000);
+          // 4. -> Agenda
+          T(function(){ clickNav('agenda', function(){ playAgenda(); }); }, 8400);
+        });
+      });
+    }, 9200);
+  }
+
+  function playAgenda(){
+    spotlightOff();
+    buildAgenda();
+    T(function(){ showCap(4,'Agenda','La cita entra sola al calendario, ya confirmada. Nadie la escribió a mano.'); }, 300);
+    T(function(){
+      var col = app.querySelector('.cal-col[data-day="3"]'); // Jueves
+      if(col){
+        var el = addAppt(col, 6, 'Bótox', 'Valentina R.', 'confirmed', true); // 15:00 -> index 6
+        if(el){
+          // La cita cae fuera del área visible (3pm exige scroll). Desplazamos
+          // SOLO el contenedor interno del calendario (nunca la página completa)
+          // y ESPERAMOS a que el scroll termine antes de medir su posición —
+          // si no, el cursor y el spotlight apuntan a donde estaba antes
+          // de moverse el contenedor. Eso era el desencaje.
+          var grid = document.getElementById('calGrid');
+          var gRect = grid.getBoundingClientRect();
+          var eRect = el.getBoundingClientRect();
+          var delta = (eRect.top + eRect.height/2) - (gRect.top + gRect.height/2);
+          grid.scrollTo({top: grid.scrollTop + delta, behavior: reduce ? 'auto' : 'smooth'});
+          T(function(){
+            moveCursorTo(el, function(){ spotlightOn(el, {pad:6, zoom:true}); });
+          }, 650);
+        }
+      }
+    }, 900);
+    T(function(){ spotlightOff(); }, 8300);
+    // 5. -> Facturación
+    T(function(){ clickNav('factura', function(){ playFactura(); }); }, 9000);
+  }
+
+  function resetFactura(){
+    var pay = document.getElementById('factPay');
+    var paid = document.getElementById('factPaid');
+    var status = document.getElementById('factStatus');
+    var verify = document.getElementById('factVerify');
+    var exp = document.getElementById('qrExp');
+    if(pay) pay.classList.remove('on');
+    if(paid) paid.classList.remove('on');
+    if(verify) verify.classList.remove('on');
+    if(status) status.textContent = 'Generando…';
+    if(exp) exp.innerHTML = 'Expira en <b>14:59</b>';
+  }
+  function runExpCountdown(){
+    var exp = document.getElementById('qrExp');
+    if(!exp || reduce) return;
+    var s = 899, start = performance.now(); // 14:59 -> baja mientras se "espera" el pago
+    function tick(now){
+      var elapsed = Math.floor((now-start)/1000);
+      var left = Math.max(0, s-elapsed);
+      var m = Math.floor(left/60), sec = left%60;
+      exp.innerHTML = 'Expira en <b>'+m+':'+(sec<10?'0':'')+sec+'</b>';
+      if(left>0 && exp.isConnected && document.getElementById('factPay').classList.contains('on')){
+        requestAnimationFrame(tick);
+      }
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Desplaza SOLO el contenedor interno de la factura (nunca la página)
+  // para que un elemento recién aparecido (el QR, el comprobante) quede
+  // completamente visible. El spotlight ya se autocorrige cada frame, así
+  // que puede lanzarse en el mismo instante sin esperar a que termine el
+  // scroll — lo sigue fluidamente mientras se desplaza.
+  function revealInFactMain(el){
+    var wrap = document.querySelector('.fact-main');
+    if(!wrap || !el) return;
+    var wRect = wrap.getBoundingClientRect();
+    var eRect = el.getBoundingClientRect();
+    var overflowBottom = (eRect.bottom) - (wRect.bottom) + 14;
+    var overflowTop = wRect.top - eRect.top + 14;
+    if(overflowBottom > 0){
+      wrap.scrollTo({top: wrap.scrollTop + overflowBottom, behavior: reduce ? 'auto' : 'smooth'});
+    } else if(overflowTop > 0){
+      wrap.scrollTo({top: wrap.scrollTop - overflowTop, behavior: reduce ? 'auto' : 'smooth'});
+    }
+  }
+
+  function playFactura(){
+    spotlightOff();
+    resetFactura();
+    T(function(){ showCap(5,'Facturación','La cita confirmada se convierte en factura sola, sin que nadie la digite.'); }, 300);
+    T(function(){
+      var wrap = document.querySelector('.fact-main');
+      if(wrap) wrap.scrollTo({top:0, behavior:'auto'}); // arranca siempre desde arriba
+      var card = document.querySelector('.fact-main');
+      spotlightOn(card, {pad:8});
+    }, 500);
+    T(function(){
+      var status = document.getElementById('factStatus');
+      var pay = document.getElementById('factPay');
+      if(status) status.textContent = 'Esperando pago';
+      if(pay){
+        pay.classList.add('on');
+        revealInFactMain(pay);
+        spotlightOn(pay, {pad:8, zoom:true});
+      }
+      runExpCountdown();
+    }, 2200);
+    T(function(){
+      var status = document.getElementById('factStatus');
+      var verify = document.getElementById('factVerify');
+      if(status) status.textContent = 'Verificando…';
+      if(verify){
+        verify.classList.add('on');
+        revealInFactMain(verify);
+        spotlightOn(verify, {pad:6});
+      }
+    }, 5600);
+    T(function(){
+      var status = document.getElementById('factStatus');
+      var verify = document.getElementById('factVerify');
+      var paid = document.getElementById('factPaid');
+      if(status) status.textContent = 'Pagada';
+      if(verify) verify.classList.remove('on');
+      if(paid){
+        paid.classList.add('on');
+        revealInFactMain(paid);
+        spotlightOn(paid, {pad:6, zoom:true});
+      }
+      showToast('Pago aprobado · $760.000 · Autorización 837211');
+    }, 7000);
+    T(function(){ spotlightOff(); }, 9800);
+    // 6. -> Automatizaciones
+    T(function(){ clickNav('auto', function(){ playFlow(); }); }, 11400);
+  }
+
+  function playFlow(){
+    spotlightOff();
+    resetFlow();
+    T(function(){ showCap(6,'Automatizaciones','El flujo completo corre solo: del primer mensaje hasta la recompra a los 90 días.'); }, 300);
+    T(function(){ spotlightOn(document.querySelector('.flow'), {pad:0}); }, 500);
+    for(var i=0;i<5;i++){ (function(step){ T(function(){ litFlow(step); }, 900+step*1300); })(i); }
+    // toggle recompra on
+    T(function(){
+      var ruleToggle = document.getElementById('ruleRecompra');
+      spotlightOn(ruleToggle.closest('.rule'), {pad:6, zoom:true});
+      moveCursorTo(ruleToggle, function(){
+        doClick(function(){ ruleToggle.classList.add('on'); });
+      });
+    }, 6000);
+    T(function(){ spotlightOff(); }, 10600);
+    // 7. back to Panel — the payoff
+    T(function(){
+      clickNav('panel', function(){
+        T(function(){ bumpKPIs(); pulseLead(); }, 500);
+        T(function(){
+          showCap(7,'Resultado','Un lead que llegó de noche terminó en cita confirmada y facturada. Sin que nadie moviera un dedo.');
+          spotlightOn(document.querySelector('.kpi-grid'), {pad:6});
+        }, 900);
+        T(function(){ spotlightOff(); endTour(); }, 6000);
+      });
+    }, 10000);
+  }
+
+  function endTour(){
+    // invite to interact, then loop
+    modeTxt.innerHTML = '¿Te gustó? <b>Explora tú mismo</b>';
+    modeBtn.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:900,iterations:3});
+    T(function(){
+      if(tourActive){ // still no user interaction -> loop
+        clearTimers();
+        startTour();
+      }
+    }, 6000);
+  }
+
+  /* ============ INTERACTIVE MODE / PAUSA POR SCROLL ============ */
+  function settleRestingState(){
+    // deja cada sección en su estado final "resuelto", igual sin importar
+    // si se llega aquí por interacción real o por pausa de scroll.
+    app.querySelectorAll('.kpi-grid .kpi').forEach(function(k){ k.style.opacity='1'; k.style.transform='none'; });
+    countKPIs(false); drawChart(); buildAgenda();
+    app.querySelectorAll('#flowLine .node').forEach(function(n){ n.classList.add('lit'); });
+    app.querySelectorAll('#flowLine .connector').forEach(function(c){ c.classList.add('lit'); });
+    app.querySelectorAll('#feed .feed-item').forEach(function(it){ it.classList.add('in'); });
+    var fp=document.getElementById('factPay'), fpd=document.getElementById('factPaid'), fs=document.getElementById('factStatus'), fv=document.getElementById('factVerify');
+    if(fp) fp.classList.add('on');
+    if(fpd) fpd.classList.add('on');
+    if(fs) fs.textContent='Pagada';
+    if(fv) fv.classList.remove('on');
+  }
+  function stopTourAndSettle(modeLabel, btnLabel){
+    tourActive = false;
+    clearTimers();
+    cursor.classList.remove('on');
+    hideCap();
+    spotlightOff();
+    app.style.cursor='';
+    content.style.pointerEvents='';
+    lockInternalScroll(false);
+    app.querySelectorAll('.nav-item').forEach(function(n){n.style.pointerEvents='';});
+    settleRestingState();
+    modeTxt.innerHTML = modeLabel;
+    modeBtnTxt.textContent = btnLabel;
+  }
+  function enterInteractive(silent){
+    userTookOver = true; // interacción real y deliberada — respetamos su elección
+    stopTourAndSettle('Modo <b>interactivo</b>', 'Ver recorrido');
+    if(!silent){ toast.classList.remove('show'); }
+  }
+  function pauseForScroll(){
+    // el widget salió de vista mientras corría el recorrido — lo pausamos
+    // limpio (no cuenta como que el visitante "tomó el control").
+    if(!tourActive) return;
+    stopTourAndSettle('En pausa — <b>vuelve a esta sección</b>', 'Ver recorrido');
+  }
+
+  /* nav clicks (interactive) */
+  app.querySelectorAll('.nav-item').forEach(function(n){
+    n.addEventListener('click', function(){ if(!tourActive) setView(n.dataset.view); });
+  });
+  /* conversation clicks (interactive) — keep simple: just highlight */
+  app.querySelectorAll('.conv').forEach(function(c){
+    c.addEventListener('click', function(){
+      if(tourActive) return;
+      app.querySelectorAll('.conv').forEach(function(x){x.classList.remove('active');});
+      c.classList.add('active');
+    });
+  });
+  /* toggles (interactive) */
+  app.querySelectorAll('.toggle').forEach(function(t){
+    t.addEventListener('click', function(){ if(!tourActive) t.classList.toggle('on'); });
+  });
+  /* slots (interactive) */
+  app.addEventListener('click', function(e){
+    var s = e.target.closest('.slot');
+    if(s && !tourActive){
+      app.querySelectorAll('.slot').forEach(function(x){x.classList.remove('picked');});
+      s.classList.add('picked');
+    }
+  });
+
+  /* mode button: toggle between tour and interactive */
+  modeBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(tourActive){ enterInteractive(false); }
+    else { userTookOver = false; clearTimers(); startTour(); }
+  });
+
+  /* takeover ONLY on a deliberate click/tap inside the app.
+     (Antes bastaba mover el mouse por encima y el recorrido se cortaba: ese era el bug.) */
+  app.addEventListener('pointerdown', function(e){
+    if(tourActive && !e.target.closest('#mode')){ enterInteractive(false); }
+  });
+
+  /* -------- narration caption -------- */
+  var capEl = document.getElementById('cap');
+  var capK = document.getElementById('capK');
+  var capT = document.getElementById('capT');
+  var capStep = document.getElementById('capStep');
+  function showCap(step, kicker, text){
+    capStep.textContent = step+'/7';
+    capK.textContent = kicker;
+    capT.innerHTML = text;
+    capEl.classList.add('show');
+  }
+  function hideCap(){ capEl.classList.remove('show'); }
+
+  /* -------- kick off -------- */
+  function boot(){
+    // pre-build static bits so interactive fallback is instant
+    if(reduce){
+      app.classList.add('in');
+      setView('panel'); settleRestingState();
+      modeTxt.innerHTML = 'Explora la <b>demo</b>';
+      modeBtnTxt.textContent = 'Reiniciar';
+      return;
+    }
+
+    // Antes: el recorrido arrancaba apenas un 40% del widget cruzaba la
+    // pantalla — si el visitante todavía estaba haciendo scroll HACIA él,
+    // el inicio se perdía. Ahora: cada cambio de scroll/tamaño reinicia un
+    // temporizador corto; solo cuando el scroll se QUEDA QUIETO se decide
+    // si hay que arrancar, pausar o dejarlo correr. Así nunca arranca a
+    // mitad de un scroll, y si el widget sale de vista mientras corre,
+    // se pausa limpio en vez de seguir animando fuera de contexto.
+    var settleTimer = null;
+    function scheduleCheck(){
+      if(settleTimer) clearTimeout(settleTimer);
+      settleTimer = setTimeout(evaluateVisibility, 420);
+    }
+    function evaluateVisibility(){
+      var r = app.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      var visibleH = Math.max(0, Math.min(r.bottom, vh) - Math.max(r.top, 0));
+      var ratio = r.height > 0 ? visibleH / r.height : 0;
+
+      if(ratio >= 0.6){
+        if(!app.classList.contains('in')) app.classList.add('in');
+        if(!tourActive && !userTookOver){ startTour(); }
+      } else if(ratio < 0.25 && tourActive){
+        pauseForScroll();
+      }
+    }
+
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(scheduleCheck, {threshold:[0,0.25,0.4,0.6,0.85]});
+      io.observe(app);
+    }
+    window.addEventListener('scroll', scheduleCheck, {passive:true});
+    window.addEventListener('resize', scheduleCheck, {passive:true});
+    // primer chequeo por si ya está visible desde el momento de cargar
+    scheduleCheck();
+  }
+
+  if(document.readyState==='complete' || document.readyState==='interactive'){ boot(); }
+  else { window.addEventListener('DOMContentLoaded', boot); }
+})();
+</script>
+
+
+</body></html>
