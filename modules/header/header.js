@@ -38,9 +38,14 @@ export default {
       drawer.append(cta);
 
       langBtn.textContent = store.state.lang === 'es' ? 'EN' : 'ES';
-      links.querySelectorAll('a').forEach((a, i) => {
-        if (ROUTES[i].id === store.state.page) a.setAttribute('aria-current', 'page');
-        else a.removeAttribute('aria-current');
+      // La ruta actual se marca en la barra y tambien en el cajon: por
+      // debajo de 1100px el cajon es la unica navegacion.
+      [links, drawer].forEach((box) => {
+        box.querySelectorAll('a').forEach((a) => {
+          const id = (a.getAttribute('href') || '').slice(1);
+          if (id === store.state.page && !a.classList.contains('hdr-cta')) a.setAttribute('aria-current', 'page');
+          else a.removeAttribute('aria-current');
+        });
       });
     };
 
@@ -55,11 +60,31 @@ export default {
       drawer.setAttribute('aria-hidden', String(!open));
       burger.setAttribute('aria-expanded', String(open));
       burger.textContent = open ? '✕' : '☰';
+      // Con el cajón abierto la página de fondo no se desplaza.
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) drawer.querySelector('a')?.focus();
     };
     setDrawer(false);
 
     burger.addEventListener('click', () => {
       setDrawer(drawer.dataset.open !== 'true');
+    });
+
+    /* Trampa de foco: con el cajón abierto, el tabulador circula entre el
+       botón de menú y los enlaces del cajón, y nunca sale al contenido de
+       fondo. Escape cierra y devuelve el foco al disparador. */
+    document.addEventListener('keydown', (e) => {
+      if (drawer.dataset.open !== 'true') return;
+      if (e.key === 'Escape') { setDrawer(false); burger.focus(); return; }
+      if (e.key !== 'Tab') return;
+      const ring = [burger, ...drawer.querySelectorAll('a')];
+      const i = ring.indexOf(document.activeElement);
+      if (i === -1) { e.preventDefault(); ring[0].focus(); return; }
+      const next = e.shiftKey ? i - 1 : i + 1;
+      if (next < 0 || next >= ring.length) {
+        e.preventDefault();
+        ring[e.shiftKey ? ring.length - 1 : 0].focus();
+      }
     });
 
     render();

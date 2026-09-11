@@ -17,7 +17,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:var(--grafito);color:var(--crema);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
+body{background:var(--grafito);color:var(--crema);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:clip}
 a{color:var(--ambar);text-decoration:none}
 a:hover{color:var(--indigo-2)}
 ::selection{background:var(--indigo);color:#fff}
@@ -60,7 +60,7 @@ input,button,textarea,select{font-family:inherit}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion: reduce){.agent-dodge,.agent-rest{transition:none}}
 @media(max-width:1100px){
-  .mainnav{display:none!important}
+  .hdr-links.mainnav{display:none!important}
   .menu-btn{display:inline-grid!important}
   .herogrid,.chatgrid,.appsgrid,.contactgrid,.logingrid,.proofgrid,.livegrid{grid-template-columns:1fr!important;gap:28px!important}
   .indgrid{grid-template-columns:1fr!important}
