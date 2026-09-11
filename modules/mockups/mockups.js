@@ -53,6 +53,25 @@ export default {
       zones.forEach((z) => io.observe(z));
     };
 
+    /* ---------- las demos se cargan cuando se piden (P-09) ----------
+       Cargarlas al acercarse a la vista costaba 184,7 KB de documento mas
+       203,3 KB de subrecursos a todo el que pasara por la ruta, la usara o
+       no. El marcador tiene el alto exacto del marco, de modo que sustituirlo
+       por el iframe no desplaza nada de lo que hay debajo. */
+    const armarDemo = (slot) => {
+      const frame = document.createElement('iframe');
+      frame.className = 'mck-iframe' + (slot.classList.contains('mck-preview-tall') ? ' mck-iframe-tall' : '');
+      frame.src = slot.dataset.src;
+      frame.title = slot.dataset.title;
+      frame.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+      slot.replaceWith(frame);
+      frame.focus();
+    };
+
+    host.querySelectorAll('[data-src]').forEach((slot) => {
+      slot.querySelector('.mck-preview-btn')?.addEventListener('click', () => armarDemo(slot));
+    });
+
     renderManages();
     watchDemos();
     store.subscribe(renderManages);

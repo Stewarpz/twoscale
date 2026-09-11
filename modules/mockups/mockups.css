@@ -51,6 +51,14 @@
 /* Los marcos son paradas de tabulación: necesitan anillo (P-21). */
 .mck-iframe:focus-visible{outline:2px solid var(--ambar);outline-offset:3px}
 
+/* Marcador de posicion de la demo: mismo alto exacto que el marco que
+   sustituye, para que abrirla no desplace lo que hay debajo (P-09). */
+.mck-preview{position:relative;display:block;width:100%;height:780px;background:#1C2029;overflow:hidden}
+.mck-preview-tall{height:900px}
+.mck-preview-img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.mck-preview::after{content:"";position:absolute;inset:0;background:rgba(20,22,28,.55);z-index:1}
+.mck-preview-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;min-height:48px;padding:14px 26px;border:none;cursor:pointer}
+
 /* Misma contencion que el resto de modulos de la ruta (P-41). El marco
    incrustado sigue a sangre. */
 .mck{max-width:var(--maxw);margin-left:auto;margin-right:auto;padding:0 24px}

@@ -21,7 +21,16 @@
           <span class="mck-lights mck-lights-dark"><i></i><i></i><i></i></span>
           <span class="mck-url mck-url-dark" data-t="mk2_frame"></span>
         </div>
-        <iframe class="mck-iframe" src="aurea-demo.html" loading="lazy" data-role="aurea" title="Demostración interactiva: panel Áurea" sandbox="allow-scripts allow-same-origin"></iframe>
+        <!-- La demo no se descarga hasta que alguien la pide: cargarla al
+             acercarse a la vista costaba 388 KB que la mayoria no llegaba a
+             usar. El marcador ocupa exactamente el mismo alto que el marco,
+             asi que abrirla no desplaza nada (P-09). -->
+        <div class="mck-preview" data-role="aurea-slot"
+             data-src="aurea-demo.html"
+             data-title="Demostración interactiva: panel Áurea">
+          <img class="mck-preview-img" src="previews/aurea.svg" alt="" width="1160" height="780">
+          <button type="button" class="btn-amber mck-preview-btn" data-t="demo_open"></button>
+        </div>
       </div>
       <p class="mck-hint" data-t="mk2_hint"></p>
     </div>
@@ -42,7 +51,12 @@
           <span class="mck-lights mck-lights-dark"><i></i><i></i><i></i></span>
           <span class="mck-url mck-url-dark" data-t="mk3_frame"></span>
         </div>
-        <iframe class="mck-iframe mck-iframe-tall" src="TwoscaleDashboard.dc.html?tour=off" loading="lazy" data-role="dash" title="Demostración interactiva: Twoscale Dashboard" sandbox="allow-scripts allow-same-origin"></iframe>
+        <div class="mck-preview mck-preview-tall" data-role="dash-slot"
+             data-src="TwoscaleDashboard.dc.html?tour=off"
+             data-title="Demostración interactiva: Twoscale Dashboard">
+          <img class="mck-preview-img" src="previews/dashboard.svg" alt="" width="1160" height="900">
+          <button type="button" class="btn-amber mck-preview-btn" data-t="demo_open"></button>
+        </div>
       </div>
       <p class="mck-hint" data-t="dash_hint"></p>
     </div>

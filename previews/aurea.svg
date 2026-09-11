@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1160 780" width="1160" height="780" role="img" aria-hidden="true">
+  <!-- Marcador de posicion sobrio de la demo de Aurea. No es una captura:
+       insinua la estructura del panel sin mostrar datos que no existen. -->
+  <rect width="1160" height="780" fill="#1C2029"/>
+  <g fill="none" stroke="#2E323C" stroke-width="1">
+    <path d="M232 0V780M0 96H1160"/>
+  </g>
+  <!-- Barra superior -->
+  <rect x="32" y="40" width="118" height="14" rx="7" fill="#3A3F4B"/>
+  <rect x="1010" y="36" width="118" height="24" rx="12" fill="#242832"/>
+  <!-- Menu lateral -->
+  <g fill="#2E323C">
+    <rect x="32" y="140" width="150" height="11" rx="5.5"/>
+    <rect x="32" y="182" width="122" height="11" rx="5.5"/>
+    <rect x="32" y="224" width="140" height="11" rx="5.5"/>
+    <rect x="32" y="266" width="104" height="11" rx="5.5"/>
+    <rect x="32" y="308" width="132" height="11" rx="5.5"/>
+  </g>
+  <rect x="20" y="176" width="4" height="23" rx="2" fill="#F0A93E"/>
+  <!-- Contenido: filas de una tabla -->
+  <g>
+    <rect x="272" y="144" width="196" height="13" rx="6.5" fill="#3A3F4B"/>
+    <g fill="#242832">
+      <rect x="272" y="196" width="856" height="64" rx="10"/>
+      <rect x="272" y="272" width="856" height="64" rx="10"/>
+      <rect x="272" y="348" width="856" height="64" rx="10"/>
+      <rect x="272" y="424" width="856" height="64" rx="10"/>
+      <rect x="272" y="500" width="856" height="64" rx="10"/>
+      <rect x="272" y="576" width="856" height="64" rx="10"/>
+    </g>
+    <g fill="#2E323C">
+      <rect x="296" y="220" width="180" height="10" rx="5"/>
+      <rect x="296" y="296" width="148" height="10" rx="5"/>
+      <rect x="296" y="372" width="204" height="10" rx="5"/>
+      <rect x="296" y="448" width="164" height="10" rx="5"/>
+      <rect x="296" y="524" width="192" height="10" rx="5"/>
+      <rect x="296" y="600" width="136" height="10" rx="5"/>
+    </g>
+    <g fill="#2E323C">
+      <rect x="900" y="220" width="88" height="10" rx="5"/>
+      <rect x="900" y="296" width="88" height="10" rx="5"/>
+      <rect x="900" y="372" width="88" height="10" rx="5"/>
+      <rect x="900" y="448" width="88" height="10" rx="5"/>
+      <rect x="900" y="524" width="88" height="10" rx="5"/>
+      <rect x="900" y="600" width="88" height="10" rx="5"/>
+    </g>
+    <g fill="#343945">
+      <rect x="1032" y="214" width="72" height="22" rx="11"/>
+      <rect x="1032" y="290" width="72" height="22" rx="11"/>
+      <rect x="1032" y="366" width="72" height="22" rx="11"/>
+      <rect x="1032" y="442" width="72" height="22" rx="11"/>
+      <rect x="1032" y="518" width="72" height="22" rx="11"/>
+      <rect x="1032" y="594" width="72" height="22" rx="11"/>
+    </g>
+  </g>
+</svg>

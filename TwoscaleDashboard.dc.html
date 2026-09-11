@@ -3,6 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- React y React-DOM se servian desde un proveedor externo, un quinto
+     origen ajeno para una demo incrustada en la landing. support.js consulta
+     __resources antes de acudir al proveedor: apuntamos ahi las copias
+     locales, verificadas contra las mismas huellas SRI que el propio
+     support.js declara. -->
+<script>
+  window.__resources = Object.assign({}, window.__resources, {
+    "https://unpkg.com/react@18.3.1/umd/react.production.min.js": "./vendor/react-18.3.1.production.min.js",
+    "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "./vendor/react-dom-18.3.1.production.min.js"
+  });
+</script>
 <script src="./support.js"></script>
 <link rel="stylesheet" href="vendor/broadsheet.css">
 </head>
