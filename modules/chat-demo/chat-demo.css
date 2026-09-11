@@ -43,3 +43,7 @@
 .live-typing i:nth-child(3){animation-delay:.4s}
 
 @media(max-width:1100px){ .live-inner{grid-template-columns:1fr;gap:28px} }
+
+/* La conversación se escribe sola y crecía 205 px durante el recorrido,
+   empujando todo lo que hay debajo. Se reserva su altura final (P-04). */
+.live-log{min-height:clamp(340px,74vw,430px)}

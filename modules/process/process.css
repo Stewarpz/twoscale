@@ -48,7 +48,9 @@
 .prc-step-2 .prc-rail { background: linear-gradient(180deg, var(--indigo-2), transparent); }
 
 .prc-top { display: flex; align-items: center; gap: 12px; }
-@keyframes stepPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(240,169,62,0) } 50% { box-shadow: 0 0 0 5px rgba(240,169,62,.14) } }
+/* Componible: opacity y transform se resuelven en el compositor; box-shadow
+   forzaba repintado en cada fotograma (P-04). */
+@keyframes stepPulse { 0%,100% { opacity: 0; transform: scale(1) } 50% { opacity: 1; transform: scale(1.32) } }
 .prc-n {
   width: 38px; height: 38px; flex: none;
   display: grid; place-items: center;
@@ -57,7 +59,7 @@
   border: 1px solid var(--ambar);
   color: var(--ambar);
   font-family: var(--fm); font-weight: 700; font-size: 13px;
-  animation: stepPulse 3s ease-in-out infinite;
+  position: relative;
 }
 .prc-tag { font-family: var(--fm); font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--piedra); }
 .prc-t { font-family: var(--fh); font-weight: 700; font-size: 19px; letter-spacing: -.4px; margin: 18px 0 0; text-wrap: pretty; }
@@ -74,8 +76,10 @@
 .prc-viz-base { position: absolute; left: 16px; right: 16px; bottom: 16px; height: 3px; border-radius: 2px; background: linear-gradient(90deg, var(--ambar), rgba(240,169,62,.25)); }
 
 /* Paso 1: gotas que caen = dinero que se fuga */
-@keyframes leakFall { 0% { top: 20px; opacity: 0 } 12% { opacity: 1 } 88% { opacity: 1 } 100% { top: 74px; opacity: 0 } }
-.prc-leak { position: absolute; width: 5px; height: 5px; border-radius: 50%; background: var(--ambar); animation: leakFall 2.6s linear infinite; }
+/* translateY en lugar de top: animar top obliga a recalcular la disposicion
+   en cada fotograma (P-04). */
+@keyframes leakFall { 0% { transform: translateY(0); opacity: 0 } 12% { opacity: 1 } 88% { opacity: 1 } 100% { transform: translateY(54px); opacity: 0 } }
+.prc-leak { position: absolute; top: 20px; width: 5px; height: 5px; border-radius: 50%; background: var(--ambar); will-change: transform; animation: leakFall 2.6s linear infinite; }
 
 /* Paso 2: barras que se construyen día a día */
 @keyframes buildUp { from { transform: scaleY(.15) } to { transform: scaleY(1) } }
@@ -102,3 +106,9 @@
 @media (prefers-reduced-motion: reduce) {
   .prc-n, .prc-leak, .prc-bar, .prc-dots span { animation: none !important; }
 }
+
+/* El pulso pasa a un pseudoelemento detras del numero (P-04). */
+.prc-n::after{content:'';position:absolute;inset:-5px;border-radius:inherit;background:rgba(240,169,62,.14);opacity:0;pointer-events:none;z-index:-1;animation:stepPulse 3s ease-in-out infinite}
+/* Altura reservada: la seccion crecia al revelarse mientras el usuario ya se
+   desplazaba, con un salto de 0,4991 (P-04). */
+.prc-step{min-height:clamp(420px,52vw,560px)}

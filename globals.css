@@ -51,14 +51,8 @@ input,button,textarea,select{font-family:inherit}
 @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
 @supports not (animation-timeline: view()){.steprail{animation:railGrow 1.4s ease both}}
-@media (prefers-reduced-motion: reduce){.steprail,.leakdrop,.buildbar,.daysweep,.orbitdot{animation:none!important}}
-@media (prefers-reduced-motion: reduce){.mocktrack,.aidachip,.appbar{animation:none!important}}
 @supports not (animation-timeline: scroll(root)){.introdissolve{animation:none}}
-@media (prefers-reduced-motion: reduce){.introdissolve{animation:none!important}.introcue{animation:none!important}}
-@media (prefers-reduced-motion: reduce){.ribbon>div{animation:none!important}}
-@media (prefers-reduced-motion: reduce){.mqtrack{animation:none}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (prefers-reduced-motion: reduce){.agent-dodge,.agent-rest{transition:none}}
 @media(max-width:1100px){
   .hdr-links.mainnav{display:none!important}
   .menu-btn{display:inline-grid!important}
@@ -93,9 +87,19 @@ input,button,textarea,select{font-family:inherit}
 @media(max-width:460px){
   .metricgrid,.aigrid,.valgrid,.pillargrid,.velgrid,.kpigrid,.svcrail{grid-template-columns:1fr!important}
 }
+/* De los 18 selectores que citaban los seis bloques anteriores, 12 no
+   correspondian a ningun elemento del DOM: varios eran nombres de
+   animacion, no clases. El sitio creia respetar la preferencia y no la
+   respetaba: seguian once familias de animacion perpetua. Un solo bloque
+   universal, que no puede fallar por un selector mal escrito (P-05). */
 @media (prefers-reduced-motion: reduce){
-  [data-reveal]{animation:none!important;opacity:1!important;transform:none!important}
-  .flowdot,.floaty,.gridbg{animation:none!important}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  [data-reveal]{opacity:1!important;transform:none!important}
   html{scroll-behavior:auto}
 }
 /* Índigo aclarado para texto pequeño sobre fondos índigo oscuros: los pares
