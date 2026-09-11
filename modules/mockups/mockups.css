@@ -7,28 +7,28 @@
 @keyframes barGrow{from{transform:scaleY(.08)}to{transform:scaleY(1)}}
 .mockwrap:hover .mocktrack,.mockwrap:hover .aidachip{animation-play-state:paused}
 
-.mck-manages{margin:56px 0 0;padding-top:44px;border-top:1px solid var(--line)}
+.mck-manages{margin:48px 0 0;padding-top:48px;border-top:1px solid var(--line)}
 .mck-manages-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:16px 0 0;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.mck-manage{background:var(--grafito);padding:18px 20px;display:flex;gap:10px;font-size:14px;color:var(--crema-dim);text-wrap:pretty}
+.mck-manage{background:var(--grafito);padding:16px 16px;display:flex;gap:10px;font-size:14px;color:var(--crema-dim);text-wrap:pretty}
 .mck-manage i{color:var(--ambar);flex:none;font-style:normal}
 
-.mck-block{margin:56px 0 0;padding-top:44px;border-top:1px solid var(--line)}
+.mck-block{margin:48px 0 0;padding-top:48px;border-top:1px solid var(--line)}
 .mck-cap{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:16px}
-.mck-cap-k{font-family:var(--fm);font-size:10.5px;letter-spacing:1.5px;color:var(--ambar)}
+.mck-cap-k{font-family:var(--fm);font-size:12px;letter-spacing:1.5px;color:var(--ambar)}
 .mck-cap-t{font-family:var(--fh);font-weight:600;font-size:17px;color:var(--crema);text-wrap:pretty}
-.mck-cap-s{font-size:13.5px;color:var(--crema-dim);flex:1;min-width:220px;text-wrap:pretty}
-.mck-cap-tag{font-family:var(--fm);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--piedra);border:1px solid var(--line-2);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.mck-cap-s{font-size:14px;color:var(--crema-dim);flex:1;min-width:220px;text-wrap:pretty}
+.mck-cap-tag{font-family:var(--fm);font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--piedra);border:1px solid var(--line-2);border-radius:999px;padding:4px 8px;white-space:nowrap}
 
 .mck-frame{border-radius:4px;overflow:hidden;border:1px solid var(--line-2);box-shadow:0 26px 60px -26px rgba(0,0,0,.75)}
-.mck-chrome{display:flex;align-items:center;gap:9px;padding:9px 13px;background:#E7E4E0;border-bottom:1px solid #D8D5D1}
+.mck-chrome{display:flex;align-items:center;gap:9px;padding:8px 12px;background:#E7E4E0;border-bottom:1px solid #D8D5D1}
 .mck-lights{display:flex;gap:5px}
 .mck-lights i{width:8px;height:8px;border-radius:50%}
-.mck-lights i:nth-child(1){background:#D8836F}
-.mck-lights i:nth-child(2){background:#D9B36A}
-.mck-lights i:nth-child(3){background:#8FB08A}
-.mck-url{flex:1;text-align:center;font-family:'Source Serif 4',Georgia,serif;font-size:10px;color:#6E6A66}
+.mck-lights i:nth-child(1){background:var(--line-2)}
+.mck-lights i:nth-child(2){background:var(--line-2)}
+.mck-lights i:nth-child(3){background:var(--line-2)}
+.mck-url{flex:1;text-align:center;font-family:var(--fh);font-size:12px;color:#6E6A66}
 .mck-screen{min-height:420px}
-.mck-hint{font-family:var(--fm);font-size:9.5px;color:var(--piedra);margin:13px 0 0}
+.mck-hint{font-family:var(--fm);font-size:12px;color:var(--piedra);margin:12px 0 0}
 
 /* Maqueta 02: marco grafito para que la demo no choque con el sitio oscuro */
 .mck-aurea{position:relative;width:100%;max-width:1160px;margin:0 auto}
@@ -57,7 +57,7 @@
 .mck-preview-tall{height:900px}
 .mck-preview-img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
 .mck-preview::after{content:"";position:absolute;inset:0;background:rgba(20,22,28,.55);z-index:1}
-.mck-preview-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;min-height:48px;padding:14px 26px;border:none;cursor:pointer}
+.mck-preview-btn{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;min-height:48px;padding:12px 24px;border:none;cursor:pointer}
 
 /* Misma contencion que el resto de modulos de la ruta (P-41). El marco
    incrustado sigue a sangre. */

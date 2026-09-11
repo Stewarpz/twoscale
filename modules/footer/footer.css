@@ -1,18 +1,18 @@
 /* modules/footer/footer.css — pie con columnas de enlaces y línea legal. */
 
 .ftr{border-top:1px solid var(--line);background:var(--grafito-2)}
-.ftr-inner{max-width:var(--maxw);margin:0 auto;padding:52px 24px 34px;display:grid;grid-template-columns:1.4fr 2fr;gap:32px}
-.ftr-brand{font-family:var(--fh);font-weight:700;font-size:22px;letter-spacing:-.5px}
+.ftr-inner{max-width:var(--maxw);margin:0 auto;padding:48px 24px 32px;display:grid;grid-template-columns:1.4fr 2fr;gap:32px}
+.ftr-brand{font-family:var(--fh);font-weight:700;font-size:21px;letter-spacing:-.5px}
 .ftr-brand-dot{color:var(--ambar)}
-.ftr-tag{color:var(--piedra);font-size:14px;margin:14px 0 0;max-width:26em;text-wrap:pretty}
-.ftr-contact{font-family:var(--fm);font-size:11px;color:var(--piedra);margin:16px 0 0}
+.ftr-tag{color:var(--piedra);font-size:14px;margin:12px 0 0;max-width:26em;text-wrap:pretty}
+.ftr-contact{font-family:var(--fm);font-size:12px;color:var(--piedra);margin:16px 0 0}
 
 .ftr-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
-.ftr-col-t{font-family:var(--fm);font-size:11px;letter-spacing:1.5px;color:var(--piedra);margin-bottom:14px}
-.ftr-col a{display:block;color:var(--crema-dim);font-size:14px;text-decoration:none;margin-bottom:9px}
+.ftr-col-t{font-family:var(--fm);font-size:12px;letter-spacing:1.5px;color:var(--piedra);margin-bottom:12px}
+.ftr-col a{display:block;color:var(--crema-dim);font-size:14px;text-decoration:none;margin-bottom:8px}
 .ftr-col a:hover{color:var(--ambar)}
 
-.ftr-legal{border-top:1px solid var(--line);max-width:var(--maxw);margin:0 auto;padding:18px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:var(--fm);font-size:11px;color:var(--piedra)}
+.ftr-legal{border-top:1px solid var(--line);max-width:var(--maxw);margin:0 auto;padding:16px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;font-family:var(--fm);font-size:12px;color:var(--piedra)}
 
 @media(max-width:1100px){ .ftr-inner{grid-template-columns:1fr} }
 @media(max-width:640px){ .ftr-cols{grid-template-columns:1fr} }

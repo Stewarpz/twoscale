@@ -9,7 +9,10 @@
 :root{
   --grafito:#14161C; --grafito-2:#191C24; --panel:#1C2029; --panel-2:#222633;
   --line:rgba(247,244,238,.10); --line-2:rgba(247,244,238,.18);
-  --indigo:#4B3BD1; --indigo-2:#6455E4; --indigo-soft:rgba(75,59,209,.16);
+  /* Un solo indigo, que significa una sola cosa en las cuatro rutas: flujo
+     automatizado. --indigo-txt es su variante legible sobre fondo oscuro,
+     no un acento aparte (P-43, P-21). */
+  --indigo-2:#6455E4; --indigo-soft:rgba(100,85,228,.16);
   --ambar:#F0A93E; --ambar-soft:rgba(240,169,62,.14);
   --piedra:#8B8D98; --crema:#F7F4EE; --crema-dim:#C9C7C0;
   --fh:'Space Grotesk',system-ui,sans-serif; --fb:'Manrope',system-ui,sans-serif; --fm:'Space Mono',ui-monospace,monospace;
@@ -18,9 +21,9 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--grafito);color:var(--crema);font-family:var(--fb);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:clip}
-a{color:var(--ambar);text-decoration:none}
+a{color:var(--crema-dim);text-decoration:none}
 a:hover{color:var(--indigo-2)}
-::selection{background:var(--indigo);color:#fff}
+::selection{background:var(--indigo-2);color:#fff}
 :focus-visible{outline:2px solid var(--ambar);outline-offset:3px;border-radius:4px}
 input,button,textarea,select{font-family:inherit}
 @keyframes revealIn{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
@@ -73,7 +76,7 @@ input,button,textarea,select{font-family:inherit}
   .svcstory,.forkrow{grid-template-columns:1fr!important;flex-direction:column!important;align-items:stretch!important;gap:20px!important}
   .velgrid,.kpigrid{grid-template-columns:1fr 1fr!important}
   .integ3,.procgrid{grid-template-columns:1fr!important}
-  .introcue{margin-top:2px}
+  .introcue{margin-top:4px}
   .svcrail{grid-template-columns:repeat(2,1fr)!important}
   .bscgrid,.sipocgrid{grid-template-columns:1fr!important}
   .aidarow{flex-direction:column!important}

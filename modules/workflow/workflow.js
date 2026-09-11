@@ -171,7 +171,7 @@ export default {
         badge.className = 'wf-node-badge';
         badge.style.cssText =
           `background:${sel ? 'var(--ambar)' : 'var(--grafito)'};` +
-          `color:${sel ? 'var(--grafito)' : isBranch ? '#5fd07a' : 'var(--crema-dim)'};` +
+          `color:${sel ? 'var(--grafito)' : isBranch ? '#3EC46A' : 'var(--crema-dim)'};` +
           `border:1px solid ${sel ? 'var(--ambar)' : 'var(--line)'}`;
         if (n.logo) {
           const inner = document.createElement('span');

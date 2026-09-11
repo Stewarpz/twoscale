@@ -540,7 +540,7 @@
         ctx.beginPath(); ctx.moveTo(fn.x + dir * 7, fn.y - 5); ctx.lineTo(lx - dir * 5, ly + 5);
         ctx.strokeStyle = 'rgba(240,169,62,' + (0.6 * la).toFixed(3) + ')';
         ctx.lineWidth = 0.8; ctx.stroke();
-        ctx.font = '600 12px "Source Serif 4", Georgia, serif';
+        ctx.font = '600 12px "Space Grotesk", system-ui, sans-serif';
         try { ctx.letterSpacing = '0.16em'; } catch (err) { }
         ctx.textAlign = dir > 0 ? 'left' : 'right';
         ctx.fillStyle = 'rgba(240,169,62,' + la.toFixed(3) + ')';

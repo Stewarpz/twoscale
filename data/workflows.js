@@ -2,7 +2,7 @@
 export const WF_W=176, WF_H=66;
 export const SUBS=[{mono:'GPT',label:{es:'Modelo',en:'Model'}},{mono:'MEM',label:{es:'Memoria',en:'Memory'}},{mono:'RAG',label:{es:'Conocimiento',en:'Knowledge'}},{mono:'TL',label:{es:'Herramientas',en:'Tools'}}];
 export const PORT_Y={ 'true':22, 'false':WF_H-22, a:18, b:WF_H/2, c:WF_H-18 };
-export const BR_COLOR={ 'true':'#5fd07a', 'false':'var(--piedra)', a:'var(--ambar)', b:'var(--indigo-2)', c:'var(--piedra)' };
+export const BR_COLOR={ 'true':'#3EC46A', 'false':'var(--piedra)', a:'var(--ambar)', b:'var(--indigo-2)', c:'var(--piedra)' };
 export const BR_LABEL={ 'true':{es:'sí',en:'yes'}, 'false':{es:'no',en:'no'}, a:{es:'caliente',en:'hot'}, b:{es:'tibio',en:'warm'}, c:{es:'frío',en:'cold'} };
 
 export const WFS = [

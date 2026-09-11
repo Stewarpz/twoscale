@@ -44,11 +44,11 @@ const ARTIFACTS = {
       );
       col.append(stack,
         txt('span', 'font-family:var(--fh);font-weight:600;font-size:12px;color:var(--crema);white-space:nowrap;overflow:hidden;text-overflow:ellipsis', store.pick(st.l)),
-        txt('span', `${MONO};font-size:9.5px;color:${STONE}`, `${st.wait} min · ${st.val} min`));
+        txt('span', `${MONO};font-size:12px;color:${STONE}`, `${st.wait} min · ${st.val} min`));
       bars.append(col);
     });
 
-    const legend = div('', `display:flex;gap:20px;${MONO};font-size:10px;color:${STONE}`);
+    const legend = div('', `display:flex;gap:20px;${MONO};font-size:12px;color:${STONE}`);
     [[AMBER, store.t('vsm_value')], [STONE, store.t('vsm_wait')]].forEach(([c, label]) => {
       const s = txt('span', 'display:flex;align-items:center;gap:7px');
       s.append(txt('span', `width:11px;height:5px;border-radius:2px;background:${c}`), document.createTextNode(label));
@@ -58,7 +58,7 @@ const ARTIFACTS = {
     const ratios = div('', 'border-top:1px solid var(--line);padding-top:22px;display:flex;flex-direction:column;gap:14px');
     [[dg.before, dg.bpct, STONE], [dg.after, dg.apct, AMBER]].forEach(([label, pct, color]) => {
       const row = div();
-      row.append(txt('div', `${MONO};font-size:10px;letter-spacing:1px;color:${color === AMBER ? AMBER : STONE};margin-bottom:7px`, store.pick(label)));
+      row.append(txt('div', `${MONO};font-size:12px;letter-spacing:1px;color:${color === AMBER ? AMBER : STONE};margin-bottom:7px`, store.pick(label)));
       const track = div('art-track', 'height:13px;border-radius:6px');
       track.append(txt('div', `height:100%;width:${pct}%;border-radius:6px;background:${color}`));
       row.append(track);
@@ -76,12 +76,12 @@ const ARTIFACTS = {
     const start = div('', 'flex:none;display:flex;flex-direction:column;align-items:center;gap:9px');
     const ring = div('', 'width:44px;height:44px;border-radius:50%;border:2px solid var(--indigo-2);display:grid;place-items:center');
     ring.append(txt('span', 'width:12px;height:12px;border-radius:50%;background:var(--indigo-2)'));
-    start.append(ring, txt('span', `${MONO};font-size:9.5px;color:${STONE};text-align:center;max-width:70px`, store.pick(dg.start)));
+    start.append(ring, txt('span', `${MONO};font-size:12px;color:${STONE};text-align:center;max-width:70px`, store.pick(dg.start)));
 
     const gate = div('', 'flex:none;display:flex;flex-direction:column;align-items:center;gap:9px');
     const diamond = div('', `width:44px;height:44px;background:var(--grafito);border:2px solid ${AMBER};transform:rotate(45deg);border-radius:5px;display:grid;place-items:center`);
     diamond.append(txt('span', `transform:rotate(-45deg);${MONO};font-weight:700;font-size:14px;color:${AMBER}`, '?'));
-    gate.append(diamond, txt('span', `${MONO};font-size:9.5px;color:${STONE};text-align:center;max-width:88px`, store.pick(dg.gate)));
+    gate.append(diamond, txt('span', `${MONO};font-size:12px;color:${STONE};text-align:center;max-width:88px`, store.pick(dg.gate)));
 
     const outs = div('', 'flex:1;display:flex;flex-direction:column;gap:8px;min-width:0');
     dg.outs.forEach((o, i) => {
@@ -90,8 +90,8 @@ const ARTIFACTS = {
         `border:1px solid ${o.hot ? AMBER : 'var(--line-2)'}`);
       r.append(
         txt('span', `width:7px;height:7px;flex:none;border-radius:50%;background:${o.hot ? AMBER : 'var(--indigo-2)'};animation:blink 1.6s infinite ${i * 0.25}s`),
-        txt('span', `flex:1;font-family:var(--fh);font-weight:600;font-size:12.5px;color:${o.hot ? 'var(--crema)' : 'var(--crema-dim)'}`, store.pick(o.l)),
-        txt('span', `${MONO};font-size:10.5px;color:${o.hot ? AMBER : STONE}`, o.p));
+        txt('span', `flex:1;font-family:var(--fh);font-weight:600;font-size:12px;color:${o.hot ? 'var(--crema)' : 'var(--crema-dim)'}`, store.pick(o.l)),
+        txt('span', `${MONO};font-size:12px;color:${o.hot ? AMBER : STONE}`, o.p));
       outs.append(r);
     });
 
@@ -108,15 +108,15 @@ const ARTIFACTS = {
 
     const head = div('', GRID);
     head.append(txt('span'));
-    store.pick(dg.cols).forEach((c) => head.append(txt('span', `${MONO};font-size:9.5px;letter-spacing:.6px;color:${STONE};text-align:center`, c)));
+    store.pick(dg.cols).forEach((c) => head.append(txt('span', `${MONO};font-size:12px;letter-spacing:.6px;color:${STONE};text-align:center`, c)));
     box.append(head);
 
     const body = div('', 'display:flex;flex-direction:column;gap:6px;margin-top:11px');
     dg.rows.forEach((r) => {
       const row = div('', GRID);
-      row.append(txt('span', 'font-family:var(--fh);font-weight:600;font-size:12.5px;color:var(--crema-dim)', store.pick(r.t)));
+      row.append(txt('span', 'font-family:var(--fh);font-weight:600;font-size:12px;color:var(--crema-dim)', store.pick(r.t)));
       r.v.forEach((v) => row.append(txt('span',
-        `display:grid;place-items:center;height:30px;border-radius:7px;${MONO};font-weight:700;font-size:11.5px;` +
+        `display:grid;place-items:center;height:30px;border-radius:7px;${MONO};font-weight:700;font-size:12px;` +
         `background:${v === 'R' ? 'rgba(240,169,62,.16)' : v === 'C' ? 'rgba(75,59,209,.16)' : 'transparent'};color:${COLOR[v]}`, v)));
       body.append(row);
     });
@@ -126,7 +126,7 @@ const ARTIFACTS = {
     const legend = div('', 'display:flex;flex-wrap:wrap;gap:18px;margin-top:20px;border-top:1px solid var(--line);padding-top:16px');
     [['R', es ? 'Ejecuta' : 'Executes'], ['C', es ? 'Consultado' : 'Consulted'], ['I', es ? 'Informado' : 'Informed']]
       .forEach(([k, label]) => {
-        const s = txt('span', `${MONO};font-size:9.5px;color:${STONE}`);
+        const s = txt('span', `${MONO};font-size:12px;color:${STONE}`);
         s.append(txt('span', `color:${AMBER};font-weight:700`, k), document.createTextNode(' · ' + label));
         legend.append(s);
       });
@@ -140,8 +140,8 @@ const ARTIFACTS = {
     dg.steps.forEach((st) => {
       const row = div();
       const head = div('', 'display:flex;align-items:baseline;gap:10px;margin-bottom:7px');
-      head.append(txt('span', `${MONO};font-size:10px;letter-spacing:1px;color:${STONE}`, store.pick(st.l)));
-      if (st.cv) head.append(txt('span', `${MONO};font-size:10px;color:${AMBER}`, st.cv));
+      head.append(txt('span', `${MONO};font-size:12px;letter-spacing:1px;color:${STONE}`, store.pick(st.l)));
+      if (st.cv) head.append(txt('span', `${MONO};font-size:12px;color:${AMBER}`, st.cv));
       const bar = div('', `height:32px;width:${st.pct}%;min-width:64px;border-radius:7px;display:flex;align-items:center;padding:0 12px;` +
         `background:linear-gradient(90deg,${AMBER},rgba(240,169,62,.55))`);
       bar.append(txt('span', 'font-family:var(--fh);font-weight:700;font-size:14px;color:var(--grafito)', st.v));
@@ -157,7 +157,7 @@ const ARTIFACTS = {
     const chart = div('', 'display:flex;align-items:flex-end;gap:14px;height:150px');
     dg.bars.forEach((b) => {
       const col = div('', 'flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;height:100%;min-width:0');
-      col.append(txt('span', `${MONO};font-size:10px;color:${AMBER}`, b.cum));
+      col.append(txt('span', `${MONO};font-size:12px;color:${AMBER}`, b.cum));
       const hold = div('', 'width:100%;flex:1;display:flex;align-items:flex-end');
       hold.append(txt('span', `width:100%;height:${b.pct}%;border-radius:5px 5px 0 0;background:${b.pct >= 34 ? AMBER : STONE}`));
       col.append(hold);
@@ -165,7 +165,7 @@ const ARTIFACTS = {
     });
     const labels = div('', 'display:flex;gap:14px;margin-top:10px');
     dg.bars.forEach((b) => labels.append(txt('span',
-      'flex:1;min-width:0;font-family:var(--fh);font-weight:600;font-size:11px;color:var(--crema-dim);text-align:center;overflow-wrap:anywhere',
+      'flex:1;min-width:0;font-family:var(--fh);font-weight:600;font-size:12px;color:var(--crema-dim);text-align:center;overflow-wrap:anywhere',
       store.pick(b.l))));
     box.append(chart, labels, txt('p', '', store.pick(dg.cut)));
     box.lastChild.className = 'art-note';
@@ -178,18 +178,18 @@ const ARTIFACTS = {
     const grid = div('velgrid', 'display:grid;grid-template-columns:repeat(4,1fr);gap:12px');
     dg.vars.forEach((v) => {
       const card = div('art-card');
-      card.append(txt('div', `${MONO};font-size:9.5px;letter-spacing:.5px;color:${STONE}`, store.pick(v.l)));
+      card.append(txt('div', `${MONO};font-size:12px;letter-spacing:.5px;color:${STONE}`, store.pick(v.l)));
       const old = div('', 'display:flex;align-items:baseline;gap:7px;margin-top:9px');
       old.append(
-        txt('span', `${MONO};font-size:11.5px;color:${STONE};text-decoration:line-through`, v.b),
-        txt('span', `${MONO};font-size:11px;color:${AMBER}`, v.up ? '↑' : '↓'));
+        txt('span', `${MONO};font-size:12px;color:${STONE};text-decoration:line-through`, v.b),
+        txt('span', `${MONO};font-size:12px;color:${AMBER}`, v.up ? '↑' : '↓'));
       card.append(old, txt('div', `font-family:var(--fh);font-weight:700;font-size:17px;color:${AMBER}`, v.a));
       grid.append(card);
     });
     const foot = div('', 'margin-top:20px;border-top:1px solid var(--line);padding-top:18px');
     foot.append(
-      txt('p', `${MONO};font-size:11.5px;color:var(--crema-dim)`, store.pick(dg.formula)),
-      txt('p', `font-family:var(--fh);font-weight:700;font-size:19px;color:${AMBER};margin:9px 0 0`, store.pick(dg.res)));
+      txt('p', `${MONO};font-size:12px;color:var(--crema-dim)`, store.pick(dg.formula)),
+      txt('p', `font-family:var(--fh);font-weight:700;font-size:21px;color:${AMBER};margin:9px 0 0`, store.pick(dg.res)));
     box.append(grid, foot);
     return box;
   },
@@ -201,16 +201,16 @@ const ARTIFACTS = {
       const last = i === 3;
       const row = div('art-card', 'display:flex;align-items:center;gap:15px;padding:15px 17px');
       row.append(txt('span',
-        `width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:9px;font-family:var(--fh);font-weight:700;font-size:15px;` +
+        `width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:9px;font-family:var(--fh);font-weight:700;font-size:14px;` +
         `background:${last ? AMBER : 'rgba(75,59,209,.2)'};color:${last ? 'var(--grafito)' : 'var(--indigo-2)'}`, st.k));
       const mid = txt('span', 'flex:1;min-width:0;display:flex;flex-direction:column;gap:2px');
       mid.append(
-        txt('span', 'font-family:var(--fh);font-weight:600;font-size:13.5px;color:var(--crema)', store.pick(st.n)),
-        txt('span', `${MONO};font-size:10px;color:${STONE};text-wrap:pretty`, store.pick(st.z)));
-      row.append(mid, txt('span', `font-family:var(--fh);font-weight:700;font-size:15px;color:${last ? AMBER : 'var(--crema-dim)'}`, st.m));
+        txt('span', 'font-family:var(--fh);font-weight:600;font-size:14px;color:var(--crema)', store.pick(st.n)),
+        txt('span', `${MONO};font-size:12px;color:${STONE};text-wrap:pretty`, store.pick(st.z)));
+      row.append(mid, txt('span', `font-family:var(--fh);font-weight:700;font-size:14px;color:${last ? AMBER : 'var(--crema-dim)'}`, st.m));
       box.append(row);
     });
-    box.append(txt('p', `${MONO};font-size:10px;color:${STONE};margin:6px 0 0`, store.t('see_mock')));
+    box.append(txt('p', `${MONO};font-size:12px;color:${STONE};margin:6px 0 0`, store.t('see_mock')));
     return box;
   },
 
@@ -220,19 +220,19 @@ const ARTIFACTS = {
     const grid = div('bscgrid', 'display:grid;grid-template-columns:1fr 1fr;gap:12px');
     dg.quads.forEach((q) => {
       const card = div('art-card', 'border-radius:13px;padding:17px');
-      card.append(txt('div', `${MONO};font-size:9.5px;letter-spacing:1.2px;text-transform:uppercase;color:${AMBER}`, store.pick(q.p)));
+      card.append(txt('div', `${MONO};font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:${AMBER}`, store.pick(q.p)));
       const row = div('', 'display:flex;gap:22px;margin-top:13px');
       q.k.forEach((kk) => {
         const cell = div();
         cell.append(
-          txt('div', 'font-family:var(--fh);font-weight:700;font-size:20px;color:var(--crema)', kk.v),
-          txt('div', `${MONO};font-size:9.5px;color:${STONE};margin-top:2px`, store.pick(kk.l)));
+          txt('div', 'font-family:var(--fh);font-weight:700;font-size:21px;color:var(--crema)', kk.v),
+          txt('div', `${MONO};font-size:12px;color:${STONE};margin-top:2px`, store.pick(kk.l)));
         row.append(cell);
       });
       card.append(row);
       grid.append(card);
     });
-    box.append(grid, txt('p', `${MONO};font-size:10px;color:${STONE};margin:14px 0 0`, store.t('see_mock')));
+    box.append(grid, txt('p', `${MONO};font-size:12px;color:${STONE};margin:14px 0 0`, store.t('see_mock')));
     return box;
   },
 
@@ -243,12 +243,12 @@ const ARTIFACTS = {
     [dg.q1, dg.q2, dg.q3, dg.q4].forEach((q, i) => {
       const row = div('art-card', 'display:flex;align-items:center;gap:16px;padding:15px 17px');
       row.append(
-        txt('span', `${MONO};font-size:10px;letter-spacing:1px;color:${AMBER};flex:none`, '0' + (i + 1)),
-        txt('span', 'flex:1;min-width:0;font-family:var(--fh);font-weight:600;font-size:13.5px;color:var(--crema);text-wrap:pretty', store.pick(q.q)),
+        txt('span', `${MONO};font-size:12px;letter-spacing:1px;color:${AMBER};flex:none`, '0' + (i + 1)),
+        txt('span', 'flex:1;min-width:0;font-family:var(--fh);font-weight:600;font-size:14px;color:var(--crema);text-wrap:pretty', store.pick(q.q)),
         txt('span', `font-family:var(--fh);font-weight:700;font-size:17px;color:${AMBER};flex:none`, q.headline));
       list.append(row);
     });
-    box.append(list, txt('p', `${MONO};font-size:10px;color:${STONE};margin:14px 0 0`, store.t('see_mock')));
+    box.append(list, txt('p', `${MONO};font-size:12px;color:${STONE};margin:14px 0 0`, store.t('see_mock')));
     return box;
   },
 
@@ -258,11 +258,11 @@ const ARTIFACTS = {
     dg.cols.forEach((c, i) => {
       const card = div('art-card', 'border-radius:12px;padding:15px');
       card.append(txt('span',
-        `width:26px;height:26px;display:grid;place-items:center;border-radius:7px;${MONO};font-weight:700;font-size:11px;` +
+        `width:26px;height:26px;display:grid;place-items:center;border-radius:7px;${MONO};font-weight:700;font-size:12px;` +
         `background:${i === 2 ? AMBER : 'rgba(75,59,209,.2)'};color:${i === 2 ? 'var(--grafito)' : 'var(--indigo-2)'}`, c.k));
       card.append(txt('div', 'font-family:var(--fh);font-weight:600;font-size:12px;color:var(--crema);margin-top:11px', store.pick(c.t)));
       const items = div('art-col', 'gap:6px;margin-top:11px');
-      store.pick(c.items).forEach((it) => items.append(txt('span', `${MONO};font-size:10px;color:${STONE};overflow-wrap:anywhere`, it)));
+      store.pick(c.items).forEach((it) => items.append(txt('span', `${MONO};font-size:12px;color:${STONE};overflow-wrap:anywhere`, it)));
       card.append(items);
       grid.append(card);
     });
@@ -316,7 +316,7 @@ export default {
       } else
       q('kpis').replaceChildren(...(x.kpis || []).map((k) => {
         const cell = div();
-        cell.append(txt('div', 'font-family:var(--fh);font-weight:700;font-size:clamp(26px,3vw,34px);letter-spacing:-1.1px;color:var(--ambar);line-height:1', k.v));
+        cell.append(txt('div', 'font-family:var(--fh);font-weight:700;font-size:clamp(28px,3vw,40px);letter-spacing:-1.1px;color:var(--ambar);line-height:1', k.v));
         cell.lastChild.className = 'svc-kpi-v';
         cell.append(txt('div', '', store.pick(k.l)));
         cell.lastChild.className = 'svc-kpi-l';

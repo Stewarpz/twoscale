@@ -213,7 +213,7 @@ export default {
       q('roi-out').replaceChildren(...[
         { v: nf(recover),       l: store.t('roi_recover'), hot: false, color: 'var(--crema)' },
         { v: '$' + nf(manual),  l: store.t('roi_costlbl'), hot: false, color: 'var(--piedra)' },
-        { v: '$' + nf(saving),  l: store.t('roi_savelbl'), hot: true,  color: 'var(--ambar)' },
+        { v: '$' + nf(saving),  l: store.t('roi_savelbl'), hot: true,  color: 'var(--crema)' },
       ].map((o) => {
         const cell = document.createElement('div');
         cell.className = 'cnt-out' + (o.hot ? ' cnt-out-hot' : '');
