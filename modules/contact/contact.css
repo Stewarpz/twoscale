@@ -45,7 +45,7 @@
 .cnt-contacts{display:flex;flex-wrap:wrap;gap:12px;margin:16px 0 0}
 .cnt-contact{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
 .cnt-contact-l{font-family:var(--fm);font-size:12px;color:var(--piedra)}
-.cnt-contact-v{font-family:var(--fh);font-weight:600;font-size:14px;margin-top:4px}
+.cnt-contact-v{font-family:var(--fh);font-weight:600;font-size:14px;margin-top:4px;display:inline-flex;align-items:center;min-height:44px}
 
 /* --- agenda --- */
 .cnt-cal-wrap{max-width:var(--maxw);margin:0 auto;padding:48px 24px 0}
