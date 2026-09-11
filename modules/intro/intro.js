@@ -47,10 +47,17 @@ export default {
       }
     };
 
+    /* Cadenas de fuente cacheadas. Reasignar ctx.font referenciando familias
+       web obliga a resolver estilo contra el documento en cada fotograma:
+       eran 1 069 ms de recalculo forzado en un recorrido de 16,5 s. */
+    const FONT_RAIN = '400 12.5px "Space Mono", ui-monospace, monospace';
+    let fontLogo = '', fontLogoSize = -1;
+
     /** Dibuja el logotipo. `only` limita el pintado a un fragmento (".IA"). */
     const word = (fill, only) => {
       const size = Math.min(W * 0.138, H * 0.86);
-      ctx.font = `700 ${size}px "Space Grotesk", system-ui, sans-serif`;
+      if (size !== fontLogoSize) { fontLogoSize = size; fontLogo = `700 ${size}px "Space Grotesk", system-ui, sans-serif`; }
+      ctx.font = fontLogo;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
       const full = ctx.measureText('Twoscale.IA').width;
@@ -65,7 +72,7 @@ export default {
       ctx.clearRect(0, 0, W, H);
 
       // 1. la lluvia, a lo ancho de todo el lienzo
-      ctx.font = '400 12.5px "Space Mono", ui-monospace, monospace';
+      ctx.font = FONT_RAIN;
       ctx.textAlign = 'left';
       ctx.textBaseline = 'top';
       for (const c of cols) {
@@ -113,7 +120,26 @@ export default {
     };
 
     let raf = null;
-    const loop = () => { frame(); raf = requestAnimationFrame(loop); };
+    /* El enrutado por hash solo conmuta visibilidad: al cambiar de ruta el
+       lienzo queda oculto y el bucle seguia pintando ~1 236 textos con
+       sombra por fotograma sobre algo invisible, 16 % de un nucleo. */
+    /* visible se mantiene por IntersectionObserver: leer clientWidth en cada
+       fotograma para saber si el lienzo esta en pantalla fuerza layout, que
+       es justo lo que este punto viene a quitar. */
+    let visible = true;
+    const loop = () => {
+      if (!visible) { raf = null; return; }
+      frame();
+      raf = requestAnimationFrame(loop);
+    };
+    const watchVisibility = () => {
+      if (!window.IntersectionObserver) return;
+      new IntersectionObserver((es) => {
+        visible = es[0].isIntersecting && es[0].boundingClientRect.width > 0;
+        if (visible && !raf && !reduced) { seed(); raf = requestAnimationFrame(loop); }
+      }, { threshold: 0 }).observe(cv);
+    };
+    watchVisibility();
 
     const start = () => {
       if (!cv.clientWidth || !cv.clientHeight) return false;
@@ -124,10 +150,7 @@ export default {
     };
 
     // El ancho puede ser 0 en el primer pintado: espera a que el layout resuelva.
-    if (!start() && window.ResizeObserver) {
-      const ro = new ResizeObserver(() => { if (start()) ro.disconnect(); });
-      ro.observe(cv);
-    }
+    if (!start()) watchVisibility();
 
     window.addEventListener('resize', () => { seed(); frame(); }, { passive: true });
     // La fuente puede llegar después: re-mide cuando esté lista.
