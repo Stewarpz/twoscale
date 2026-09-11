@@ -43,7 +43,7 @@ export const store = {
     if (page === this.state.page) return;
     this.set({ page });
     history.replaceState(null, '', '#' + page);
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    landRoute(page);
   },
 };
 
@@ -104,6 +104,17 @@ function applyRoute() {
   });
 }
 
+/** Deja la vista al principio de la ruta destino. En contacto, sobre el
+    formulario, que es la acción que prometen los seis enlaces que llevan allí. */
+function landRoute(page) {
+  window.scrollTo({ top: 0, behavior: 'auto' });
+  if (page !== 'contacto') return;
+  requestAnimationFrame(() => {
+    const form = document.querySelector('[data-page="contacto"] form');
+    if (form) form.scrollIntoView({ block: 'start', behavior: 'auto' });
+  });
+}
+
 /* ---------- arranque ---------- */
 (async function boot() {
   await Promise.all(MODULES.map(loadModule));
@@ -113,6 +124,14 @@ function applyRoute() {
   store.subscribe(() => fillText(document.body));
   window.addEventListener('hashchange', () => {
     const page = location.hash.replace('#', '') || 'home';
-    if (page !== store.state.page) store.set({ page });
+    if (page !== store.state.page) store.go(page);
+  });
+  // Un enlace a la ruta en la que ya estamos no dispara hashchange, y aun así
+  // debe llevar al usuario a la acción que promete.
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest?.('a[href^="#"]');
+    if (!a) return;
+    const page = a.getAttribute('href').slice(1) || 'home';
+    if (page === store.state.page) landRoute(page);
   });
 })();
