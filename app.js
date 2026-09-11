@@ -74,7 +74,7 @@ export const maskIcon = (url, size, color) =>
 
 /* ---------- carga de módulos ---------- */
 const MODULES = [
-  'header', 'intro', 'hero', 'metrics', 'chat-demo', 'integrations', 'process',
+  'header', 'hero', 'metrics', 'chat-demo', 'integrations', 'process',
   'services', 'workflow', 'mockups', 'cases',
   'about', 'contact', 'footer', 'agent',
 ];

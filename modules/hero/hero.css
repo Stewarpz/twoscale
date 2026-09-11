@@ -56,3 +56,8 @@
   background: rgba(20, 22, 28, .72);
   border-color: rgba(247, 244, 238, .10);
 }
+
+/* CTA secundario y línea de reducción de riesgo del primer pliegue (P-25/P-26). */
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;height:51px;padding:0 18px;border:1px solid var(--ambar);border-radius:10px;font-family:var(--fh);font-weight:600;font-size:14px;color:var(--ambar);text-decoration:none}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.cta-risk{margin:12px 0 0;font-size:13px;color:var(--crema-dim);max-width:52ch;text-wrap:pretty}

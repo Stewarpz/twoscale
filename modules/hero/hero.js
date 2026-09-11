@@ -23,6 +23,10 @@ export default {
   name: 'hero',
 
   mount(host, store) {
+    const wa = host.querySelector('[data-role="hero-wa"]');
+    if (wa) wa.href = 'https://wa.me/573004032882?text=' +
+      encodeURIComponent('Hola, quiero agendar el diagnóstico gratuito de 30 minutos.');
+
     bootBrain();
     const pills = host.querySelector('[data-role="pills"]');
     const flow  = host.querySelector('[data-role="flow"]');
