@@ -92,6 +92,16 @@
 .cnt-faq-a{font-size:14px;color:var(--crema-dim);margin:8px 0 0;text-wrap:pretty}
 
 @media(max-width:1100px){ .cnt-grid,.cnt-cal-grid{grid-template-columns:1fr;gap:28px} }
+/* A 390px las siete columnas de 44px del calendario mas los rellenos sumaban
+   492px: la ultima columna quedaba recortada y el dia de esa columna no se
+   podia tocar. Los 44px de area tactil no se negocian, asi que lo que cede es
+   el relleno de las tres cajas que lo envuelven. */
+@media(max-width:520px){
+  .cnt-cal-wrap{padding-left:12px;padding-right:12px}
+  .cnt-cal{padding:16px 12px}
+  .cnt-cal-card{padding:16px 10px}
+  .cal-dows,.cal-days{gap:2px}
+}
 @media(max-width:460px){ .cnt-roi-out{grid-template-columns:1fr} }
 
 
