@@ -1,4 +1,4 @@
-/* modules/contact/contact.js — formulario, calculadora de retorno, agenda y FAQ.
+/* modules/contact/contact.js — formulario, calculadora de retorno, agenda incrustada y FAQ.
 
    Flujo dual: envío AJAX al backend + redirección a WhatsApp tras éxito.
    Configura FORM_ENDPOINT y WHATSAPP_NUMBER antes de desplegar. */
@@ -8,21 +8,16 @@ import { FAQ, CONTACT_WORDS, TRUST } from '../../data/misc.js';
 /* ========== CONFIGURACIÓN — CAMBIAR ANTES DE PRODUCCIÓN ========== */
 const FORM_ENDPOINT = 'https://formspree.io/f/myeyonwe';
 const WHATSAPP_NUMBER = '573004032882';
+/* Enlace del tipo de evento de Calendly. Es lo unico que hay que rellenar
+   para que la agenda quede viva: crea en Calendly un evento de 30 minutos,
+   conectalo al Google Calendar del equipo y pega aqui su direccion. */
+const CALENDLY_URL = 'https://calendly.com/twoscale/diagnostico-30min';
 /* Enlace directo a la conversación, usado en el bloque de contacto y en la
    recuperación del error de envío. */
 const WA_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=` +
   encodeURIComponent('Hola, quiero automatizar mi operación.');
 /* ================================================================= */
 
-const MONTHS = {
-  es: ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
-  en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-};
-const DOWS = { es: ['L','M','M','J','V','S','D'], en: ['M','T','W','T','F','S','S'] };
-const SLOTS = ['09:00','10:00','11:00','14:00','15:00','16:00'];
-const MAX_MONTHS_AHEAD = 3;
-
-const pad = (n) => String(n).padStart(2, '0');
 const nf = (n) => Math.round(n).toLocaleString('en-US');
 
 export default {
@@ -244,186 +239,73 @@ export default {
       }));
     };
 
-    /* ---------- agenda ---------- */
-    const cal = { offset: 0, day: null, slot: null, booked: false, name: '', mail: '' };
+    /* ---------- agenda ----------
+       El calendario propio no sabia que franjas estaban tomadas: las seis
+       horas eran un array fijo y confirmar hacia POST a un rele de
+       formulario a correo, que no se puede consultar. Era un formulario de
+       solicitud con aspecto de agenda. Ahora la disponibilidad la sirve
+       Calendly, que lee el calendario real del equipo, resuelve la zona
+       horaria del visitante y manda la invitacion.
 
-    const renderCal = () => {
-      const box = q('cal');
-      box.replaceChildren();
-      const L = store.state.lang;
+       El guion del proveedor no se descarga en la carga del sitio: solo la
+       primera vez que la ruta de contacto se muestra. En las otras tres
+       rutas no se pide ni un byte. */
+    const montarAgenda = (() => {
+      let pedido = false;
+      return () => {
+        if (pedido) return;
+        pedido = true;
+        const caja = q('cal');
+        if (!caja) return;
 
-      if (cal.booked) {
-        const [yy, mm, dd] = cal.day.split('-').map(Number);
-        const pretty = L === 'es' ? `${dd} de ${MONTHS.es[mm - 1]}` : `${MONTHS.en[mm - 1]} ${dd}`;
-        const done = document.createElement('div');
-        done.className = 'cal-done';
-        done.innerHTML =
-          '<span class="cal-done-icon">✓</span>' +
-          '<p class="cal-done-t"></p>' +
-          `<p class="cal-done-when">${pretty} · ${cal.slot}</p>` +
-          '<p class="cal-done-s"></p>' +
-          '<button class="cal-again"></button>';
-        done.querySelector('.cal-done-t').textContent = store.t('cal_ok');
-        done.querySelector('.cal-done-s').textContent = store.t('cal_ok_s');
-        const again = done.querySelector('.cal-again');
-        again.textContent = store.t('cal_again');
-        again.addEventListener('click', () => { cal.day = null; cal.slot = null; cal.booked = false; renderCal(); });
-        box.append(done);
-        return;
-      }
-
-      const now = new Date();
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      const view = new Date(now.getFullYear(), now.getMonth() + cal.offset, 1);
-      const vY = view.getFullYear(), vM = view.getMonth();
-
-      const head = document.createElement('div');
-      head.className = 'cal-head';
-      head.innerHTML =
-        `<span class="cal-month">${MONTHS[L][vM]} ${vY}</span>` +
-        '<span class="cal-nav"><button data-prev aria-label="Anterior">‹</button><button data-next aria-label="Siguiente">›</button></span>';
-      const prev = head.querySelector('[data-prev]'), next = head.querySelector('[data-next]');
-      prev.disabled = cal.offset <= 0;
-      next.disabled = cal.offset >= MAX_MONTHS_AHEAD;
-      prev.addEventListener('click', () => { if (cal.offset > 0) { cal.offset--; cal.day = null; cal.slot = null; renderCal(); } });
-      next.addEventListener('click', () => { if (cal.offset < MAX_MONTHS_AHEAD) { cal.offset++; cal.day = null; cal.slot = null; renderCal(); } });
-      box.append(head);
-
-      const dows = document.createElement('div');
-      dows.className = 'cal-dows';
-      DOWS[L].forEach((d) => {
-        const s = document.createElement('span');
-        s.className = 'cal-dow';
-        s.textContent = d;
-        dows.append(s);
-      });
-      box.append(dows);
-
-      const days = document.createElement('div');
-      days.className = 'cal-days';
-      // lunes = 0, para que la rejilla arranque en L
-      const firstDow = (new Date(vY, vM, 1).getDay() + 6) % 7;
-      const daysInMonth = new Date(vY, vM + 1, 0).getDate();
-      for (let i = 0; i < firstDow; i++) days.append(document.createElement('span'));
-      for (let d = 1; d <= daysInMonth; d++) {
-        const date = new Date(vY, vM, d), dow = date.getDay();
-        const iso = `${vY}-${pad(vM + 1)}-${pad(d)}`;
-        const off = date < today || dow === 0 || dow === 6;   // sin fines de semana ni pasado
-        const b = document.createElement('button');
-        b.className = 'cal-day';
-        b.textContent = d;
-        b.setAttribute('aria-pressed', String(cal.day === iso));
-        if (off) {
-          // Pulsable pero no seleccionable: antes no devolvia nada y el
-          // usuario no distinguia el fallo de dedo del sitio roto.
-          b.setAttribute('aria-disabled', 'true');
-          b.classList.add('cal-day-off');
-          b.addEventListener('click', () => {
-            const e = box.querySelector('.cal-err');
-            if (e) { e.textContent = store.t('cal_weekend'); e.hidden = false; }
+        const pintar = () => {
+          caja.replaceChildren();
+          const widget = document.createElement('div');
+          widget.className = 'calendly-inline-widget cnt-cal-embed';
+          caja.append(widget);
+          // Los colores de marca viajan en la direccion: el widget nace ya
+          // sobre el fondo grafito y no parpadea en blanco.
+          window.Calendly.initInlineWidget({
+            url: CALENDLY_URL + '?hide_gdpr_banner=1&hide_event_type_details=1'
+               + '&background_color=1C2029&text_color=F7F4EE&primary_color=F0A93E',
+            parentElement: widget,
           });
-        } else {
-          b.addEventListener('click', () => { cal.day = iso; cal.slot = null; renderCal(); });
-        }
-        days.append(b);
-      }
-      box.append(days);
+        };
 
-      if (cal.day) {
-        const wrap = document.createElement('div');
-        wrap.className = 'cal-slots-wrap';
-        wrap.innerHTML = `<div class="svc-lbl">${store.t('cal_slots')}</div><div class="cal-slots"></div>`;
-        const row = wrap.querySelector('.cal-slots');
-        SLOTS.forEach((tm) => {
-          const b = document.createElement('button');
-          b.className = 'cal-slot';
-          b.textContent = tm;
-          b.setAttribute('aria-pressed', String(cal.slot === tm));
-          b.addEventListener('click', () => { cal.slot = tm; renderCal(); });
-          row.append(b);
-        });
-        box.append(wrap);
-      } else {
-        const hint = document.createElement('p');
-        hint.className = 'cnt-note';
-        hint.style.cssText = 'max-width:322px;border-top:1px solid var(--line);padding-top:18px;margin-top:20px';
-        hint.textContent = store.t('cal_pick');
-        box.append(hint);
-      }
+        const caer = () => {
+          // Si el proveedor no carga —red, bloqueador, politica— el visitante
+          // no se queda sin forma de agendar.
+          caja.replaceChildren();
+          const a = document.createElement('a');
+          a.className = 'btn-amber cnt-cal-fallback';
+          a.href = CALENDLY_URL;
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.textContent = store.t('cal_abrir');
+          caja.append(a);
+        };
 
-      const ready = !!(cal.day && cal.slot);
+        if (window.Calendly) { pintar(); return; }
+        const s = document.createElement('script');
+        s.src = 'https://assets.calendly.com/assets/external/widget.js';
+        s.async = true;
+        s.addEventListener('load', () => { window.Calendly ? pintar() : caer(); });
+        s.addEventListener('error', caer);
+        document.head.append(s);
+      };
+    })();
 
-      /* Con día y hora elegidos pedimos nombre y correo: sin un identificador
-         no hay a quién confirmar, y antes la pantalla de éxito se pintaba sin
-         que saliera una sola petición del navegador. */
-      let nameI = null, mailI = null;
-      if (ready) {
-        const who = document.createElement('div');
-        who.className = 'cal-who';
-        who.innerHTML =
-          '<label class="cnt-field"><span></span><input type="text" name="cal_name" autocomplete="name" required></label>' +
-          '<label class="cnt-field"><span></span><input type="email" name="cal_email" autocomplete="email" required></label>';
-        const [ln, lm] = who.querySelectorAll('span');
-        ln.textContent = store.t('cal_name');
-        lm.textContent = store.t('cal_mail');
-        [nameI, mailI] = who.querySelectorAll('input');
-        nameI.value = cal.name; mailI.value = cal.mail;
-        nameI.addEventListener('input', (e) => { cal.name = e.target.value; });
-        mailI.addEventListener('input', (e) => { cal.mail = e.target.value; });
-        box.append(who);
-      }
-
-      const err = document.createElement('p');
-      err.className = 'cal-err';
-      err.setAttribute('role', 'alert');
-      err.hidden = true;
-      box.append(err);
-
-      const confirm = document.createElement('button');
-      confirm.className = 'cal-confirm';
-      confirm.dataset.ready = String(ready);
-      confirm.disabled = !ready;                       // I-58: deshabilitado de verdad
-      if (ready) {
-        const [yy, mm, dd] = cal.day.split('-').map(Number);
-        const L2 = store.state.lang;
-        const pretty = L2 === 'es' ? `${dd} de ${MONTHS.es[mm - 1]}` : `${MONTHS.en[mm - 1]} ${dd}`;
-        confirm.textContent = `${store.t('cal_confirm_for')} ${pretty} · ${cal.slot}`;
-        confirm.addEventListener('click', async () => {
-          if (!nameI.value.trim() || !mailI.checkValidity()) {
-            const bad = !nameI.value.trim() ? nameI : mailI;
-            err.textContent = store.t(bad === nameI ? 'cal_name' : 'cal_mail');
-            err.hidden = false;
-            bad.focus();
-            return;
-          }
-          err.hidden = true;
-          confirm.disabled = true;
-          confirm.textContent = store.t('cal_sending');
-          try {
-            const res = await fetch(FORM_ENDPOINT, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-              body: JSON.stringify({
-                source: 'agenda', day: cal.day, slot: cal.slot,
-                name: nameI.value.trim(), email: mailI.value.trim(),
-              }),
-            });
-            if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            cal.booked = true;                          // solo tras respuesta correcta
-            renderCal();
-          } catch (e) {
-            console.error('[twoscale] reserva fallida:', e);
-            err.textContent = store.t('cal_err');
-            err.hidden = false;
-            confirm.disabled = false;
-            confirm.textContent = store.t('cal_btn');
-          }
-        });
-      } else {
-        confirm.textContent = store.t('cal_btn_wait');
-      }
-      box.append(confirm);
-    };
+    /* La ruta nace oculta: esperamos a que se muestre de verdad. */
+    const zona = host.closest('[data-page]');
+    if (zona && !zona.hidden) montarAgenda();
+    else if (zona && window.IntersectionObserver) {
+      const io = new IntersectionObserver((entradas) => {
+        if (entradas.some((e) => e.isIntersecting)) { io.disconnect(); montarAgenda(); }
+      });
+      io.observe(zona);
+    } else {
+      montarAgenda();
+    }
 
     /* ---------- palabra rotativa del título ----------
        La primera se repite al final: el salto del bucle cae sobre un
@@ -473,7 +355,7 @@ export default {
       }));
     };
 
-    const renderAll = () => { renderRoi(); renderContacts(); renderCal(); renderFaq(); renderWords(); renderTrust(); };
+    const renderAll = () => { renderRoi(); renderContacts(); renderFaq(); renderWords(); renderTrust(); };
     renderAll();
     store.subscribe(renderAll);
   },

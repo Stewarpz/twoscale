@@ -57,31 +57,11 @@
 .cnt-cal-bullets>span{display:flex;gap:11px;font-size:14px;color:var(--crema-dim);text-wrap:pretty}
 .cnt-cal-bullets i{color:var(--crema-dim);flex:none;font-style:normal}
 .cnt-cal-card{background:var(--grafito);border:1px solid var(--line-2);border-radius:16px;padding:24px}
-
-.cal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:322px}
-.cal-month{font-family:var(--fh);font-weight:600;font-size:17px;text-transform:capitalize}
-.cal-nav{display:flex;gap:8px}
-.cal-nav button{width:44px;height:44px;display:grid;place-items:center;font-size:17px;border-radius:10px;background:transparent;border:1px solid var(--line-2);color:var(--crema);cursor:pointer}
-.cal-nav button[disabled]{color:rgba(139,141,152,.35);cursor:default}
-.cal-dows,.cal-days{display:grid;grid-template-columns:repeat(7,minmax(44px,1fr));gap:4px;max-width:none}
-.cal-dows{margin:16px 0 8px}
-.cal-dow{text-align:center;font-family:var(--fm);font-size:12px;letter-spacing:.5px;color:var(--piedra)}
-.cal-day{min-height:44px;min-width:44px;display:grid;place-items:center;border-radius:10px;font-family:var(--fh);font-weight:600;font-size:14px;background:var(--panel-2);border:1px solid var(--line);color:var(--crema);cursor:pointer;transition:all .25s}
-.cal-day[aria-disabled="true"]{background:transparent;border-color:transparent;color:rgba(139,141,152,.7);cursor:default}
-.cal-day[aria-pressed="true"]{background:var(--indigo-2);border-color:var(--indigo-2);color:var(--crema)}
-.cal-slots-wrap{max-width:none;margin:16px 0 0;border-top:1px solid var(--line);padding-top:16px}
-.cal-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:322px;margin:12px 0 0}
-.cal-slot{font-family:var(--fh);font-size:14px;padding:12px 4px;border-radius:10px;background:var(--grafito);border:1px solid var(--line-2);color:var(--crema-dim);cursor:pointer;transition:all .25s}
-.cal-slot[aria-pressed="true"]{background:var(--indigo-2);border-color:var(--indigo-2);color:var(--crema)}
-.cal-confirm{width:100%;max-width:322px;margin-top:16px;font-family:var(--fh);font-weight:600;font-size:14px;padding:12px;border-radius:10px;border:none;background:var(--panel-2);color:var(--piedra);cursor:default;transition:all .3s}
-.cal-confirm[data-ready="true"]{background:var(--ambar);color:var(--grafito);cursor:pointer}
-.cal-done{display:flex;flex-direction:column;align-items:center;gap:14px;padding:32px 8px;text-align:center}
-.cal-done-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;background:rgba(62,196,106,.14);border:1px solid #3EC46A;color:#3EC46A;font-size:21px}
-.cal-done-t{font-family:var(--fh);font-weight:700;font-size:21px}
-.cal-done-when{font-family:var(--fh);font-size:14px;color:var(--crema)}
-.cal-done-s{font-size:14px;color:var(--crema-dim);max-width:26em;text-wrap:pretty}
-.cal-again{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--crema-dim);background:transparent;border:1px solid var(--line-2);border-radius:10px;padding:8px 16px;cursor:pointer;margin-top:4px}
-.cal-again:hover{border-color:var(--crema-dim)}
+/* Alto fijo, no automatico: el iframe del proveedor tarda en responder y sin
+   reserva de espacio la pagina daria un salto al aparecer. */
+.cnt-cal-embed{min-width:0;width:100%;height:700px}
+.cnt-cal-fallback{display:inline-flex;margin:24px 0}
+@media(max-width:1100px){ .cnt-cal-embed{height:1000px} }
 
 /* --- FAQ --- */
 .cnt-faq{max-width:var(--maxw);margin:0 auto;padding:48px 24px 80px}
@@ -100,10 +80,8 @@
   .cnt-cal-wrap{padding-left:12px;padding-right:12px}
   .cnt-cal{padding:16px 12px}
   .cnt-cal-card{padding:16px 10px}
-  .cal-dows,.cal-days{gap:2px}
 }
 @media(max-width:460px){ .cnt-roi-out{grid-template-columns:1fr} }
-
 
 /* ============ Palabra que rota en el título ============ */
 @keyframes wordRoll {
@@ -149,20 +127,12 @@
 }
 
 /* Captura de identidad antes de confirmar la reunión (P-14). */
-.cal-who{display:grid;gap:10px;margin:16px 0 0}
-.cal-who .cnt-field span{display:block;font-family:var(--fm);font-size:12px;letter-spacing:.6px;color:var(--crema-dim);margin:0 0 4px}
-.cal-err{margin:12px 0 0;font-size:14px;color:#FFBE5C}
-.cal-confirm[disabled]{cursor:default}
 /* Día no seleccionable: no depende solo del contraste (P-21). */
-.cal-day-off{text-decoration:line-through;cursor:default}
 /* Acciones del panel de confirmación (P-16): el embudo no termina en pared. */
 .cnt-ok-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:16px 0 0}
 .cnt-ok-wa{font-size:14px;color:var(--crema-dim);text-decoration:underline}
 
 /* Área táctil y foco unificado del calendario y el estimador (P-21/P-22). */
-.cal-day:focus-visible,.cal-slot:focus-visible,.cal-confirm:focus-visible{outline:2px solid var(--ambar);outline-offset:2px}
-.cal-slot{min-height:44px}
-.cal-confirm{min-height:44px}
 .cnt-slider input[type=range]{height:44px;-webkit-appearance:none;appearance:none;background:transparent}
 .cnt-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--indigo-2);cursor:pointer;margin-top:-12px}
 .cnt-slider input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:4px;background:var(--line-2)}
