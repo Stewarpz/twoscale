@@ -20,11 +20,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
 
+<!-- 0. Adelanta los dos saltos de la cadena critica: sin esto, app.js se
+     descubre tras las hojas de estilo y strings.js tras app.js. -->
+<link rel="modulepreload" href="app.js">
+<link rel="modulepreload" href="data/strings.js">
+
 <!-- 1. Tokens de marca, reset y utilidades compartidas -->
 <link rel="stylesheet" href="globals.css">
-
-<!-- 2. Broadsheet, encapsulado bajo .bs (solo para las maquetas de cliente) -->
-<link rel="stylesheet" href="vendor/broadsheet.css">
 
 <!-- 2b. Cerebro digital (capa de fondo del hero) -->
 <link rel="stylesheet" href="vendor/brain-network.css">
@@ -38,12 +40,12 @@
 <link rel="stylesheet" href="modules/chat-demo/chat-demo.css">
 <link rel="stylesheet" href="modules/integrations/integrations.css">
 <link rel="stylesheet" href="modules/process/process.css">
-<link rel="stylesheet" href="modules/services/services.css">
-<link rel="stylesheet" href="modules/workflow/workflow.css">
-<link rel="stylesheet" href="modules/mockups/mockups.css">
-<link rel="stylesheet" href="modules/about/about.css">
-<link rel="stylesheet" href="modules/cases/cases.css">
-<link rel="stylesheet" href="modules/contact/contact.css">
+<link rel="stylesheet" href="modules/services/services.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="modules/workflow/workflow.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="modules/mockups/mockups.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="modules/about/about.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="modules/cases/cases.css" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="modules/contact/contact.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="modules/footer/footer.css">
 <link rel="stylesheet" href="modules/agent/agent.css">
 </head>
