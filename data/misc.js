@@ -54,7 +54,7 @@ export const FOUNDERS=[
   bio:{es:'Administrador tecnológico y tecnólogo en gestión documental, especializado en marketing digital. Diseña cómo cada solución se convierte en crecimiento medible para el cliente.',en:'Technology administrator and document management technologist specialized in digital marketing. Designs how each solution turns into measurable growth for the client.'}},
  {initials:'SP',name:'Stewar Posada',
   role:{es:'Director de Operaciones y Alianzas',en:'Director of Operations and Partnerships'},
-  bio:{es:'Negociador internacional. Estructura las alianzas y la operación que sostienen cada proyecto, del primer contacto a la entrega.',en:'International negotiator. Structures the partnerships and operations behind every project, from first contact to delivery.'}}
+  bio:{es:'Negociador internacional y desarrollador web, con estudios en big data. Estructura las alianzas y la operación que sostienen cada proyecto, del primer contacto a la entrega.',en:'International negotiator and web developer, with studies in big data. Structures the partnerships and operations behind every project, from first contact to delivery.'}}
 ];
 
 /* Palabra que rota en el título de Contacto. */
