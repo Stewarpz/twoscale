@@ -157,3 +157,6 @@
 .cal-confirm[disabled]{cursor:default}
 /* Día no seleccionable: no depende solo del contraste (P-21). */
 .cal-day-off{text-decoration:line-through;cursor:default}
+/* Acciones del panel de confirmación (P-16): el embudo no termina en pared. */
+.cnt-ok-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:18px 0 0}
+.cnt-ok-wa{font-size:14px;color:var(--ambar);text-decoration:underline}

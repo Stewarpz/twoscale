@@ -63,9 +63,20 @@ export default {
 
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-        /* 2. Éxito: mostrar confirmación */
+        /* 2. Éxito: mostrar confirmación.
+           El formulario, al ocultarse, colapsaba la altura del contenedor y
+           arrastraba el scroll: el panel quedaba 78-106 px por encima del
+           borde superior y el usuario no veía la confirmación. */
+        const alto = form.getBoundingClientRect().height;
+        form.parentElement.style.minHeight = alto + 'px';
         form.hidden = true;
-        q('ok').hidden = false;
+        const ok = q('ok');
+        q('ok-wa').href = WA_LINK;
+        q('ok-agenda').addEventListener('click', () => {
+          q('cal').scrollIntoView({ block: 'center', behavior: 'auto' });
+        });
+        ok.hidden = false;
+        ok.scrollIntoView({ block: 'center', behavior: 'auto' });
 
         /* 3. Construir y abrir enlace de WhatsApp */
         const msg = [
