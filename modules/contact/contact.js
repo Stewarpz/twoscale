@@ -71,24 +71,18 @@ export default {
         form.parentElement.style.minHeight = alto + 'px';
         form.hidden = true;
         const ok = q('ok');
-        q('ok-wa').href = WA_LINK;
+        q('ok-wa').href = `https://wa.me/${WHATSAPP_NUMBER}?text=` +
+          encodeURIComponent(`Hola, soy ${data.name}. Acabo de enviar el formulario desde la web.`);
         q('ok-agenda').addEventListener('click', () => {
           q('cal').scrollIntoView({ block: 'center', behavior: 'auto' });
         });
         ok.hidden = false;
         ok.scrollIntoView({ block: 'center', behavior: 'auto' });
 
-        /* 3. Construir y abrir enlace de WhatsApp */
-        const msg = [
-          store.t('form_name') + ': ' + data.name,
-          store.t('form_email') + ': ' + data.email,
-          (store.t('form_phone') || 'Tel') + ': ' + data.phone,
-          data.organization ? (store.t('form_biz') + ': ' + data.organization) : '',
-          data.message ? (store.t('form_msg') + ': ' + data.message) : '',
-        ].filter(Boolean).join('\n');
-
-        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-        window.open(waUrl, '_blank', 'noopener,noreferrer');
+        /* 3. Nada de abrir WhatsApp por nuestra cuenta: el traspaso de canal
+           es una eleccion del usuario y vive en el enlace secundario del
+           panel de exito. Repetir alli los cinco campos que acaba de enviar
+           era incomodo y no aportaba nada. */
 
       } catch (err) {
         console.error('[twoscale] form submit failed:', err);

@@ -148,11 +148,23 @@ export default {
         cta.href = '#contacto';
         cta.textContent = store.t('ag_cta');
         cta.addEventListener('click', () => { state.open = false; render(); });
+        /* El CTA decia 'Agendar una reunion' y su destino era WhatsApp. Se
+           renombra y se anade un segundo enlace que si lleva a la agenda. */
+        const cta2 = document.createElement('a');
+        cta2.className = 'ag-cta2';
+        cta2.href = '#contacto';
+        cta2.textContent = store.t('ag_cta2');
+        cta2.addEventListener('click', () => {
+          state.open = false; render();
+          requestAnimationFrame(() => {
+            document.querySelector('[data-role="cal"]')?.scrollIntoView({ block: 'center' });
+          });
+        });
         const again = document.createElement('button');
         again.className = 'ag-again';
         again.textContent = store.t('ag_again');
         again.addEventListener('click', reset);
-        wrap.append(cta, again);
+        wrap.append(cta, cta2, again);
 
         const summary = AGENT_FLOW.map((q, i) => ({
           key: store.pick(q.k),
