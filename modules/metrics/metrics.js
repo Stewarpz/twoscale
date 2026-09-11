@@ -26,8 +26,8 @@ export default {
       grid.replaceChildren(...METRICS.map((m) => {
         const cell = document.createElement('div');
         cell.innerHTML =
-          `<div class="metric-value"><span data-count="${m.value}">0</span>` +
-          `<span class="metric-suffix">${m.suffix}</span></div>` +
+          `<div class="metric-value">${m.prefix || ''}<span data-count="${m.value}">0</span>` +
+          `<span class="metric-suffix">${(store.state.lang === 'en' && m.suffixEn) ? m.suffixEn : m.suffix}</span></div>` +
           `<div class="metric-label"></div>`;
         cell.querySelector('.metric-label').textContent = store.pick(m.label);
         return cell;

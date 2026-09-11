@@ -27,7 +27,6 @@ export default {
       const rows = [
         { v: '2 s',  l: L === 'es' ? 'primera respuesta' : 'first response' },
         { v: '24/7', l: L === 'es' ? 'sin turnos ni descansos' : 'no shifts, no breaks' },
-        { v: '19 %', l: L === 'es' ? 'conversación a venta' : 'conversation to sale' },
         { v: '0',    l: L === 'es' ? 'conversaciones sin responder' : 'unanswered conversations' },
       ];
       stats.replaceChildren(...rows.map((r) => {

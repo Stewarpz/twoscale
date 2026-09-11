@@ -79,3 +79,5 @@
 
 @media (max-width: 1100px) { .svc-story-pas { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 640px)  { .svc-story-pas { grid-template-columns: 1fr; } }
+/* Un servicio puede no publicar cifras y explicar por qué (P-35). */
+.svc-kpi-note{font-size:14px;color:var(--crema-dim);text-wrap:pretty;margin:0}

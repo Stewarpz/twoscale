@@ -35,7 +35,7 @@ export const FAQ=[
  {q:{es:'¿Necesito conocimientos técnicos?',en:'Do I need technical skills?'},a:{es:'No. Nosotros implementamos y te entregamos todo funcionando y documentado.',en:'No. We implement and hand everything over working and documented.'}},
  {q:{es:'¿Los precios son finales?',en:'Are prices final?'},a:{es:'Son valores de referencia; el precio final depende del alcance de tu proyecto.',en:'They are reference values; the final price depends on your project scope.'}},
  {q:{es:'¿En cuánto tiempo se implementa?',en:'How long does it take?'},a:{es:'Un paquete de entrada puede estar listo en días; proyectos Elite toman algunas semanas.',en:'An entry package can be ready in days; Elite projects take a few weeks.'}},
- {q:{es:'¿Trabajan con mi CRM actual?',en:'Do you work with my current CRM?'},a:{es:'Sí, integramos con HubSpot, Salesforce, Pipedrive, Zoho, Kommo y más.',en:'Yes, we integrate with HubSpot, Salesforce, Pipedrive, Zoho, Kommo and more.'}},
+ {q:{es:'¿Trabajan con mi CRM actual?',en:'Do you work with my current CRM?'},a:{es:'Sí. Integramos de forma nativa con HubSpot y Zoho, y con cualquier CRM que exponga API —Salesforce, Pipedrive o Kommo incluidos— vía n8n o Make.',en:'Yes. We integrate natively with HubSpot and Zoho, and with any CRM that exposes an API —Salesforce, Pipedrive or Kommo included— through n8n or Make.'}},
  {q:{es:'¿El chatbot funciona en WhatsApp?',en:'Does the chatbot work on WhatsApp?'},a:{es:'Sí, es uno de nuestros canales principales, junto con web e Instagram.',en:'Yes, it is one of our main channels, along with web and Instagram.'}},
  {q:{es:'¿Qué incluye el servicio recurrente?',en:'What does the recurring service include?'},a:{es:'Dominio, mantenimiento de la página y del bot, y soporte continuo.',en:'Domain, website and bot maintenance, and ongoing support.'}}
 ];
@@ -67,5 +67,5 @@ export const CONTACT_WORDS={
 export const TRUST=[
  {v:'< 2 h', l:{es:'es lo que tardamos en responderte en horario laboral.',en:'is how long we take to reply during business hours.'}},
  {v:'30 min',l:{es:'dura el diagnóstico. Sin costo, sin compromiso y sin permanencia.',en:'is the length of the diagnosis. Free, no commitment, no lock-in.'}},
- {v:'47',    l:{es:'plataformas que ya tenemos integradas, incluida la que usas hoy.',en:'platforms we already integrate, including the one you use today.'}}
+ {v:'46',    l:{es:'plataformas que ya tenemos integradas, incluida la que usas hoy.',en:'platforms we already integrate, including the one you use today.'}}
 ];

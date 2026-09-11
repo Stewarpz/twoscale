@@ -306,7 +306,15 @@ export default {
       const drawer = ARTIFACTS[x.dia];
       q('artifact').replaceChildren(drawer ? drawer(x.dg, store) : txt('p', `color:${STONE}`, x.dia));
 
-      q('kpis').replaceChildren(...x.kpis.map((k) => {
+      // Un servicio puede no publicar cifras de resultado y explicar por que:
+      // las que habia no tenian fuente y se retiraron (P-35).
+      if (!x.kpis && x.note) {
+        const p = document.createElement('p');
+        p.className = 'svc-kpi-note';
+        p.textContent = store.pick(x.note);
+        q('kpis').replaceChildren(p);
+      } else
+      q('kpis').replaceChildren(...(x.kpis || []).map((k) => {
         const cell = div();
         cell.append(txt('div', 'font-family:var(--fh);font-weight:700;font-size:clamp(26px,3vw,34px);letter-spacing:-1.1px;color:var(--ambar);line-height:1', k.v));
         cell.lastChild.className = 'svc-kpi-v';
