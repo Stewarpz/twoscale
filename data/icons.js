@@ -23,4 +23,3 @@ export const INTEG_GROUPS=[
   note:{es:'Tu correo, tu agenda y tus datos, conectados al mismo flujo.',en:'Your email, calendar and data, wired into the same flow.'},
   items:[['gmail','Gmail'],['googlecalendar','Google Calendar'],['googledrive','Google Drive'],['googlesheets','Google Sheets']]}
 ];
-export const MARQUEE=['hubspot','zoho','intercom','zendesk','stripe','mercadopago','paypal','shopify','woocommerce','n8n','make','zapier','supabase','airtable','notion','dropbox','calendly','asana','clickup','trello','webflow','livechat','mailchimp','brevo','odoo','perplexity','huggingface','ollama','square','discord'];

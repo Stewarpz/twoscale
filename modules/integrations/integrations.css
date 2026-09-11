@@ -8,7 +8,7 @@
 
 .integ{max-width:var(--maxw);margin:0 auto;padding:84px 24px}
 .integ-head{max-width:640px}
-.integ-groups{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin:38px 0 0;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.integ-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1px;margin:38px 0 0;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .integ-group{background:var(--grafito);padding:26px 22px 30px;transition:background .4s}
 .integ-group:hover{background:var(--grafito-2)}
 .integ-group-cat{font-family:var(--fm);font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ambar)}
@@ -26,7 +26,14 @@
 .integ-count-n{font-family:var(--fh);font-weight:700;font-size:30px;letter-spacing:-.8px;color:var(--ambar)}
 .integ-count-l{font-family:var(--fm);font-size:11px;letter-spacing:1px;color:var(--piedra)}
 
-@media(max-width:1100px){ .integ-groups{grid-template-columns:1fr 1fr} }
+@media(max-width:1100px){ .integ-groups{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))} }
 @media(max-width:640px){ .integ-groups{grid-template-columns:1fr} }
 /* Altura reservada del muro de integraciones (P-04). */
 .integ-ribbons{min-height:210px}
+
+/* El grupo es un control: necesita anillo (P-40). */
+.integ-group:focus-visible{outline:2px solid var(--ambar);outline-offset:-2px}
+.integ-group[aria-pressed="true"]{background:var(--grafito-2)}
+/* La pausa de las cintas tambien por teclado (P-40). */
+.ribbon:focus-within>div{animation-play-state:paused}
+.integ-link{display:inline-block;margin-left:14px;font-size:12px;color:var(--ambar);text-decoration:underline}
