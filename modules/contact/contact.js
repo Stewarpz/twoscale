@@ -8,10 +8,10 @@ import { FAQ, CONTACT_WORDS, TRUST } from '../../data/misc.js';
 /* ========== CONFIGURACIÓN — CAMBIAR ANTES DE PRODUCCIÓN ========== */
 const FORM_ENDPOINT = 'https://formspree.io/f/myeyonwe';
 const WHATSAPP_NUMBER = '573004032882';
-/* Enlace del tipo de evento de Calendly. Es lo unico que hay que rellenar
-   para que la agenda quede viva: crea en Calendly un evento de 30 minutos,
-   conectalo al Google Calendar del equipo y pega aqui su direccion. */
-const CALENDLY_URL = 'https://calendly.com/twoscale/diagnostico-30min';
+/* Tipo de evento de Calendly que se incrusta. Es el enlace del evento, no el
+   del perfil (calendly.com/2scaleia): el del perfil lista los tipos y obliga
+   a un clic mas antes de ver un solo hueco libre. */
+const CALENDLY_URL = 'https://calendly.com/2scaleia/30min';
 /* Enlace directo a la conversación, usado en el bloque de contacto y en la
    recuperación del error de envío. */
 const WA_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=` +
