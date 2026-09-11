@@ -9,7 +9,12 @@
 @keyframes gridShift{0%{background-position:0 0}100%{background-position:60px 60px}}
 .wf-paused .flowdot{animation-play-state:paused!important}
 
-.wf{margin:44px 0 0}
+/* El modulo no usaba var(--maxw) ni relleno lateral: a 1440 ocupaba de 0 a
+   1425 mientras services y cases ocupaban de 112 a 1312, y a 390 el texto
+   tocaba los dos bordes de la pantalla (P-41). */
+.wf{max-width:var(--maxw);margin:44px auto 0;padding:0 24px}
+/* El lienzo grafico sigue a sangre. */
+.wf-viewport{margin-left:calc(-1 * clamp(0px, (100vw - var(--maxw)) / -2 + 24px, 24px))}
 .wf-cap{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;margin-bottom:16px}
 .wf-cap-k{font-family:var(--fm);font-size:10.5px;letter-spacing:1.5px;color:var(--ambar)}
 .wf-cap-t{font-family:var(--fh);font-weight:600;font-size:17px;color:var(--crema);text-wrap:pretty}
@@ -19,7 +24,7 @@
 .wf-stage-n{font-family:var(--fm);font-size:10px;letter-spacing:1.5px;color:var(--ambar)}
 .wf-stage-l{font-family:var(--fh);font-weight:600;font-size:15px;color:var(--crema)}
 
-.wf-viewport{position:relative;overflow:hidden;height:400px;border-radius:16px;border:1px solid var(--line);background:radial-gradient(ellipse at center,rgba(75,59,209,.09),rgba(20,22,28,.75) 70%)}
+.wf-viewport{position:relative;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;height:400px;border-radius:16px;border:1px solid var(--line);background:radial-gradient(ellipse at center,rgba(75,59,209,.09),rgba(20,22,28,.75) 70%)}
 .wf-canvas{position:absolute;left:50%;top:50%;transform-origin:center center;transition:transform 1.5s cubic-bezier(.62,.03,.24,1);background-image:radial-gradient(circle at 1px 1px,rgba(247,244,238,.09) 1px,transparent 0);background-size:26px 26px}
 
 .wfnode{position:absolute;display:flex;align-items:center;gap:11px;padding:0 13px;cursor:pointer;text-align:left;backdrop-filter:blur(6px);transition:border-color .5s,opacity .5s,background .4s,box-shadow .5s}
@@ -43,3 +48,9 @@
 .wf-detail-role{font-family:var(--fm);font-size:11px;color:var(--crema-dim);margin-left:10px}
 .wf-detail-info{font-size:14px;color:var(--crema-dim);margin-top:4px;text-wrap:pretty}
 .wf-hint{font-family:var(--fm);font-size:11px;color:var(--crema-dim);margin:14px 0 0}
+/* Los tres pasos de implementación se repartían mal al envolver a 390: el
+   tercero caía bajo el primero con un conector colgando (P-41). */
+@media(max-width:520px){
+  .wf-steps,.svc-steps{display:grid!important;grid-template-columns:1fr!important;gap:14px}
+  .wf-steps>*+*::before,.svc-steps>*+*::before{display:none!important}
+}

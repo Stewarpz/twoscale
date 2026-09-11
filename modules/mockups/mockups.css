@@ -50,3 +50,7 @@
 .mck-iframe-tall { height: 900px; }
 /* Los marcos son paradas de tabulación: necesitan anillo (P-21). */
 .mck-iframe:focus-visible{outline:2px solid var(--ambar);outline-offset:3px}
+
+/* Misma contencion que el resto de modulos de la ruta (P-41). El marco
+   incrustado sigue a sangre. */
+.mck{max-width:var(--maxw);margin-left:auto;margin-right:auto;padding:0 24px}
