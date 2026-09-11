@@ -5,6 +5,14 @@
 
 import { AGENT_FLOW, AGENT_CLOSE } from '../../data/chat.js';
 
+/* ========== CONFIGURACIÓN — CAMBIAR ANTES DE PRODUCCIÓN ========== */
+const AGENT_ENDPOINT = 'https://formspree.io/f/myeyonwe';
+const WHATSAPP_NUMBER = '573004032882';
+/* ================================================================= */
+
+/** Escapa HTML para prevenir XSS al insertar datos del usuario. */
+const escapeHtml = (s) => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
 /** Marca del agente. SVG propio: no usamos logos de terceros. */
 export const AGENT_ICON = (size) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none"
   stroke="currentColor" stroke-width="1.9" stroke-linecap="round">
@@ -115,6 +123,40 @@ export default {
         again.textContent = store.t('ag_again');
         again.addEventListener('click', reset);
         wrap.append(cta, again);
+
+        /* Envío de datos al backend + WhatsApp */
+        const summary = AGENT_FLOW.map((q, i) => ({
+          key: store.pick(q.k),
+          value: state.picks[i] || '—'
+        }));
+
+        fetch(AGENT_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ source: 'agent', answers: summary }),
+        }).catch((err) => {
+          console.error('[twoscale] agent submit failed:', err);
+          const errMsg = document.createElement('p');
+          errMsg.className = 'ag-note';
+          errMsg.style.color = 'var(--ambar)';
+          errMsg.textContent = store.t('ag_error');
+          wrap.append(errMsg);
+        });
+
+        /* Construir enlace de WhatsApp con resumen */
+        const waMsgLines = summary.map((s) => `${s.key}: ${s.value}`);
+        const waMsg = 'Hola, soy ' + (state.picks[4] || '') + '.\n' + waMsgLines.join('\n');
+        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waMsg)}`;
+        cta.href = waUrl;
+        cta.target = '_blank';
+        cta.rel = 'noopener noreferrer';
+        cta.addEventListener('click', (e) => {
+          e.preventDefault();
+          state.open = false;
+          render();
+          window.open(waUrl, '_blank', 'noopener,noreferrer');
+        });
+
         foot.append(wrap);
         return;
       }
@@ -136,11 +178,17 @@ export default {
       if (current?.input) {
         const form = document.createElement('form');
         form.className = 'ag-form';
-        form.innerHTML =
-          `<input class="ag-input" placeholder="${store.pick(current.ph)}" value="${state.draft}">` +
-          `<button type="submit" class="ag-send" aria-label="${store.t('ag_send')}">→</button>`;
-        const input = form.querySelector('input');
+        const input = document.createElement('input');
+        input.className = 'ag-input';
+        input.placeholder = store.pick(current.ph);
+        input.value = state.draft;
         input.addEventListener('input', (e) => { state.draft = e.target.value; });
+        const sendBtn = document.createElement('button');
+        sendBtn.type = 'submit';
+        sendBtn.className = 'ag-send';
+        sendBtn.setAttribute('aria-label', store.t('ag_send'));
+        sendBtn.textContent = '→';
+        form.append(input, sendBtn);
         form.addEventListener('submit', (e) => {
           e.preventDefault();
           const v = state.draft.trim();

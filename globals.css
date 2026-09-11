@@ -1,3 +1,7 @@
+/* El atributo hidden manda sobre cualquier display de autor.
+   Sin esto, una regla como .panel{display:flex} deja visible un [hidden]. */
+[hidden] { display: none !important; }
+
 /* ===========================================================
    globals.css — tokens de marca, reset y utilidades compartidas
    Twoscale.IA · toda regla propia de un módulo vive en su carpeta

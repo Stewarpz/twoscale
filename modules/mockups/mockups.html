@@ -6,25 +6,7 @@
     <p class="cnt-note" data-t="proof_bnote"></p>
   </div>
 
-  <!-- Maqueta 01 · web navegable -->
-  <div class="mck-block" data-reveal>
-    <div class="mck-cap">
-      <span class="mck-cap-k" data-t="mk1_k"></span>
-      <span class="mck-cap-t" data-t="mk1_t"></span>
-      <span class="mck-cap-s" data-t="mk1_s"></span>
-      <span class="mck-cap-tag" data-t="demo_tag"></span>
-    </div>
-    <div class="mck-frame bs">
-      <div class="mck-chrome">
-        <span class="mck-lights"><i></i><i></i><i></i></span>
-        <span class="mck-url" data-role="site-url"></span>
-      </div>
-      <div class="mck-screen" data-role="site"></div>
-    </div>
-    <p class="mck-hint" data-t="mock_nav"></p>
-  </div>
-
-  <!-- Maqueta 02 · sistema administrativo (demo externa, en iframe) -->
+  <!-- Maqueta 01 · sistema administrativo (Áurea, demo externa en iframe) -->
   <div class="mck-block" data-reveal>
     <div class="mck-cap">
       <span class="mck-cap-k" data-t="mk2_k"></span>
@@ -45,7 +27,7 @@
     </div>
   </div>
 
-  <!-- Maqueta 03 · panel de análisis -->
+  <!-- Maqueta 02 · dashboard ejecutivo (demo externa en iframe) -->
   <div class="mck-block" data-reveal>
     <div class="mck-cap">
       <span class="mck-cap-k" data-t="mk3_k"></span>
@@ -53,7 +35,16 @@
       <span class="mck-cap-s" data-t="mk3_s"></span>
       <span class="mck-cap-tag" data-t="demo_tag"></span>
     </div>
-    <div class="mck-frame bs" data-role="dash"></div>
-    <p class="mck-hint" data-t="mock_nav"></p>
+    <div class="mck-aurea" data-role="dash-zone">
+      <div class="mck-aurea-glow" aria-hidden="true"></div>
+      <div class="mck-frame mck-frame-dark">
+        <div class="mck-chrome mck-chrome-dark">
+          <span class="mck-lights mck-lights-dark"><i></i><i></i><i></i></span>
+          <span class="mck-url mck-url-dark" data-t="mk3_frame"></span>
+        </div>
+        <iframe class="mck-iframe mck-iframe-tall" src="TwoscaleDashboard.dc.html?tour=off" loading="lazy" data-role="dash"></iframe>
+      </div>
+      <p class="mck-hint" data-t="dash_hint"></p>
+    </div>
   </div>
 </div>

@@ -33,3 +33,27 @@
   .hdr-cta.mainnav{display:none}
   .menu-btn{display:inline-grid}
 }
+
+
+/* El cajón se ancla al header y escala desde arriba: nunca ocupa layout,
+   así que abrirlo no empuja el contenido de la página. */
+.hdr { position: relative; }
+.hdr-drawer {
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  transform-origin: top center;
+  transform: scaleY(0);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform .25s cubic-bezier(.3,0,.2,1), opacity .2s ease, visibility 0s linear .25s;
+  will-change: transform, opacity;
+}
+.hdr-drawer[data-open="true"] {
+  transform: scaleY(1);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform .25s cubic-bezier(.2,.9,.3,1), opacity .25s ease, visibility 0s;
+}
+@media (prefers-reduced-motion: reduce) { .hdr-drawer { transition: none; } }

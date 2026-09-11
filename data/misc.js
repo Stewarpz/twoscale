@@ -47,3 +47,25 @@ export const AITASKS=[
  {k:{es:'Ventas',en:'Sales'},p:{es:'El pipeline se desordena y no hay foco.',en:'The pipeline gets messy and unfocused.'},ia:{es:'La IA ordena oportunidades por potencial.',en:'AI ranks opportunities by potential.'},au:{es:'Actualiza el CRM y avisa al comercial.',en:'Updates the CRM and alerts the rep.'},r:{es:'El equipo se enfoca en lo que cierra.',en:'The team focuses on what closes.'}},
  {k:{es:'Reportes',en:'Reports'},p:{es:'Armar reportes a mano consume el viernes.',en:'Building reports by hand eats your Friday.'},ia:{es:'La IA resume datos y detecta tendencias.',en:'AI summarizes data and spots trends.'},au:{es:'Genera y envía el reporte solo.',en:'Generates and sends the report on its own.'},r:{es:'Decisiones con datos, sin trabajo manual.',en:'Data-driven decisions, no manual work.'}}
 ];
+/* Fundadores — sección Nosotros. */
+export const FOUNDERS=[
+ {initials:'EC',name:'Estiven Calle Gaviria',
+  role:{es:'Director de Estrategia y Marketing',en:'Director of Strategy and Marketing'},
+  bio:{es:'Administrador tecnológico y tecnólogo en gestión documental, especializado en marketing digital. Diseña cómo cada solución se convierte en crecimiento medible para el cliente.',en:'Technology administrator and document management technologist specialized in digital marketing. Designs how each solution turns into measurable growth for the client.'}},
+ {initials:'SP',name:'Stewar Posada',
+  role:{es:'Director de Operaciones y Alianzas',en:'Director of Operations and Partnerships'},
+  bio:{es:'Negociador internacional. Estructura las alianzas y la operación que sostienen cada proyecto, del primer contacto a la entrega.',en:'International negotiator. Structures the partnerships and operations behind every project, from first contact to delivery.'}}
+];
+
+/* Palabra que rota en el título de Contacto. */
+export const CONTACT_WORDS={
+  es:['proceso','equipo','negocio','idea','clientes'],
+  en:['process','team','business','idea','customers']
+};
+
+/* Señales de confianza que rotan sobre el formulario. */
+export const TRUST=[
+ {v:'< 2 h', l:{es:'es lo que tardamos en responderte en horario laboral.',en:'is how long we take to reply during business hours.'}},
+ {v:'30 min',l:{es:'dura el diagnóstico. Sin costo, sin compromiso y sin permanencia.',en:'is the length of the diagnosis. Free, no commitment, no lock-in.'}},
+ {v:'47',    l:{es:'plataformas que ya tenemos integradas, incluida la que usas hoy.',en:'platforms we already integrate, including the one you use today.'}}
+];

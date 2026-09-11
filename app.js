@@ -18,7 +18,9 @@ export const store = {
   },
   /** Traduce una clave al idioma actual. */
   t(key) {
-    return STR[this.state.lang][key] ?? key;
+    const val = STR[this.state.lang][key];
+    if (val === undefined) console.warn(`[twoscale] missing translation: "${key}" (${this.state.lang})`);
+    return val ?? key;
   },
   /** Devuelve el valor del idioma actual de un objeto {es, en}. */
   pick(obj) {
@@ -70,8 +72,8 @@ export const maskIcon = (url, size, color) =>
 /* ---------- carga de módulos ---------- */
 const MODULES = [
   'header', 'intro', 'hero', 'metrics', 'chat-demo', 'integrations', 'process',
-  'services', 'workflow', 'mockups', 'industries',
-  'about', 'cases', 'contact', 'footer', 'agent',
+  'services', 'workflow', 'mockups', 'cases',
+  'about', 'contact', 'footer', 'agent',
 ];
 
 async function loadModule(name) {
@@ -88,6 +90,7 @@ async function loadModule(name) {
     host.dataset.ready = 'true';
   } catch (err) {
     console.error(`[twoscale] módulo "${name}" falló:`, err);
+    host.innerHTML = `<div style="padding:24px;color:#F0A93E;font-size:14px;font-family:monospace;border:1px solid rgba(240,169,62,.3);border-radius:12px;margin:12px 0">⚠️ Módulo «${name}» no pudo cargarse.</div>`;
   }
 }
 

@@ -10,7 +10,7 @@ export default {
       const es = store.state.lang === 'es';
       const groups = [
         { title: es ? 'SOLUCIONES' : 'SOLUTIONS', links: [['servicios', 'nav_serv']] },
-        { title: es ? 'EMPRESA' : 'COMPANY',      links: [['nosotros', 'nav_about'], ['casos', 'nav_cases']] },
+        { title: es ? 'EMPRESA' : 'COMPANY',      links: [['nosotros', 'nav_about']] },
         { title: es ? 'CONTACTO' : 'CONTACT',     links: [['contacto', 'nav_contact']] },
       ];
       cols.replaceChildren(...groups.map((g) => {

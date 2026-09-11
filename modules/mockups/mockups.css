@@ -44,3 +44,7 @@
 
 @media(max-width:1100px){ .mck-manages-grid{grid-template-columns:1fr 1fr} }
 @media(max-width:640px){ .mck-manages-grid{grid-template-columns:1fr} }
+
+
+/* El dashboard necesita más alto que la demo de Áurea. */
+.mck-iframe-tall { height: 900px; }

@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#F7F4EE;font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:#4B3BD1;text-decoration:none}
+  a:hover{color:#3A2DB0}
+  ::selection{background:rgba(75,59,209,.18)}
+  :focus-visible{outline:2px solid #4B3BD1;outline-offset:2px}
+  @keyframes tsPulse{0%,100%{opacity:.35}50%{opacity:1}}
+  @keyframes tsIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @keyframes tsLabel{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @keyframes tsClick{0%{transform:scale(1)}45%{transform:scale(.86)}100%{transform:scale(1)}}
+</style>
+</helmet>
+<div style="display:flex;min-height:100vh;background:#F7F4EE;color:#14161C">
+
+  <main style="flex:1;min-width:0;display:flex;flex-direction:column">
+
+    <header style="display:flex;align-items:center;justify-content:space-between;gap:28px;padding:16px 40px;border-bottom:1px solid rgba(139,141,152,.24);background:#F7F4EE;position:sticky;top:0;z-index:5">
+      <div style="display:flex;align-items:center;gap:26px;min-width:0">
+        <div style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
+          <div style="width:28px;height:28px;border-radius:8px;background:#14161C;display:flex;align-items:center;justify-content:center;flex:0 0 28px">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F7F4EE" stroke-width="2.4" stroke-linecap="round"><path d="M4 18 10 12 4 6"></path><path d="M13 18h7"></path></svg>
+          </div>
+          <div>
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px;letter-spacing:-.012em;line-height:1.1">Twoscale.IA</div>
+            <div style="font-size:9.5px;color:#8B8D98;letter-spacing:.11em;text-transform:uppercase;margin-top:2px">{{ t.demoTag }}</div>
+          </div>
+        </div>
+        <div style="width:1px;height:30px;background:rgba(139,141,152,.3);flex:0 0 1px"></div>
+        <div style="min-width:0">
+          <div style="font-family:Manrope,sans-serif;font-size:18px;font-weight:700;letter-spacing:-.015em;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Comercial Andina S.A.S.</div>
+          <div style="font-size:12px;color:#8B8D98;margin-top:2px">{{ t.headerSub }}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;flex:0 0 auto">
+        <div style="display:flex;gap:5px">
+          <sc-for list="{{ langs }}" as="l" hint-placeholder-count="2">
+            <button onClick="{{ l.go }}" style="{{ l.style }}">{{ l.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;gap:5px">
+          <sc-for list="{{ currencies }}" as="c" hint-placeholder-count="2">
+            <button onClick="{{ c.go }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <div style="display:flex;background:rgba(139,141,152,.13);border-radius:9px;padding:3px;gap:2px">
+          <sc-for list="{{ periods }}" as="p" hint-placeholder-count="2">
+            <button onClick="{{ p.go }}" style="{{ p.style }}">{{ p.label }}</button>
+          </sc-for>
+        </div>
+      </div>
+    </header>
+
+    <div style="padding:26px 40px 112px;display:flex;flex-direction:column;gap:22px">
+
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:32px">
+        <h1 style="font-family:Manrope,sans-serif;font-size:27px;font-weight:700;margin:0;letter-spacing:-.02em;flex:0 0 auto">{{ t.modTitle }}</h1>
+        <div style="font-size:12.5px;color:#8B8D98;max-width:520px;text-align:right;line-height:1.45;text-wrap:pretty">{{ t.modSub }}</div>
+      </div>
+
+      <sc-if value="{{ hasKpis }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px">
+          <sc-for list="{{ kpis }}" as="k" hint-placeholder-count="4">
+            <div id="{{ k.domId }}" onMouseEnter="{{ k.enter }}" onMouseLeave="{{ k.leave }}" style="{{ k.style }}">
+              <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px">
+                <div style="font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:{{ k.labelColor }};line-height:1.35">{{ k.label }}</div>
+                <div style="font-size:11.5px;font-weight:600;padding:3px 7px;border-radius:6px;white-space:nowrap;background:{{ k.deltaBg }};color:{{ k.deltaColor }}">{{ k.delta }}</div>
+              </div>
+              <div style="font-family:Manrope,sans-serif;font-size:31px;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums;line-height:1.05;color:{{ k.valueColor }}">{{ k.value }}</div>
+              <div style="font-size:12.5px;color:{{ k.insightColor }};line-height:1.45">{{ k.insight }}</div>
+              <sc-if value="{{ k.open }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:9px;padding-top:11px;margin-top:2px;border-top:1px solid {{ k.ruleColor }};animation:tsIn .22s ease both">
+                  <sc-for list="{{ k.bars }}" as="b" hint-placeholder-count="3">
+                    <div style="display:flex;flex-direction:column;gap:4px">
+                      <div style="display:flex;justify-content:space-between;font-size:11.5px;color:{{ k.insightColor }}">
+                        <span>{{ b.label }}</span><span style="font-variant-numeric:tabular-nums;font-weight:600">{{ b.val }}</span>
+                      </div>
+                      <div style="height:5px;border-radius:3px;background:{{ k.trackColor }};overflow:hidden">
+                        <div style="height:100%;border-radius:3px;background:{{ k.barColor }};width:{{ b.pct }}%;transition:width .5s cubic-bezier(.2,.7,.3,1)"></div>
+                      </div>
+                    </div>
+                  </sc-for>
+                  <div style="font-size:12px;line-height:1.45;color:#F0A93E;display:flex;gap:6px">
+                    <span style="flex:0 0 auto">◆</span><span>{{ k.rec }}</span>
+                  </div>
+                  <sc-if value="{{ k.notActivated }}" hint-placeholder-val="{{ true }}">
+                    <button onClick="{{ k.activate }}" style="{{ k.actBtnStyle }}" style-hover="background:rgba(240,169,62,.28)">{{ k.actLabel }}</button>
+                  </sc-if>
+                  <sc-if value="{{ k.activated }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:#F0A93E;animation:tsIn .22s ease both">
+                      <span>✓</span><span>{{ k.actDone }}</span>
+                    </div>
+                  </sc-if>
+                </div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isResumen }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:1.55fr 1fr;gap:14px;align-items:start">
+          <div id="tt-trend" style="background:#FDFCF9;border:1px solid rgba(139,141,152,.26);border-radius:11px;padding:18px 20px 12px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px">
+              <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px">{{ t.trendTitle }}</div>
+              <div style="font-size:12px;color:#8B8D98">{{ t.trendSub }}</div>
+            </div>
+            <div style="position:relative;padding-bottom:20px">
+              <svg viewBox="0 0 640 168" style="width:100%;height:auto;display:block;overflow:visible">
+                <defs>
+                  <linearGradient id="tsArea" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#4B3BD1" stop-opacity="0.34"></stop>
+                    <stop offset="55%" stop-color="#4B3BD1" stop-opacity="0.13"></stop>
+                    <stop offset="100%" stop-color="#4B3BD1" stop-opacity="0"></stop>
+                  </linearGradient>
+                </defs>
+                <sc-for list="{{ grid }}" as="g" hint-placeholder-count="4">
+                  <line x1="42" x2="632" y1="{{ g.y }}" y2="{{ g.y }}" stroke="rgba(139,141,152,.22)" stroke-width="1"></line>
+                </sc-for>
+                <line x1="42" x2="632" y1="{{ targetY }}" y2="{{ targetY }}" stroke="#F0A93E" stroke-width="1.5" stroke-dasharray="6 5"></line>
+                <path d="{{ areaPath }}" fill="url(#tsArea)"></path>
+                <path d="{{ linePath }}" fill="none" stroke="#4B3BD1" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <sc-for list="{{ points }}" as="p" hint-placeholder-count="6">
+                  <circle cx="{{ p.x }}" cy="{{ p.y }}" r="{{ p.r }}" fill="{{ p.fill }}" stroke="#F7F4EE" stroke-width="2"></circle>
+                </sc-for>
+              </svg>
+              <div style="position:absolute;left:0;right:0;top:0;bottom:20px">
+                <sc-for list="{{ grid }}" as="g" hint-placeholder-count="4">
+                  <div style="position:absolute;left:0;top:{{ g.topPct }}%;transform:translateY(-50%);font-size:11px;color:#8B8D98;font-variant-numeric:tabular-nums">{{ g.label }}</div>
+                </sc-for>
+                <div style="position:absolute;right:0;top:{{ targetTopPct }}%;transform:translateY(-50%);font-size:10.5px;font-weight:600;color:#F0A93E;background:#FDFCF9;padding:0 5px">{{ t.targetLabel }}</div>
+              </div>
+              <div style="position:absolute;left:0;right:0;bottom:0;height:16px">
+                <sc-for list="{{ points }}" as="p" hint-placeholder-count="6">
+                  <div style="position:absolute;top:0;left:{{ p.leftPct }}%;transform:translateX(-50%);font-size:11px;color:#8B8D98">{{ p.label }}</div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="background:#FDFCF9;border:1px solid rgba(139,141,152,.26);border-radius:11px;padding:18px 20px">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px;margin-bottom:12px">{{ t.feedTitle }}</div>
+            <div style="display:flex;flex-direction:column;gap:11px">
+              <sc-for list="{{ feed }}" as="f" hint-placeholder-count="6">
+                <div style="display:flex;gap:10px;align-items:flex-start">
+                  <span style="width:6px;height:6px;border-radius:50%;background:{{ f.dot }};margin-top:6px;flex:0 0 6px"></span>
+                  <div style="min-width:0">
+                    <div style="font-size:12.5px;line-height:1.45">{{ f.text }}</div>
+                    <div style="font-size:11px;color:#8B8D98;margin-top:1px">{{ f.time }}</div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <sc-for list="{{ alerts }}" as="a" hint-placeholder-count="2">
+            <div style="display:flex;gap:12px;padding:15px 18px;border-radius:11px;background:{{ a.bg }};border:1px solid {{ a.border }}">
+              <span style="font-size:15px;line-height:1;color:{{ a.accent }};margin-top:1px">{{ a.glyph }}</span>
+              <div>
+                <div style="font-weight:600;font-size:13px">{{ a.title }}</div>
+                <div style="font-size:12.5px;color:#5B5D67;margin-top:3px;line-height:1.45">{{ a.body }}</div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isAuto }}" hint-placeholder-val="{{ false }}">
+        <div id="tt-agent" style="display:grid;grid-template-columns:330px 1fr;border-radius:11px;overflow:hidden;background:#14161C;box-shadow:0 14px 32px -22px rgba(20,22,28,.8)">
+          <div style="display:flex;flex-direction:column;gap:14px;padding:18px 20px;border-right:1px solid rgba(247,244,238,.1)">
+            <div style="display:flex;align-items:center;gap:9px">
+              <div style="width:27px;height:27px;border-radius:8px;background:#4B3BD1;display:flex;align-items:center;justify-content:center;flex:0 0 27px">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F7F4EE" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"></path><rect x="4" y="6" width="16" height="12" rx="3"></rect><path d="M9 12h.01M15 12h.01"></path><path d="M10 21h4"></path></svg>
+              </div>
+              <div>
+                <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:13.5px;color:#F7F4EE;line-height:1.15">{{ t.agName }}</div>
+                <div style="font-size:10.5px;color:#8B8D98;margin-top:1px">{{ t.agRole }}</div>
+              </div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:170px">
+              <sc-if value="{{ agShowQ }}" hint-placeholder-val="{{ false }}">
+                <div style="align-self:flex-end;max-width:90%;padding:10px 13px;border-radius:11px 11px 3px 11px;background:#4B3BD1;color:#F7F4EE;font-size:12.5px;line-height:1.45;animation:tsIn .2s ease both">{{ agQuestion }}</div>
+              </sc-if>
+              <sc-if value="{{ agThinking }}" hint-placeholder-val="{{ false }}">
+                <div style="align-self:flex-start;display:flex;align-items:center;gap:8px;padding:11px 14px;border-radius:11px 11px 11px 3px;background:rgba(247,244,238,.07)">
+                  <span style="display:flex;gap:4px">
+                    <span style="width:5px;height:5px;border-radius:50%;background:#8B8D98;animation:tsPulse 1s ease-in-out infinite"></span>
+                    <span style="width:5px;height:5px;border-radius:50%;background:#8B8D98;animation:tsPulse 1s ease-in-out .18s infinite"></span>
+                    <span style="width:5px;height:5px;border-radius:50%;background:#8B8D98;animation:tsPulse 1s ease-in-out .36s infinite"></span>
+                  </span>
+                  <span style="font-size:11.5px;color:#8B8D98">{{ t.agWorking }}</span>
+                </div>
+              </sc-if>
+              <sc-if value="{{ agAnswered }}" hint-placeholder-val="{{ false }}">
+                <div style="align-self:flex-start;max-width:94%;padding:11px 14px;border-radius:11px 11px 11px 3px;background:rgba(247,244,238,.07);color:#DEDCD6;font-size:12.5px;line-height:1.5;animation:tsIn .25s ease both;text-wrap:pretty">{{ agAnswer }}</div>
+              </sc-if>
+            </div>
+            <div style="{{ agFieldStyle }}">
+              <span style="flex:1;min-width:0;font-size:12.5px;line-height:1.3;color:{{ agTypedColor }}">{{ agTyped }}<span style="{{ agCaret }}"></span></span>
+              <button onClick="{{ agAction }}" style="{{ agBtnStyle }}">{{ agBtnLabel }}</button>
+            </div>
+          </div>
+          <div style="padding:18px 22px;display:flex;flex-direction:column;gap:14px;min-width:0">
+            <sc-if value="{{ agAnswered }}" hint-placeholder-val="{{ false }}">
+              <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:13.5px;color:#F7F4EE;animation:tsIn .25s ease both">{{ agChartTitle }}</div>
+            </sc-if>
+
+            <sc-if value="{{ agIdle }}" hint-placeholder-val="{{ true }}">
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:11px;min-height:210px;border-radius:9px;border:1px dashed rgba(247,244,238,.16)">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8B8D98" stroke-width="1.6" stroke-linecap="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20V8"></path></svg>
+                <div style="font-size:12px;color:#8B8D98">{{ t.agEmpty }}</div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ agIsTarget }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;animation:tsIn .3s ease both">
+                <div style="height:176px;display:flex;align-items:flex-end;gap:14px">
+                  <sc-for list="{{ agBars }}" as="b" hint-placeholder-count="6">
+                    <div style="flex:1;border-radius:5px 5px 0 0;background:{{ b.bg }};height:{{ b.pct }}%;transition:height .7s cubic-bezier(.2,.7,.3,1)"></div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:14px;margin-top:8px">
+                  <sc-for list="{{ agBars }}" as="b" hint-placeholder-count="6">
+                    <div style="flex:1;text-align:center;font-size:10.5px;color:{{ b.fg }}">{{ b.month }}</div>
+                  </sc-for>
+                </div>
+                <div style="position:absolute;left:0;right:0;top:{{ agTargetTop }}px;border-top:1.5px dashed #F0A93E">
+                  <span style="position:absolute;right:0;top:-17px;font-size:10.5px;font-weight:600;color:#F0A93E;background:#14161C;padding:0 5px">{{ t.agTargetLabel }}</span>
+                </div>
+                <div style="position:absolute;right:0;top:{{ agPeakTop }}px;font-family:Manrope,sans-serif;font-size:15px;font-weight:700;color:#F7F4EE;background:#14161C;padding:1px 5px;font-variant-numeric:tabular-nums">{{ agPeak }}</div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ agIsSavings }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:13px;animation:tsIn .3s ease both">
+                <sc-for list="{{ agRows }}" as="r" hint-placeholder-count="5">
+                  <div style="display:flex;flex-direction:column;gap:5px">
+                    <div style="display:flex;justify-content:space-between;gap:12px;font-size:12.5px">
+                      <span style="color:#DEDCD6">{{ r.label }}</span>
+                      <span style="font-weight:600;color:{{ r.fg }};font-variant-numeric:tabular-nums">{{ r.val }}</span>
+                    </div>
+                    <div style="height:9px;border-radius:5px;background:rgba(247,244,238,.1);overflow:hidden">
+                      <div style="height:100%;border-radius:5px;background:{{ r.bg }};width:{{ r.pct }}%;transition:width .7s cubic-bezier(.2,.7,.3,1)"></div>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ agIsCompare }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;animation:tsIn .3s ease both">
+                <sc-for list="{{ agPairs }}" as="p" hint-placeholder-count="4">
+                  <div style="display:flex;flex-direction:column;gap:9px">
+                    <div style="display:flex;align-items:flex-end;gap:8px;height:150px">
+                      <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;height:100%">
+                        <span style="font-size:10.5px;color:#8B8D98;text-align:center;font-variant-numeric:tabular-nums">{{ p.prev }}</span>
+                        <div style="border-radius:5px 5px 0 0;background:rgba(247,244,238,.2);height:{{ p.prevPct }}%;transition:height .7s cubic-bezier(.2,.7,.3,1)"></div>
+                      </div>
+                      <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;height:100%">
+                        <span style="font-size:10.5px;font-weight:600;color:#F0A93E;text-align:center;font-variant-numeric:tabular-nums">{{ p.now }}</span>
+                        <div style="border-radius:5px 5px 0 0;background:#F0A93E;height:{{ p.nowPct }}%;transition:height .7s cubic-bezier(.2,.7,.3,1)"></div>
+                      </div>
+                    </div>
+                    <div style="font-size:11px;color:#8B8D98;text-align:center;line-height:1.35;border-top:1px solid rgba(247,244,238,.14);padding-top:8px">{{ p.label }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ agIsForecast }}" hint-placeholder-val="{{ false }}">
+              <div style="position:relative;animation:tsIn .3s ease both">
+                <svg viewBox="0 0 600 176" style="width:100%;height:auto;display:block;overflow:visible">
+                  <line x1="{{ agSplitX }}" x2="{{ agSplitX }}" y1="6" y2="160" stroke="rgba(247,244,238,.16)" stroke-width="1" stroke-dasharray="3 4"></line>
+                  <path d="{{ agSolid }}" fill="none" stroke="#4B3BD1" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <path d="{{ agDashed }}" fill="none" stroke="#F0A93E" stroke-width="2.6" stroke-dasharray="7 6" stroke-linecap="round" stroke-linejoin="round"></path>
+                  <sc-for list="{{ agFPoints }}" as="p" hint-placeholder-count="15">
+                    <circle cx="{{ p.x }}" cy="{{ p.y }}" r="{{ p.r }}" fill="{{ p.fill }}" stroke="#14161C" stroke-width="2"></circle>
+                  </sc-for>
+                </svg>
+                <div style="position:relative;height:15px;margin-top:4px">
+                  <sc-for list="{{ agFPoints }}" as="p" hint-placeholder-count="15">
+                    <div style="position:absolute;left:{{ p.leftPct }}%;transform:translateX(-50%);font-size:10px;color:{{ p.labelColor }}">{{ p.label }}</div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:18px;margin-top:12px;font-size:11px;color:#8B8D98">
+                  <span style="display:flex;align-items:center;gap:6px"><span style="width:14px;height:2.5px;border-radius:2px;background:#4B3BD1"></span>{{ t.agReal }}</span>
+                  <span style="display:flex;align-items:center;gap:6px"><span style="width:14px;height:2.5px;border-radius:2px;background:#F0A93E"></span>{{ t.agProj }}</span>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+        <div id="tt-heat" style="background:#14161C;color:#F7F4EE;border-radius:11px;padding:20px 22px 18px;box-shadow:0 14px 32px -22px rgba(20,22,28,.8)">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;gap:20px;margin-bottom:4px">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px">{{ t.heatTitle }}</div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#8B8D98">
+              <span>{{ t.heatLow }}</span>
+              <span style="display:flex;gap:2px">
+                <sc-for list="{{ heatLegend }}" as="s" hint-placeholder-count="5">
+                  <span style="width:13px;height:9px;border-radius:2px;background:{{ s.bg }}"></span>
+                </sc-for>
+              </span>
+              <span>{{ t.heatHigh }}</span>
+            </div>
+          </div>
+          <div style="font-size:12px;color:#8B8D98;margin-bottom:14px">{{ t.heatSub }}</div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <sc-for list="{{ heatRows }}" as="r" hint-placeholder-count="7">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="width:20px;flex:0 0 20px;font-size:10.5px;color:#8B8D98;letter-spacing:.04em">{{ r.day }}</span>
+                <div style="flex:1;display:grid;grid-template-columns:repeat(24,1fr);gap:3px">
+                  <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="24">
+                    <div style="aspect-ratio:1;border-radius:2.5px;background:{{ c.bg }};transition:background .5s ease"></div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+            <div style="display:flex;align-items:center;gap:9px;margin-top:3px">
+              <span style="width:20px;flex:0 0 20px"></span>
+              <div style="flex:1;display:grid;grid-template-columns:repeat(24,1fr);gap:3px">
+                <sc-for list="{{ hourLabels }}" as="h" hint-placeholder-count="24">
+                  <span style="font-size:9.5px;color:#8B8D98;text-align:center">{{ h.label }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:#F0A93E;margin-top:14px;display:flex;gap:7px">
+            <span>◆</span><span>{{ t.heatNote }}</span>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start">
+          <div id="tt-cats" style="background:#FDFCF9;border:1px solid rgba(139,141,152,.26);border-radius:11px;padding:18px 20px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px">
+              <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px">{{ t.catTitle }}</div>
+              <div style="display:flex;gap:14px;font-size:11.5px;color:#8B8D98">
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:rgba(139,141,152,.42)"></span>{{ t.prevPeriod }}</span>
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:#4B3BD1"></span>{{ t.thisPeriod }}</span>
+              </div>
+            </div>
+            <div style="font-size:12px;color:#8B8D98;margin-bottom:16px">{{ t.catSub }}</div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px">
+              <sc-for list="{{ cats }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="display:flex;align-items:flex-end;gap:7px;height:132px">
+                    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;height:100%">
+                      <span style="font-size:11px;color:#8B8D98;text-align:center;font-variant-numeric:tabular-nums">{{ c.prev }}</span>
+                      <div style="border-radius:5px 5px 0 0;background:rgba(139,141,152,.34);height:{{ c.prevPct }}%;transition:height .7s cubic-bezier(.2,.7,.3,1)"></div>
+                    </div>
+                    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;height:100%">
+                      <span style="font-size:11px;color:#4B3BD1;font-weight:600;text-align:center;font-variant-numeric:tabular-nums">{{ c.val }}</span>
+                      <div style="border-radius:5px 5px 0 0;background:#4B3BD1;height:{{ c.pct }}%;transition:height .7s cubic-bezier(.2,.7,.3,1)"></div>
+                    </div>
+                  </div>
+                  <div style="font-size:11.5px;text-align:center;line-height:1.35;border-top:1px solid rgba(139,141,152,.22);padding-top:8px">{{ c.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="background:#FDFCF9;border:1px solid rgba(139,141,152,.26);border-radius:11px;overflow:hidden">
+            <div style="padding:16px 20px 12px;font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px">{{ t.tableTitle }}</div>
+            <div style="display:grid;grid-template-columns:1.7fr 1fr .8fr .8fr;gap:10px;padding:8px 20px;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#8B8D98;border-top:1px solid rgba(139,141,152,.2);border-bottom:1px solid rgba(139,141,152,.2)">
+              <div>{{ t.thName }}</div><div>{{ t.thType }}</div><div style="text-align:right">{{ t.thRuns }}</div><div style="text-align:right">{{ t.thState }}</div>
+            </div>
+            <sc-for list="{{ autos }}" as="a" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:1.7fr 1fr .8fr .8fr;gap:10px;padding:11px 20px;font-size:12.5px;align-items:center;border-bottom:1px solid rgba(139,141,152,.14)">
+                <div style="font-weight:600">{{ a.name }}</div>
+                <div style="color:#8B8D98">{{ a.type }}</div>
+                <div style="text-align:right;font-variant-numeric:tabular-nums">{{ a.runs }}</div>
+                <div style="text-align:right"><span style="font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:{{ a.bg }};color:{{ a.fg }}">{{ a.state }}</span></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isVentas }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:14px;align-items:start">
+          <div id="tt-funnel" style="background:#FDFCF9;border:1px solid rgba(139,141,152,.26);border-radius:11px;padding:18px 20px 14px">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px;margin-bottom:2px">{{ t.funnelTitle }}</div>
+            <div style="font-size:12px;color:#8B8D98;margin-bottom:10px">{{ t.funnelSub }}</div>
+            <div style="position:relative">
+              <svg viewBox="0 0 460 258" style="width:100%;height:auto;display:block">
+                <sc-for list="{{ funnel }}" as="s" hint-placeholder-count="3">
+                  <polygon points="{{ s.pts }}" fill="{{ s.fill }}"></polygon>
+                </sc-for>
+              </svg>
+              <sc-for list="{{ funnel }}" as="s" hint-placeholder-count="3">
+                <div style="position:absolute;left:0;right:0;top:{{ s.topPct }}%;height:26.4%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;pointer-events:none">
+                  <div style="font-family:Manrope,sans-serif;font-size:25px;font-weight:700;letter-spacing:-.025em;line-height:1;font-variant-numeric:tabular-nums;color:{{ s.fg }}">{{ s.val }}</div>
+                  <div style="font-size:12px;color:{{ s.fg2 }}">{{ s.label }}</div>
+                </div>
+                <div style="position:absolute;right:0;top:{{ s.rateTopPct }}%;font-size:11.5px;color:#8B8D98;pointer-events:none">{{ s.rate }}</div>
+              </sc-for>
+            </div>
+          </div>
+          <div id="tt-donut" style="background:#FDFCF9;border:1px solid rgba(139,141,152,.26);border-radius:11px;padding:18px 20px">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px;margin-bottom:2px">{{ t.donutTitle }}</div>
+            <div style="font-size:12px;color:#8B8D98;margin-bottom:8px">{{ t.donutSub }}</div>
+            <div style="display:flex;align-items:center;gap:18px">
+              <svg viewBox="0 0 140 140" style="width:150px;height:150px;flex:0 0 150px;transform:rotate(-90deg)">
+                <circle cx="70" cy="70" r="54" fill="none" stroke="rgba(139,141,152,.16)" stroke-width="17"></circle>
+                <sc-for list="{{ donut }}" as="d" hint-placeholder-count="3">
+                  <circle cx="70" cy="70" r="54" fill="none" stroke="{{ d.color }}" stroke-width="17" stroke-dasharray="{{ d.dash }}" stroke-dashoffset="{{ d.offset }}" stroke-linecap="butt"></circle>
+                </sc-for>
+              </svg>
+              <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:11px">
+                <div>
+                  <div style="font-family:Manrope,sans-serif;font-size:27px;font-weight:700;letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums">{{ donutTotal }}</div>
+                  <div style="font-size:11.5px;color:#8B8D98;margin-top:3px">{{ t.donutTotalLabel }}</div>
+                </div>
+                <sc-for list="{{ donut }}" as="d" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;gap:8px;font-size:12.5px">
+                    <span style="width:9px;height:9px;border-radius:3px;flex:0 0 9px;background:{{ d.color }}"></span>
+                    <span style="flex:1;min-width:0">{{ d.label }}</span>
+                    <span style="font-weight:600;font-variant-numeric:tabular-nums">{{ d.val }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="background:#FDFCF9;border:1px solid rgba(139,141,152,.26);border-radius:11px;padding:18px 20px">
+          <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px;margin-bottom:6px">{{ t.clientsTitle }}</div>
+          <sc-for list="{{ clients }}" as="c" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid rgba(139,141,152,.14)">
+              <div style="min-width:0">
+                <div style="font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ c.name }}</div>
+                <div style="font-size:11px;color:#8B8D98;margin-top:1px">{{ c.meta }}</div>
+              </div>
+              <span style="font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;white-space:nowrap;background:{{ c.bg }};color:{{ c.fg }}">{{ c.state }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isInteg }}" hint-placeholder-val="{{ false }}">
+        <div id="tt-integ" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+          <sc-for list="{{ integrations }}" as="i" hint-placeholder-count="5">
+            <div style="background:#FDFCF9;border:1px solid {{ i.border }};border-radius:11px;padding:18px;display:flex;flex-direction:column;gap:12px;opacity:{{ i.opacity }};transition:opacity .4s ease,border-color .4s ease">
+              <div style="width:34px;height:34px;border-radius:9px;background:{{ i.chip }};display:flex;align-items:center;justify-content:center;font-family:Manrope,sans-serif;font-weight:700;font-size:14px;color:#F7F4EE;transition:background .4s ease">{{ i.initial }}</div>
+              <div>
+                <div style="font-weight:600;font-size:13.5px">{{ i.name }}</div>
+                <div style="font-size:11.5px;color:#8B8D98;margin-top:2px">{{ i.kind }}</div>
+              </div>
+              <span style="align-self:flex-start;font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;background:{{ i.bg }};color:{{ i.fg }}">{{ i.state }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding-top:2px">
+          <div style="font-size:12px;color:#8B8D98">{{ t.integNote }}</div>
+          <div style="text-align:right">
+            <div style="font-family:Manrope,sans-serif;font-size:22px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em">{{ syncEvents }}</div>
+            <div style="font-size:11.5px;color:#8B8D98">{{ t.syncLabel }}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isReportes }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:.85fr 1.15fr;gap:14px;align-items:stretch">
+          <div id="tt-gauge" style="background:#14161C;color:#F7F4EE;border-radius:11px;padding:20px 22px;display:flex;flex-direction:column;box-shadow:0 14px 32px -22px rgba(20,22,28,.8)">
+            <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px">{{ t.gaugeTitle }}</div>
+            <div style="font-size:12px;color:#8B8D98;margin-top:2px">{{ t.gaugeSub }}</div>
+            <div style="position:relative;margin-top:4px">
+              <svg viewBox="0 0 220 158" style="width:100%;height:auto;display:block">
+                <path d="{{ gaugeTrack }}" fill="none" stroke="rgba(247,244,238,.13)" stroke-width="15" stroke-linecap="round"></path>
+                <path d="{{ gaugeFill }}" fill="none" stroke="#F0A93E" stroke-width="15" stroke-linecap="round"></path>
+                <line x1="{{ gaugeTick.x1 }}" y1="{{ gaugeTick.y1 }}" x2="{{ gaugeTick.x2 }}" y2="{{ gaugeTick.y2 }}" stroke="#F7F4EE" stroke-width="2.5" stroke-linecap="round"></line>
+              </svg>
+              <div style="position:absolute;left:0;right:0;top:57%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none">
+                <div style="font-family:Manrope,sans-serif;font-size:42px;font-weight:800;letter-spacing:-.035em;line-height:1;color:#F7F4EE;font-variant-numeric:tabular-nums">{{ gaugeValue }}</div>
+                <div style="font-size:12px;color:#8B8D98">{{ t.gaugeTarget }}</div>
+              </div>
+            </div>
+            <div style="font-size:12px;color:#8B8D98;line-height:1.5;margin-top:auto">{{ t.gaugeNote }}</div>
+          </div>
+          <div style="background:#FDFCF9;border:1px solid rgba(139,141,152,.26);border-radius:11px;padding:18px 20px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+              <div style="font-family:Manrope,sans-serif;font-weight:700;font-size:14.5px">{{ t.compareTitle }}</div>
+              <div style="display:flex;gap:16px;font-size:11.5px;color:#8B8D98">
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:rgba(139,141,152,.45)"></span>{{ t.before }}</span>
+                <span style="display:flex;align-items:center;gap:6px"><span style="width:9px;height:9px;border-radius:3px;background:#4B3BD1"></span>{{ t.after }}</span>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding-top:14px">
+              <sc-for list="{{ compare }}" as="c" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;gap:9px">
+                  <div style="display:flex;align-items:flex-end;gap:10px;height:150px">
+                    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;height:100%">
+                      <span style="font-size:11.5px;color:#8B8D98;text-align:center;font-variant-numeric:tabular-nums">{{ c.beforeLabel }}</span>
+                      <div style="border-radius:6px 6px 0 0;background:rgba(139,141,152,.35);height:{{ c.beforePct }}%;transition:height .7s cubic-bezier(.2,.7,.3,1)"></div>
+                    </div>
+                    <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end;gap:5px;height:100%">
+                      <span style="font-size:11.5px;color:#4B3BD1;text-align:center;font-weight:600;font-variant-numeric:tabular-nums">{{ c.afterLabel }}</span>
+                      <div style="border-radius:6px 6px 0 0;background:#4B3BD1;height:{{ c.afterPct }}%;transition:height .7s cubic-bezier(.2,.7,.3,1)"></div>
+                    </div>
+                  </div>
+                  <div style="font-size:12px;text-align:center;line-height:1.35;border-top:1px solid rgba(139,141,152,.22);padding-top:8px">{{ c.label }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="background:#14161C;color:#F7F4EE;border-radius:11px;padding:26px 30px;display:flex;gap:28px;align-items:flex-start;box-shadow:0 12px 28px -18px rgba(20,22,28,.65)">
+          <div style="flex:1;min-width:0">
+            <div style="font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#F0A93E;margin-bottom:9px">{{ t.closingKicker }}</div>
+            <div style="font-family:Manrope,sans-serif;font-size:19px;font-weight:600;line-height:1.45;letter-spacing:-.015em;text-wrap:pretty">{{ t.closingBody }}</div>
+          </div>
+          <div style="flex:0 0 auto;text-align:right">
+            <div style="font-family:Manrope,sans-serif;font-size:44px;font-weight:800;letter-spacing:-.035em;color:#F0A93E;line-height:1">{{ t.closingBig }}</div>
+            <div style="font-size:12px;color:#8B8D98;margin-top:4px">{{ t.closingBigLabel }}</div>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="font-size:11px;line-height:1.5;color:#8B8D98;padding-top:4px">{{ t.mockNote }}</div>
+
+    </div>
+  </main>
+
+  <sc-if value="{{ tourOn }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:40;pointer-events:none">
+      <div style="{{ spotStyle }}"></div>
+      <div style="{{ cursorStyle }}">
+        <svg width="26" height="26" viewBox="0 0 24 24" style="{{ cursorAnim }}">
+          <path d="M5 2.5 19 12.2l-6.1.5-3.2 5.6z" fill="#F7F4EE" stroke="#14161C" stroke-width="1.4" stroke-linejoin="round"></path>
+        </svg>
+      </div>
+      <sc-if value="{{ showLabel }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ calloutStyle }}">
+          <span style="{{ arrowStyle }}"></span>
+          <div style="font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:#F0A93E;margin-bottom:6px">{{ tourLabel }}</div>
+          <div style="font-size:14px;line-height:1.45;color:#F7F4EE;text-wrap:pretty">{{ tourInsight }}</div>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <div style="position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:60;display:flex;flex-wrap:nowrap;align-items:center;gap:8px;padding:7px;border-radius:999px;background:rgba(20,22,28,.96);box-shadow:0 16px 40px -14px rgba(20,22,28,.75),0 0 0 1px rgba(247,244,238,.07);backdrop-filter:blur(10px);width:max-content;max-width:calc(100vw - 32px);overflow:hidden">
+    <nav style="display:flex;flex-wrap:nowrap;align-items:center;gap:2px;flex:0 0 auto">
+      <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.go }}" title="{{ n.label }}" style="{{ n.style }}" style-hover="background:rgba(247,244,238,.08);color:#F7F4EE">
+          <span style="display:flex;flex:0 0 auto" dangerouslySetInnerHTML="{{ n.icon }}"></span>
+          <sc-if value="{{ n.active }}" hint-placeholder-val="{{ false }}">
+            <span style="line-height:1.2;white-space:nowrap">{{ n.short }}</span>
+          </sc-if>
+        </button>
+      </sc-for>
+    </nav>
+    <span style="width:1px;height:26px;background:rgba(247,244,238,.14);flex:0 0 1px"></span>
+    <sc-if value="{{ tourOn }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;align-items:center;gap:11px;padding-left:3px;padding-right:4px;animation:tsIn .25s ease both">
+        <span style="display:flex;gap:5px">
+          <sc-for list="{{ tourDots }}" as="d" hint-placeholder-count="9">
+            <span style="width:{{ d.w }}px;height:5px;border-radius:3px;background:{{ d.bg }};transition:all .3s ease"></span>
+          </sc-for>
+        </span>
+        <span style="font-size:11.5px;color:#8B8D98;font-variant-numeric:tabular-nums">{{ tourCount }}</span>
+      </div>
+    </sc-if>
+    <button onClick="{{ toggleDemo }}" style="{{ dockTourBtn }}">
+      <span style="width:7px;height:7px;border-radius:50%;background:{{ demoDotColor }};animation:{{ demoDotAnim }};flex:0 0 7px"></span>
+      <span style="white-space:nowrap">{{ t.demoBtn }}</span>
+    </button>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;es&quot;,&quot;en&quot;],&quot;default&quot;:&quot;es&quot;,&quot;tsType&quot;:&quot;'es'|'en'&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;defaultCurrency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;COP&quot;,&quot;USD&quot;],&quot;default&quot;:&quot;COP&quot;,&quot;tsType&quot;:&quot;'COP'|'USD'&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;tourAutoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
+class Component extends DCLogic {
+  state = { mod:'resumen', lang:null, cur:null, period:'mes', demo:null, step:0, open:null, lit:5, anim:1,
+            rect:null, showLabel:false, clicking:false,
+            agIdx:0, agPhase:'idle', agTyped:'', agAnim:1, activated:{}, actLog:[] };
+
+  D = {
+    mes: { rev:186400000, revUsd:46600, clients:218, autos:1248, hours:187, tasks:14, acc:94,
+      leads:342, qual:128, conv:41, sync:8412, avg:4546000, avgUsd:1137, f:1 },
+    trim:{ rev:524800000, revUsd:131200, clients:218, autos:3556, hours:528, tasks:14, acc:94,
+      leads:968, qual:358, conv:115, sync:24100, avg:4563000, avgUsd:1141, f:2.85 }
+  };
+
+  dict = {
+    es:{ demoTag:'Demo', mockNote:'Datos demostrativos. Ninguna cifra corresponde a un cliente real.',
+      demoBtnOn:'Detener recorrido', demoBtnOff:'Ver recorrido guiado', pauseTour:'Pausar recorrido',
+      mes:'Mes', trim:'Trimestre', periodMes:'Marzo 2026', periodTrim:'Q1 2026',
+      subtitle:'Dashboard demostrativo',
+      nav:['Resumen Ejecutivo','Automatizaciones & Agentes IA','Ventas & Clientes','Integraciones','Reportes & ROI'],
+      titles:{ resumen:'Resumen Ejecutivo', auto:'Automatizaciones & Agentes IA', ventas:'Ventas & Clientes', integ:'Integraciones', rep:'Reportes & ROI' },
+      subs:{ resumen:'Los cuatro indicadores que definen el mes, con su desglose al pasar el cursor.',
+        auto:'Cuándo trabajan las automatizaciones y qué devuelven. Sin diagramas de flujo: solo resultados.',
+        ventas:'De lead a cliente, con el chatbot calificando en el medio.',
+        integ:'Las herramientas que ya usa el negocio, conectadas al mismo motor.',
+        rep:'Antes y después de automatizar, en las variables que mueven el costo.' },
+      trendTitle:'Ingresos, últimos 6 meses', trendSub:'oct 2025 – mar 2026',
+      feedTitle:'Actividad reciente', tableTitle:'Automatizaciones activas',
+      thName:'Automatización', thType:'Tipo', thRuns:'Ejec.', thState:'Estado',
+      catTitle:'Ejecuciones por categoría', catSub:'Comparado con el periodo anterior',
+      thisPeriod:'Este periodo', prevPeriod:'Anterior',
+      heatTitle:'Actividad por día y hora', heatSub:'Cada celda es una hora. La intensidad es el número de ejecuciones.',
+      heatLow:'Menos', heatHigh:'Más',
+      heatNote:'El 41% de las ejecuciones ocurre fuera del horario laboral. Nadie del equipo estaba conectado.',
+      funnelTitle:'Embudo de conversión', funnelSub:'Lead → Calificado → Cliente',
+      donutTitle:'Clientes por segmento', donutSub:'Distribución de la base activa', donutTotalLabel:'clientes activos',
+      clientsTitle:'Clientes recientes',
+      integNote:'Representación demostrativa de integraciones disponibles.', syncLabel:'eventos sincronizados',
+      gaugeTitle:'Reducción de costo operativo', gaugeSub:'Avance sobre la meta del año',
+      gaugeTarget:'de una meta de 25%',
+      gaugeNote:'Tres puntos porcentuales separan al negocio de la meta anual, a nueve meses del cierre.',
+      compareTitle:'Antes y después de automatizar', before:'Antes', after:'Después',
+      closingKicker:'Lectura del periodo',
+      closingBody:'187 horas devueltas al equipo y 22% menos costo operativo en un solo mes. La misma plantilla atiende hoy un tercio más de volumen, sin contratar.',
+      closingBodyT:'528 horas devueltas al equipo y 22% menos costo operativo en el trimestre. La misma plantilla atiende hoy un tercio más de volumen, sin contratar.',
+      closingBig:'22%', closingBigLabel:'reducción de costo operativo',
+      active:'Activa', paused:'Pausada', connected:'Conectado',
+      days:['LUN','MAR','MIÉ','JUE','VIE','SÁB','DOM'],
+      targetLabel:'meta',
+      agReal:'Real', agProj:'Proyectado',
+      agName:'Agente analítico', agRole:'Pregunta sobre tus datos',
+      agPlaceholder:'Escribe una pregunta…', agAsk:'Preguntar', agNext:'Otra pregunta', agWorking:'Analizando',
+      agEmpty:'La gráfica de la respuesta aparece aquí.',
+      agTargetLabel:'meta $180M',
+      agActivate:'Activar', agActivated:'Activada · cada lunes 8:00',
+      agChart:{ target:'Ingresos contra la meta, últimos 6 meses', savings:'Ahorro mensual por automatización',
+        compare:'Marzo contra febrero', forecast:'Proyección de ingresos a diciembre' },
+      ag:[
+        { q:'¿Cómo van los ingresos frente a la meta?', kind:'target',
+          a:'Marzo cerró en {m}, 3,6% por encima de la meta. Es el cuarto mes consecutivo al alza y el primero que la supera antes del cierre.' },
+        { q:'¿Qué automatización me ahorra más dinero?', kind:'savings',
+          a:'Facturación: {s} al mes en horas de trabajo que ya no se pagan. Cobranza ahorra menos horas pero recupera cartera más rápido.' },
+        { q:'Compárame este mes contra el anterior', kind:'compare',
+          a:'Marzo mejoró en las cuatro variables. El salto más grande está en leads procesados, 18% más que febrero, por la cobertura de fin de semana.' },
+        { q:'Proyecta el cierre del año', kind:'forecast',
+          a:'Al ritmo actual el año cierra en {y}. La proyección asume que no se agregan automatizaciones nuevas.' }
+      ],
+      actLog:{ rev:'Campaña de reactivación programada para el segmento retail',
+        clients:'Seguimiento automático activado en 31 clientes inactivos',
+        autos:'Conciliación bancaria agregada a la cola de automatización',
+        hours:'74 horas reasignadas al equipo comercial',
+        tasks:'Documentación generada para las 3 automatizaciones principales',
+        acc:'Umbral de auto-aprobación de facturación elevado a 97%',
+        convRate:'Revisión de la propuesta comercial agendada',
+        avg:'Servicio de seguimiento empaquetado como upsell',
+        leads:'Cobertura del chatbot ampliada a fines de semana',
+        cost:'Auditoría de costos de atención al cliente iniciada',
+        cap:'Segunda línea de servicio en evaluación' },
+      kpi:{
+        rev:['Ingresos del mes','Impulsado por reactivación de clientes inactivos','Sugerencia: replicar la campaña de reactivación en el segmento retail'],
+        clients:['Clientes activos','14 nuevos frente al mes anterior','Sugerencia: activar seguimiento automático en los 31 clientes sin compra en 60 días'],
+        autos:['Automatizaciones ejecutadas','Facturación concentra el 38% del total','Sugerencia: extender el mismo patrón a conciliación bancaria'],
+        hours:['Horas ahorradas','Equivale a 1,2 personas de tiempo completo','Sugerencia: reasignar esas horas al equipo comercial'],
+        tasks:['Tareas automatizadas activas','2 nuevas este mes, ninguna pausada','Sugerencia: documentar las 3 más usadas antes de escalar'],
+        acc:['Precisión de decisiones IA','Por encima de la meta interna de 90%','Sugerencia: subir el umbral de auto-aprobación en facturación'],
+        convRate:['Tasa de conversión','32% de los leads calificados cierran','Sugerencia: el chatbot califica bien; el cuello está en la propuesta'],
+        avg:['Valor promedio por cliente','Estable frente al periodo anterior','Sugerencia: empaquetar el servicio de seguimiento como upsell'],
+        leads:['Leads procesados por IA','El chatbot atiende el 100% del primer contacto','Sugerencia: ampliar cobertura a fines de semana'],
+        cost:['Reducción de costos operativos','Frente al trimestre anterior','Sugerencia: el próximo ahorro está en atención al cliente'],
+        cap:['Capacidad operativa ganada','Mismo equipo, más volumen atendido','Sugerencia: usar el margen para abrir una segunda línea de servicio']
+      },
+      tour:[
+        ['Ingresos del mes','{rev} — 12,4% más que febrero, impulsado por la reactivación de clientes inactivos.'],
+        ['Desglose por segmento','Retail aporta el 38% del ingreso. Es el segmento donde la campaña automatizada rindió más.'],
+        ['Tendencia de 6 meses','Cuatro meses consecutivos al alza desde que se automatizó facturación y seguimiento.'],
+        ['Actividad fuera de horario','El 41% de las ejecuciones ocurre de noche y en fin de semana, sin nadie conectado.'],
+        ['Ejecuciones por categoría','Facturación creció 8% contra el periodo anterior. Es la automatización más rentable.'],
+        ['Pregúntale al dashboard','El agente responde en lenguaje natural y arma la gráfica que sustenta la respuesta.'],
+        ['Embudo de conversión','El chatbot califica 128 de 342 leads. El 32% de esos calificados termina cerrando.'],
+        ['Clientes por segmento','218 clientes activos. Retail y mayorista concentran el 72% de la base.'],
+        ['Integraciones conectadas','Cinco herramientas que el negocio ya usaba, ahora alimentando el mismo motor.'],
+        ['Reducción de costo','22% menos costo operativo, a tres puntos de la meta anual de 25%.']
+      ]
+    },
+    en:{ demoTag:'Demo', mockNote:'Demonstration data. No figure belongs to a real client.',
+      demoBtnOn:'Stop tour', demoBtnOff:'Play guided tour', pauseTour:'Pause tour',
+      mes:'Month', trim:'Quarter', periodMes:'March 2026', periodTrim:'Q1 2026',
+      subtitle:'Demonstration dashboard',
+      nav:['Executive Summary','Automations & AI Agents','Sales & Customers','Integrations','Reports & ROI'],
+      titles:{ resumen:'Executive Summary', auto:'Automations & AI Agents', ventas:'Sales & Customers', integ:'Integrations', rep:'Reports & ROI' },
+      subs:{ resumen:'The four indicators that define the month, each with its breakdown on hover.',
+        auto:'When the automations work and what they return. No flow diagrams — results only.',
+        ventas:'From lead to customer, with the chatbot qualifying in between.',
+        integ:'The tools the business already uses, wired into the same engine.',
+        rep:'Before and after automating, across the variables that move cost.' },
+      trendTitle:'Revenue, last 6 months', trendSub:'Oct 2025 – Mar 2026',
+      feedTitle:'Recent activity', tableTitle:'Active automations',
+      thName:'Automation', thType:'Type', thRuns:'Runs', thState:'Status',
+      catTitle:'Runs by category', catSub:'Against the previous period',
+      thisPeriod:'This period', prevPeriod:'Previous',
+      heatTitle:'Activity by day and hour', heatSub:'Each cell is one hour. Intensity is the number of runs.',
+      heatLow:'Fewer', heatHigh:'More',
+      heatNote:'41% of all runs happen outside working hours. Nobody on the team was online.',
+      funnelTitle:'Conversion funnel', funnelSub:'Lead → Qualified → Customer',
+      donutTitle:'Customers by segment', donutSub:'Share of the active base', donutTotalLabel:'active customers',
+      clientsTitle:'Recent customers',
+      integNote:'Demonstration view of available integrations.', syncLabel:'events synced',
+      gaugeTitle:'Operating cost reduction', gaugeSub:'Progress against the yearly target',
+      gaugeTarget:'of a 25% target',
+      gaugeNote:'Three percentage points separate the business from its yearly target, nine months from close.',
+      compareTitle:'Before and after automating', before:'Before', after:'After',
+      closingKicker:'Reading of the period',
+      closingBody:'187 hours returned to the team and 22% lower operating cost in a single month. The same headcount now handles a third more volume, with no new hires.',
+      closingBodyT:'528 hours returned to the team and 22% lower operating cost this quarter. The same headcount now handles a third more volume, with no new hires.',
+      closingBig:'22%', closingBigLabel:'operating cost reduction',
+      active:'Active', paused:'Paused', connected:'Connected',
+      days:['MON','TUE','WED','THU','FRI','SAT','SUN'],
+      targetLabel:'target',
+      agReal:'Actual', agProj:'Projected',
+      agName:'Analytics agent', agRole:'Ask about your data',
+      agPlaceholder:'Type a question…', agAsk:'Ask', agNext:'Another question', agWorking:'Analyzing',
+      agEmpty:'The answer chart appears here.',
+      agTargetLabel:'target $180M',
+      agActivate:'Activate', agActivated:'Active · every Monday 8:00',
+      agChart:{ target:'Revenue against target, last 6 months', savings:'Monthly saving per automation',
+        compare:'March against February', forecast:'Revenue projection to December' },
+      ag:[
+        { q:'How is revenue tracking against target?', kind:'target',
+          a:'March closed at {m}, 3.6% above target. It is the fourth consecutive month of growth and the first to pass target before close.' },
+        { q:'Which automation saves the most money?', kind:'savings',
+          a:'Invoicing: {s} a month in labour hours no longer paid for. Collections saves fewer hours but recovers receivables faster.' },
+        { q:'Compare this month against the last one', kind:'compare',
+          a:'March improved on all four variables. The largest jump is in leads processed, 18% above February, from weekend coverage.' },
+        { q:'Project the close of the year', kind:'forecast',
+          a:'At the current pace the year closes at {y}. The projection assumes no new automations are added.' }
+      ],
+      actLog:{ rev:'Reactivation campaign scheduled for the retail segment',
+        clients:'Automatic follow-up enabled for 31 dormant accounts',
+        autos:'Bank reconciliation added to the automation queue',
+        hours:'74 hours reassigned to the sales team',
+        tasks:'Documentation generated for the top 3 automations',
+        acc:'Invoicing auto-approval threshold raised to 97%',
+        convRate:'Commercial proposal review scheduled',
+        avg:'Follow-up service packaged as an upsell',
+        leads:'Chatbot coverage extended to weekends',
+        cost:'Customer support cost audit started',
+        cap:'Second service line under evaluation' },
+      kpi:{
+        rev:['Revenue this period','Driven by reactivation of dormant accounts','Suggestion: repeat the reactivation campaign in the retail segment'],
+        clients:['Active customers','14 more than last month','Suggestion: turn on automatic follow-up for the 31 accounts idle 60+ days'],
+        autos:['Automation runs','Invoicing accounts for 38% of the total','Suggestion: extend the same pattern to bank reconciliation'],
+        hours:['Hours saved','Equivalent to 1.2 full-time people','Suggestion: reassign those hours to the sales team'],
+        tasks:['Active automated tasks','2 added this month, none paused','Suggestion: document the top 3 before scaling further'],
+        acc:['AI decision accuracy','Above the internal 90% target','Suggestion: raise the auto-approval threshold in invoicing'],
+        convRate:['Conversion rate','32% of qualified leads close','Suggestion: the chatbot qualifies well; the bottleneck is the proposal'],
+        avg:['Average customer value','Flat against the previous period','Suggestion: package the follow-up service as an upsell'],
+        leads:['Leads processed by AI','The chatbot handles 100% of first contact','Suggestion: extend coverage to weekends'],
+        cost:['Operating cost reduction','Against the previous quarter','Suggestion: the next saving sits in customer support'],
+        cap:['Operating capacity gained','Same team, more volume handled','Suggestion: use the headroom to open a second service line']
+      },
+      tour:[
+        ['Revenue this month','{rev} — 12.4% above February, driven by reactivation of dormant accounts.'],
+        ['Breakdown by segment','Retail contributes 38% of revenue. It is where the automated campaign paid off most.'],
+        ['Six-month trend','Four consecutive months of growth since invoicing and follow-up were automated.'],
+        ['Out-of-hours activity','41% of runs happen at night and on weekends, with nobody online.'],
+        ['Runs by category','Invoicing grew 8% against the previous period. It is the most profitable automation.'],
+        ['Ask the dashboard','The agent answers in plain language and builds the chart that backs the answer.'],
+        ['Conversion funnel','The chatbot qualifies 128 of 342 leads. 32% of those qualified end up closing.'],
+        ['Customers by segment','218 active customers. Retail and wholesale hold 72% of the base.'],
+        ['Connected integrations','Five tools the business already used, now feeding the same engine.'],
+        ['Cost reduction','22% lower operating cost, three points from the 25% yearly target.']
+      ]
+    }
+  };
+
+  icons = {
+    resumen:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+    auto:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="10" width="18" height="11" rx="2.5"/><path d="M12 6v4"/><circle cx="12" cy="4" r="1.6"/><path d="M9 15h.01M15 15h.01"/></svg>',
+    ventas:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+    integ:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-5"/><path d="M9 8V2M15 8V2"/><path d="M18 8v3a6 6 0 0 1-12 0V8z"/></svg>',
+    rep:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>'
+  };
+
+  steps = [
+    { mod:'resumen', open:null, id:'tt-kpi-0', action:'highlight', ms:4800 },
+    { mod:'resumen', open:0,    id:'tt-kpi-0', action:'drilldown', ms:5200 },
+    { mod:'resumen', open:null, id:'tt-trend', action:'highlight', ms:5400 },
+    { mod:'auto',    open:null, id:'tt-heat',  action:'highlight', ms:6600 },
+    { mod:'auto',    open:null, id:'tt-cats',  action:'highlight', ms:5200 },
+    { mod:'auto',    open:null, id:'tt-agent', action:'ask',       ms:11000 },
+    { mod:'ventas',  open:null, id:'tt-funnel',action:'highlight', ms:6000 },
+    { mod:'ventas',  open:null, id:'tt-donut', action:'highlight', ms:5200 },
+    { mod:'integ',   open:null, id:'tt-integ', action:'highlight', ms:5600 },
+    { mod:'rep',     open:null, id:'tt-gauge', action:'highlight', ms:6000 }
+  ];
+
+  componentDidMount(){
+    this.blockScroll = (e) => { if (this.tourActive()) e.preventDefault(); };
+    window.addEventListener('wheel', this.blockScroll, { passive:false });
+    window.addEventListener('touchmove', this.blockScroll, { passive:false });
+    if (this.tourActive()) this.startTour();
+  }
+  componentWillUnmount(){
+    clearTimeout(this.timer); clearTimeout(this.labelTimer); clearInterval(this.litTimer);
+    clearInterval(this.typeTimer); clearTimeout(this.thinkTimer);
+    cancelAnimationFrame(this.raf); cancelAnimationFrame(this.tourRaf); cancelAnimationFrame(this.agRaf);
+    window.removeEventListener('wheel', this.blockScroll);
+    window.removeEventListener('touchmove', this.blockScroll);
+  }
+
+  autoplayDefault(){
+    // Embedded mounts pass ?tour=off so the guided tour never blocks the host page's scroll.
+    try { if (new URLSearchParams(location.search).get('tour') === 'off') return false; } catch (e) {}
+    return this.props.tourAutoplay ?? true;
+  }
+  tourActive(){ return this.state.demo === null ? this.autoplayDefault() : this.state.demo; }
+  lang(){ return this.state.lang || this.props.defaultLang || 'es'; }
+  cur(){ return this.state.cur || this.props.defaultCurrency || 'COP'; }
+
+  startTour(){ this.trackRects(); this.runStep(0); }
+
+  trackRects(){
+    cancelAnimationFrame(this.tourRaf);
+    const tick = () => {
+      if (!this.tourActive()) return;
+      const s = this.steps[this.state.step % this.steps.length];
+      const el = document.getElementById(s.id);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        const c = this.state.rect;
+        if (!c || Math.abs(c.top - r.top) > .5 || Math.abs(c.left - r.left) > .5
+            || Math.abs(c.width - r.width) > .5 || Math.abs(c.height - r.height) > .5) {
+          this.setState({ rect:{ top:r.top, left:r.left, width:r.width, height:r.height } });
+        }
+      }
+      this.tourRaf = requestAnimationFrame(tick);
+    };
+    this.tourRaf = requestAnimationFrame(tick);
+  }
+
+  runStep(i){
+    const s = this.steps[i % this.steps.length];
+    clearTimeout(this.labelTimer);
+    this.setState({ mod:s.mod, open:s.open, step:i % this.steps.length, showLabel:false, clicking:false });
+    this.animate();
+    if (s.mod === 'integ') this.lightUp();
+
+    setTimeout(() => {
+      const el = document.getElementById(s.id);
+      if (el) {
+        const r = el.getBoundingClientRect();
+        const target = window.scrollY + r.top - 150;
+        if (r.top < 120 || r.bottom > window.innerHeight - 120) window.scrollTo({ top:Math.max(0, target), behavior:'smooth' });
+      }
+    }, 80);
+
+    this.labelTimer = setTimeout(() => {
+      if (!this.tourActive()) return;
+      if (s.action === 'ask') { this.setState({ clicking:true }); setTimeout(() => { this.setState({ clicking:false }); this.ask(0); }, 260); }
+      if (s.action === 'drilldown') {
+        this.setState({ clicking:true });
+        setTimeout(() => this.setState({ clicking:false }), 260);
+      }
+      this.setState({ showLabel:true });
+    }, 780);
+
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => { if (this.tourActive()) this.runStep(i + 1); }, s.ms);
+  }
+
+  lightUp(){
+    clearInterval(this.litTimer);
+    this.setState({ lit:0 });
+    this.litTimer = setInterval(() => this.setState(st => {
+      if (st.lit >= 5) { clearInterval(this.litTimer); return null; }
+      return { lit: st.lit + 1 };
+    }), 560);
+  }
+
+  ask(i){
+    clearInterval(this.typeTimer); clearTimeout(this.thinkTimer);
+    const q = this.dict[this.lang()].ag[i % 4].q;
+    this.setState({ agIdx:i % 4, agPhase:'typing', agTyped:'' });
+    let n = 0;
+    this.typeTimer = setInterval(() => {
+      n += 2;
+      if (n >= q.length) {
+        clearInterval(this.typeTimer);
+        this.setState({ agTyped:q, agPhase:'thinking' });
+        this.thinkTimer = setTimeout(() => { this.setState({ agPhase:'answer', agTyped:'' }); this.animateAg(); }, 950);
+      } else this.setState({ agTyped:q.slice(0, n) });
+    }, 26);
+  }
+
+  animateAg(){
+    cancelAnimationFrame(this.agRaf);
+    const t0 = performance.now();
+    const tick = () => {
+      const p = Math.min(1, (performance.now() - t0) / 850);
+      this.setState({ agAnim: 1 - Math.pow(1 - p, 3) });
+      if (p < 1) this.agRaf = requestAnimationFrame(tick);
+    };
+    this.agRaf = requestAnimationFrame(tick);
+  }
+
+  activate(key){
+    this.setState(st => st.activated[key] ? null : {
+      activated: Object.assign({}, st.activated, { [key]:true }),
+      actLog: [key].concat(st.actLog)
+    });
+  }
+
+  animate(){
+    cancelAnimationFrame(this.raf);
+    const t0 = performance.now();
+    const tick = () => {
+      const p = Math.min(1, (performance.now() - t0) / 900);
+      this.setState({ anim: 1 - Math.pow(1 - p, 3) });
+      if (p < 1) this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+
+  stopTour(){
+    clearTimeout(this.timer); clearTimeout(this.labelTimer); clearInterval(this.litTimer);
+    cancelAnimationFrame(this.tourRaf);
+    this.setState({ demo:false, lit:5, rect:null, showLabel:false });
+  }
+  go(mod){ this.stopTour(); this.setState({ mod, open:null }); this.animate(); }
+  toggleDemo(){
+    if (this.tourActive()) this.stopTour();
+    else { this.setState({ demo:true, step:0 }); setTimeout(() => this.startTour(), 20); }
+  }
+
+  n(v){ return this.lang() === 'es' ? Math.round(v).toLocaleString('es-CO') : Math.round(v).toLocaleString('en-US'); }
+  money(cop, usd){ return '$' + this.n((this.cur() === 'COP' ? cop : usd) * this.state.anim); }
+  polar(cx, cy, r, deg){ const a = (deg - 90) * Math.PI / 180; return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; }
+  arc(cx, cy, r, from, to){
+    const [x1, y1] = this.polar(cx, cy, r, from), [x2, y2] = this.polar(cx, cy, r, to);
+    return 'M' + x1.toFixed(1) + ' ' + y1.toFixed(1) + ' A' + r + ' ' + r + ' 0 ' + (to - from > 180 ? 1 : 0) + ' 1 ' + x2.toFixed(1) + ' ' + y2.toFixed(1);
+  }
+
+  card(id, key, value, delta, up, bars, dark){
+    const L = this.dict[this.lang()], t = L.kpi[key];
+    const open = this.state.open === id;
+    const dk = !!dark;
+    const act = !!this.state.activated[key];
+    return {
+      id, domId:'tt-kpi-' + id, label:t[0], value, insight:t[1], rec:t[2], delta, open,
+      activated:act, notActivated:!act, actLabel:L.agActivate, actDone:L.agActivated,
+      activate:() => this.activate(key),
+      actBtnStyle:'align-self:flex-start;padding:5px 11px;border-radius:7px;font:inherit;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .18s ease;'
+        + (dk ? 'background:rgba(240,169,62,.16);border:1px solid rgba(240,169,62,.55);color:#F0A93E;'
+              : 'background:rgba(240,169,62,.14);border:1px solid rgba(240,169,62,.6);color:#8A5D0C;'),
+      valueColor: dk ? '#F7F4EE' : '#14161C',
+      labelColor:'#8B8D98',
+      insightColor: dk ? '#A9ABB5' : '#5B5D67',
+      ruleColor: dk ? 'rgba(247,244,238,.16)' : 'rgba(139,141,152,.26)',
+      trackColor: dk ? 'rgba(247,244,238,.14)' : 'rgba(139,141,152,.18)',
+      barColor: dk ? '#8B7BF0' : '#4B3BD1',
+      deltaBg: up ? (dk ? 'rgba(240,169,62,.18)' : 'rgba(240,169,62,.20)') : 'rgba(139,141,152,.20)',
+      deltaColor: up ? (dk ? '#F0A93E' : '#9A6612') : '#5B5D67',
+      bars: bars.map(b => ({ label:b[0], val:b[1], pct:Math.round(b[2] * this.state.anim) })),
+      style: 'display:flex;flex-direction:column;gap:9px;padding:16px 18px;border-radius:11px;cursor:default;'
+        + (dk
+          ? 'background:#14161C;color:#F7F4EE;border:1px solid #14161C;box-shadow:0 10px 26px -18px rgba(20,22,28,.75);'
+          : 'background:#FDFCF9;border:1px solid ' + (open ? 'rgba(75,59,209,.45)' : 'rgba(139,141,152,.26)') + ';')
+        + 'transition:border-color .2s ease,transform .2s ease;'
+        + (open ? 'transform:translateY(-1px);' : ''),
+      enter: () => { if (this.tourActive()) return; this.setState({ open:id }); },
+      leave: () => { if (this.tourActive()) return; this.setState(st => (st.open === id ? { open:null } : null)); }
+    };
+  }
+
+  heatValue(d, h){
+    const work = h >= 8 && h <= 18 && d < 5;
+    const evening = h >= 19 && h <= 23;
+    const night = h >= 0 && h <= 6;
+    let base = work ? .78 : evening ? .48 : night ? .30 : .22;
+    if (d >= 5) base *= .62;
+    if (work && (h === 9 || h === 15)) base = .97;
+    if (night && (h === 2 || h === 3)) base = .55;
+    const jitter = ((d * 31 + h * 17) % 11) / 100;
+    return Math.max(.05, Math.min(1, base - .05 + jitter));
+  }
+
+  renderVals(){
+    const L = this.lang(), t = this.dict[L], d = this.D[this.state.period], a = this.state.anim, m = this.state.mod;
+    const cop = this.cur() === 'COP', es = L === 'es';
+    const per = this.state.period === 'mes' ? t.periodMes : t.periodTrim;
+
+    const shortNav = es
+      ? ['Resumen','Automatizaciones','Ventas','Integraciones','ROI']
+      : ['Summary','Automations','Sales','Integrations','ROI'];
+    const nav = ['resumen','auto','ventas','integ','rep'].map((p, i) => ({
+      label:t.nav[i], short:shortNav[i], active:m === p, icon:{ __html:this.icons[p] }, go:() => this.go(p),
+      style:'display:flex;align-items:center;border:0;border-radius:999px;font:inherit;font-size:12.5px;cursor:pointer;transition:background .2s ease,color .2s ease;'
+        + (m === p ? 'gap:8px;padding:9px 15px;font-weight:600;background:#4B3BD1;color:#F7F4EE;' : 'gap:0;padding:9px 11px;font-weight:500;background:transparent;color:#8B8D98;')
+    }));
+
+    const pill = (on) => 'padding:5px 10px;border-radius:7px;border:0;font:inherit;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .18s ease;'
+      + (on ? 'background:#4B3BD1;color:#F7F4EE;' : 'background:rgba(139,141,152,.15);color:#5B5D67;');
+    const segStyle = (on) => 'padding:6px 13px;border-radius:7px;border:0;font:inherit;font-size:12px;font-weight:600;cursor:pointer;transition:all .18s ease;'
+      + (on ? 'background:#FDFCF9;color:#14161C;box-shadow:0 1px 3px rgba(20,22,28,.12);' : 'background:transparent;color:#8B8D98;');
+
+    let kpis = [];
+    if (m === 'resumen') kpis = [
+      this.card(0,'rev', this.money(d.rev, d.revUsd), '↑ 12,4%', true,
+        [[es?'Retail':'Retail','38%',38],[es?'Mayorista':'Wholesale','34%',34],[es?'Servicios':'Services','28%',28]], true),
+      this.card(1,'clients', this.n(d.clients * a), '↑ 14', true,
+        [[es?'Recurrentes':'Recurring','187',86],[es?'Nuevos':'New','31',14]], true),
+      this.card(2,'autos', this.n(d.autos * a), '↑ 9,1%', true,
+        [[es?'Facturación':'Invoicing','474',38],[es?'Ventas':'Sales','342',27],[es?'Atención':'Support','218',18]], false),
+      this.card(3,'hours', this.n(d.hours * a) + ' h', '↑ 6,3%', true,
+        [[es?'Facturación':'Invoicing','71 h',38],[es?'Atención':'Support','58 h',31],[es?'Cobranza':'Collections','58 h',31]], false)
+    ];
+    if (m === 'auto') kpis = [
+      this.card(0,'hours', this.n(d.hours * a) + ' h', '↑ 6,3%', true,
+        [[es?'Facturación':'Invoicing','71 h',38],[es?'Atención':'Support','58 h',31],[es?'Cobranza':'Collections','58 h',31]], true),
+      this.card(1,'tasks', this.n(d.tasks * a), '↑ 2', true,
+        [[es?'Activas':'Active','14',100],[es?'Pausadas':'Paused','0',0]], true),
+      this.card(2,'acc', Math.round(d.acc * a) + '%', '↑ 4 pts', true,
+        [[es?'Calificación de leads':'Lead qualification','96%',96],[es?'Facturación':'Invoicing','95%',95],[es?'Atención':'Support','91%',91]], false)
+    ];
+    if (m === 'ventas') kpis = [
+      this.card(0,'convRate', Math.round(32 * a) + '%', '↑ 3,5 pts', true,
+        [[es?'Retail':'Retail','36%',36],[es?'Mayorista':'Wholesale','31%',31],[es?'Servicios':'Services','27%',27]], true),
+      this.card(1,'avg', this.money(d.avg, d.avgUsd), '↑ 0,8%', true,
+        [[es?'Retail':'Retail',cop?'$5,1M':'$1,275',100],[es?'Mayorista':'Wholesale',cop?'$4,6M':'$1,150',90],[es?'Servicios':'Services',cop?'$3,9M':'$975',76]], true),
+      this.card(2,'leads', this.n(d.leads * a), '↑ 18,2%', true,
+        [['WhatsApp','198',58],[es?'Web':'Web','101',30],[es?'Correo':'Email','43',12]], false)
+    ];
+    if (m === 'rep') kpis = [
+      this.card(0,'cap', Math.round(31 * a) + '%', '↑ 31%', true,
+        [[es?'Volumen atendido':'Volume handled','+31%',100],[es?'Personal':'Headcount','0%',0]], true),
+      this.card(1,'hours', this.n(d.hours * a) + ' h', '↑ 6,3%', true,
+        [[es?'Equivalente FTE':'FTE equivalent','1,2',60],[es?'Reasignadas a ventas':'Moved to sales','74 h',40]], true),
+      this.card(2,'acc', Math.round(d.acc * a) + '%', '↑ 4 pts', true,
+        [[es?'Calificación de leads':'Lead qualification','96%',96],[es?'Facturación':'Invoicing','95%',95]], false)
+    ];
+
+    const rev = cop ? [142.3,151.8,149.2,163.5,174.9,186.4] : [35.6,38.0,37.3,40.9,43.7,46.6];
+    const labels = es ? ['oct','nov','dic','ene','feb','mar'] : ['Oct','Nov','Dec','Jan','Feb','Mar'];
+    const max = cop ? 200 : 50, min = cop ? 120 : 30;
+    const X = i => 60 + i * 114, Y = v => 160 - ((v - min) / (max - min)) * 130;
+    const points = rev.map((v, i) => ({ x:X(i), y:Y(min + (v - min) * a), label:labels[i], r:i === 5 ? 5 : 3.5,
+      fill:i === 5 ? '#F0A93E' : '#4B3BD1', leftPct:((X(i) / 640) * 100).toFixed(2) }));
+    const linePath = points.map((p, i) => (i ? 'L' : 'M') + p.x + ' ' + p.y.toFixed(1)).join(' ');
+    const areaPath = linePath + ' L' + X(5) + ' 160 L' + X(0) + ' 160 Z';
+    const grid = [0,1,2,3].map(i => {
+      const v = max - i * ((max - min) / 3);
+      return { y:Y(v), topPct:((Y(v) / 168) * 100).toFixed(2), label: cop ? Math.round(v) + 'M' : '$' + Math.round(v) + 'k' };
+    });
+
+    const targetVal = cop ? 180 : 45;
+    const targetY = Y(min + (targetVal - min) * a);
+    const targetTopPct = ((targetY / 168) * 100).toFixed(2);
+
+    const agQ = t.ag[this.state.agIdx], ph = this.state.agPhase, aa = this.state.agAnim;
+    const monthStr = cop ? '$186,4M' : '$46,6k';
+    const savStr = cop ? (es ? '$4,2M' : '$4.2M') : (es ? '$1.050' : '$1,050');
+    const yearStr = cop ? (es ? '$2.518M' : '$2,518M') : '$630k';
+    const agAnswerText = agQ.a.replace('{m}', monthStr).replace('{s}', savStr).replace('{y}', yearStr);
+    const answered = ph === 'answer';
+    const kind = answered ? agQ.kind : null;
+
+    const TRACK = 176;
+    const agTop = cop ? 200 : 50, agBot = cop ? 120 : 30;
+    const agH = v => ((v - agBot) / (agTop - agBot)) * TRACK;
+    const agBars = rev.map((v, i) => ({
+      month:labels[i], bg:i === 5 ? '#F0A93E' : 'rgba(139,126,240,.75)',
+      fg:i === 5 ? '#F0A93E' : '#8B8D98',
+      pct:((agH(v) / TRACK) * 100 * aa).toFixed(1)
+    }));
+    const agTargetTop = Math.round(TRACK - agH(targetVal));
+    const agPeakTop = Math.round(TRACK - agH(rev[5]) - 24);
+
+    const savRaw = cop ? [4.2,2.8,2.1,1.6,0.9] : [1050,700,525,400,225];
+    const savLabels = es ? ['Facturación','Cobranza','Atención al cliente','Ventas y leads','Operaciones']
+                         : ['Invoicing','Collections','Customer support','Sales and leads','Operations'];
+    const agRows = savRaw.map((v, i) => ({
+      label:savLabels[i],
+      val:'$' + (cop ? (v * aa).toFixed(1).replace('.', es ? ',' : '.') + 'M' : this.n(v * aa)),
+      pct:((v / savRaw[0]) * 100 * aa).toFixed(1),
+      bg:i === 0 ? '#F0A93E' : 'rgba(139,126,240,.7)',
+      fg:i === 0 ? '#F0A93E' : '#F7F4EE'
+    }));
+
+    const cmpPairs = [
+      [es?'Ingresos':'Revenue', cop?174.9:43.7, cop?186.4:46.6, 'money'],
+      [es?'Leads':'Leads', 289, 342, 'n'],
+      [es?'Ejecuciones':'Runs', 1144, 1248, 'n'],
+      [es?'Horas ahorradas':'Hours saved', 176, 187, 'h']
+    ];
+    const agPairs = cmpPairs.map(p => {
+      const top = Math.max(p[1], p[2]);
+      const fmt = v => p[3] === 'money'
+        ? '$' + v.toFixed(1).replace('.', es ? ',' : '.') + (cop ? 'M' : 'k')
+        : this.n(v) + (p[3] === 'h' ? ' h' : '');
+      return { label:p[0], prev:fmt(p[1]), now:fmt(p[2]),
+        prevPct:((p[1] / top) * 100 * aa).toFixed(1), nowPct:((p[2] / top) * 100 * aa).toFixed(1) };
+    });
+
+    const fcRaw = cop ? [142.3,151.8,149.2,163.5,174.9,186.4,194.1,201.3,208.0,214.2,221.5,228.4,235.0,241.8,248.5]
+                      : [35.6,38.0,37.3,40.9,43.7,46.6,48.5,50.3,52.0,53.6,55.4,57.1,58.8,60.5,62.1];
+    const fcLabels = es ? ['O','N','D','E','F','M','A','M','J','J','A','S','O','N','D']
+                        : ['O','N','D','J','F','M','A','M','J','J','A','S','O','N','D'];
+    const fLast = fcRaw.length - 1;
+    const fTop = cop ? 260 : 65, fBot = cop ? 130 : 32;
+    const FX = i => 22 + i * 39.6, FY = v => 160 - ((v - fBot) / (fTop - fBot)) * 148;
+    const agFPoints = fcRaw.map((v, i) => ({
+      x:FX(i).toFixed(1), y:FY(fBot + (v - fBot) * aa).toFixed(1), label:fcLabels[i],
+      r:i === fLast ? 4.5 : i === 5 ? 4 : 2.4,
+      fill:i > 5 ? '#F0A93E' : '#4B3BD1',
+      labelColor:i > 5 ? '#F0A93E' : '#8B8D98',
+      leftPct:((FX(i) / 600) * 100).toFixed(2)
+    }));
+    const seg = (from, to) => agFPoints.slice(from, to).map((p, i) => (i ? 'L' : 'M') + p.x + ' ' + p.y).join(' ');
+
+    const badge = (k) => k === 'ok' ? { bg:'rgba(240,169,62,.20)', fg:'#8A5D0C' }
+      : k === 'ind' ? { bg:'rgba(75,59,209,.13)', fg:'#4B3BD1' } : { bg:'rgba(139,141,152,.20)', fg:'#5B5D67' };
+
+    const autoRows = es
+      ? [['Emisión y envío de facturas','Facturación',474],['Calificación de leads entrantes','Ventas',342],['Respuesta de primer contacto','Atención',218],['Recordatorio de pago','Cobranza',131],['Agenda y confirmación de citas','Operaciones',58],['Reporte semanal a gerencia','Reportes',25]]
+      : [['Invoice issue and delivery','Invoicing',474],['Inbound lead qualification','Sales',342],['First-contact reply','Support',218],['Payment reminder','Collections',131],['Scheduling and confirmation','Operations',58],['Weekly report to management','Reporting',25]];
+    const autos = autoRows.map(r => {
+      const b = badge('ok');
+      return { name:r[0], type:r[1], runs:this.n(r[2] * d.f * a), state:t.active, bg:b.bg, fg:b.fg };
+    });
+
+    const catRows = es
+      ? [['Facturación',474,438],['Ventas y leads',342,291],['Atención',218,205],['Cobranza y ops.',214,198]]
+      : [['Invoicing',474,438],['Sales and leads',342,291],['Support',218,205],['Collections and ops',214,198]];
+    const catMax = 500;
+    const cats = catRows.map(c => ({
+      label:c[0], val:this.n(c[1] * d.f * a), prev:this.n(c[2] * d.f * a),
+      pct:Math.round((c[1] / catMax) * 100 * a), prevPct:Math.round((c[2] / catMax) * 100 * a)
+    }));
+
+    const heatRows = [0,1,2,3,4,5,6].map(dy => ({
+      day:t.days[dy],
+      cells:Array.from({ length:24 }, (_, h) => {
+        const v = this.heatValue(dy, h) * a;
+        const peak = v > .88;
+        return { bg: peak ? 'rgba(240,169,62,' + (0.55 + v * .4).toFixed(2) + ')' : 'rgba(120,105,235,' + (0.06 + v * .82).toFixed(2) + ')' };
+      })
+    }));
+    const heatLegend = [.1,.3,.5,.75,1].map(v => ({ bg:'rgba(120,105,235,' + (0.06 + v * .82).toFixed(2) + ')' }));
+    const hourLabels = Array.from({ length:24 }, (_, h) => ({ label: h % 6 === 0 ? (h < 10 ? '0' + h : '' + h) : '' }));
+
+    const fVals = [d.leads, d.qual, d.conv];
+    const fLabels = es ? ['Leads recibidos','Calificados por chatbot','Conversiones'] : ['Leads received','Qualified by chatbot','Conversions'];
+    const fRates = es ? ['100% del total','37% de los leads','32% de los calificados'] : ['100% of total','37% of leads','32% of qualified'];
+    const widths = [400, 250, 138, 74];
+    const funnel = fLabels.map((lb, i) => {
+      const y = 8 + i * 82, h = 68;
+      const w0 = widths[i] * a || 1, w1 = widths[i + 1] * a || 1;
+      const pts = [[230 - w0 / 2, y],[230 + w0 / 2, y],[230 + w1 / 2, y + h],[230 - w1 / 2, y + h]]
+        .map(p => p[0].toFixed(1) + ',' + p[1]).join(' ');
+      return {
+        pts, label:lb, rate:fRates[i], val:this.n(fVals[i] * a),
+        fill: i === 2 ? '#F0A93E' : i === 1 ? '#3E31B4' : '#4B3BD1',
+        fg: i === 2 ? '#14161C' : '#F7F4EE', fg2: i === 2 ? 'rgba(20,22,28,.72)' : 'rgba(247,244,238,.72)',
+        topPct:((y / 258) * 100).toFixed(2), rateTopPct:(((y + 12) / 258) * 100).toFixed(2)
+      };
+    });
+
+    const segs = es ? [['Retail',83],['Mayorista',74],['Servicios',61]] : [['Retail',83],['Wholesale',74],['Services',61]];
+    const colors = ['#4B3BD1','#7A6DE8','#B3ABF2'];
+    const C = 2 * Math.PI * 54, totalSeg = 218;
+    let acc = 0;
+    const donut = segs.map((s, i) => {
+      const frac = (s[1] / totalSeg) * a;
+      const len = C * frac, off = -C * acc;
+      acc += frac;
+      return { label:s[0], val:this.n(s[1] * a), color:colors[i], dash:len.toFixed(1) + ' ' + (C - len).toFixed(1), offset:off.toFixed(1) };
+    });
+
+    const gFrac = (22 / 25) * a;
+    const gaugeTrack = this.arc(110, 100, 76, -125, 125);
+    const gaugeFill = this.arc(110, 100, 76, -125, -125 + 250 * gFrac);
+    const [tx1, ty1] = this.polar(110, 100, 62, 125);
+    const [tx2, ty2] = this.polar(110, 100, 90, 125);
+
+    const cmp = [[100,78,''],[240,53,' h'],[240,18,' min'],[100,131,'']];
+    const cmpLabels = es ? ['Costo operativo (índice)','Horas manuales al mes','Respuesta a leads','Tareas por empleado (índice)']
+                         : ['Operating cost (index)','Manual hours per month','Lead response time','Tasks per employee (index)'];
+    const compare = cmp.map((c, i) => {
+      const top = Math.max(c[0], c[1]);
+      return { label:cmpLabels[i], beforeLabel:this.n(c[0]) + c[2], afterLabel:this.n(c[1]) + c[2],
+        beforePct:Math.round((c[0] / top) * 100 * a), afterPct:Math.round((c[1] / top) * 100 * a) };
+    });
+
+    const integ = [['WhatsApp Business','W', es?'Mensajería':'Messaging'],['Gmail','G', es?'Correo':'Email'],['Google Calendar','C', es?'Agenda':'Scheduling'],['Stripe','S', es?'Pagos':'Payments'],['n8n','N', es?'Orquestación':'Orchestration']];
+    const integrations = integ.map((g, i) => {
+      const on = i < this.state.lit;
+      return { name:g[0], initial:g[1], kind:g[2], state:t.connected, opacity:on ? 1 : .42,
+        border:on ? 'rgba(75,59,209,.38)' : 'rgba(139,141,152,.26)',
+        chip:on ? '#4B3BD1' : 'rgba(139,141,152,.45)',
+        bg:on ? 'rgba(240,169,62,.20)' : 'rgba(139,141,152,.18)', fg:on ? '#8A5D0C' : '#8B8D98' };
+    });
+
+    const on = this.tourActive();
+    const r = this.state.rect;
+    const pad = 10;
+    const vw = typeof window !== 'undefined' ? window.innerWidth : 1440;
+    const spotStyle = r
+      ? 'position:fixed;top:' + (r.top - pad) + 'px;left:' + (r.left - pad) + 'px;width:' + (r.width + pad * 2) + 'px;height:' + (r.height + pad * 2)
+        + 'px;border-radius:14px;border:2px solid #F0A93E;box-shadow:0 0 0 9999px rgba(20,22,28,.62),0 0 22px 2px rgba(240,169,62,.45);pointer-events:none'
+      : 'position:fixed;inset:0;background:rgba(20,22,28,.62);pointer-events:none';
+    const cx = r ? r.left + r.width * .5 : vw / 2;
+    const cy = r ? r.top + r.height * .55 : 300;
+    const cursorStyle = 'position:fixed;top:0;left:0;transform:translate(' + cx.toFixed(0) + 'px,' + cy.toFixed(0)
+      + 'px);transition:transform .55s cubic-bezier(.3,.8,.3,1);pointer-events:none;filter:drop-shadow(0 3px 6px rgba(20,22,28,.5))';
+    const vh = typeof window !== 'undefined' ? window.innerHeight : 900;
+    const CW = 300, CH = 118, GAP = 18, EDGE = 16, DOCK = 86;
+    let cl, ct, arrow;
+    if (!r) { cl = (vw - CW) / 2; ct = vh * .5; arrow = null; }
+    else {
+      const spaceR = vw - (r.left + r.width) - GAP - EDGE;
+      const spaceL = r.left - GAP - EDGE;
+      const spaceB = vh - DOCK - (r.top + r.height) - GAP - EDGE;
+      if (spaceR >= CW) { cl = r.left + r.width + GAP; ct = r.top + r.height / 2 - CH / 2; arrow = 'left'; }
+      else if (spaceL >= CW) { cl = r.left - GAP - CW; ct = r.top + r.height / 2 - CH / 2; arrow = 'right'; }
+      else if (spaceB >= CH) { ct = r.top + r.height + GAP; cl = r.left + r.width / 2 - CW / 2; arrow = 'top'; }
+      else { ct = r.top - GAP - CH; cl = r.left + r.width / 2 - CW / 2; arrow = 'bottom'; }
+      cl = Math.max(EDGE, Math.min(cl, vw - CW - EDGE));
+      ct = Math.max(EDGE, Math.min(ct, vh - CH - DOCK));
+    }
+    const arrowStyle = arrow
+      ? 'position:absolute;width:9px;height:9px;background:rgba(20,22,28,.97);transform:rotate(45deg);'
+        + (arrow === 'left' ? 'left:-4px;top:50%;margin-top:-4px;'
+        : arrow === 'right' ? 'right:-4px;top:50%;margin-top:-4px;'
+        : arrow === 'top' ? 'top:-4px;left:50%;margin-left:-4px;' : 'bottom:-4px;left:50%;margin-left:-4px;')
+      : 'display:none';
+    const calloutStyle = 'position:fixed;top:' + Math.round(ct) + 'px;left:' + Math.round(cl) + 'px;width:' + CW
+      + 'px;padding:15px 17px;border-radius:11px;background:rgba(20,22,28,.97);box-shadow:0 18px 44px -14px rgba(20,22,28,.9);'
+      + 'animation:tsLabel .2s ease both;pointer-events:none';
+
+    const tourCopy = t.tour[this.state.step] || ['', ''];
+    const revStr = this.cur() === 'COP' ? '$186,4M COP' : '$46,6k USD';
+
+    return {
+      t:Object.assign({}, t, {
+        demoTag:t.demoTag, mockNote:t.mockNote, pauseTour:t.pauseTour,
+        headerSub:per + ' · ' + t.subtitle,
+        demoBtn:on ? t.demoBtnOn : t.demoBtnOff,
+        modTitle:t.titles[m], modSub:t.subs[m],
+        trendTitle:t.trendTitle, trendSub:t.trendSub, feedTitle:t.feedTitle,
+        tableTitle:t.tableTitle, thName:t.thName, thType:t.thType, thRuns:t.thRuns, thState:t.thState,
+        catTitle:t.catTitle, catSub:t.catSub, thisPeriod:t.thisPeriod, prevPeriod:t.prevPeriod,
+        heatTitle:t.heatTitle, heatSub:t.heatSub, heatLow:t.heatLow, heatHigh:t.heatHigh, heatNote:t.heatNote,
+        funnelTitle:t.funnelTitle, funnelSub:t.funnelSub,
+        donutTitle:t.donutTitle, donutSub:t.donutSub, donutTotalLabel:t.donutTotalLabel,
+        clientsTitle:t.clientsTitle, integNote:t.integNote, syncLabel:t.syncLabel + ' · ' + per,
+        gaugeTitle:t.gaugeTitle, gaugeSub:t.gaugeSub, gaugeTarget:t.gaugeTarget, gaugeNote:t.gaugeNote,
+        compareTitle:t.compareTitle, before:t.before, after:t.after,
+        closingKicker:t.closingKicker, closingBody:this.state.period === 'mes' ? t.closingBody : t.closingBodyT,
+        closingBig:t.closingBig, closingBigLabel:t.closingBigLabel
+      }),
+      nav,
+      langs:[['es','ES'],['en','EN']].map(l => ({ label:l[1], go:() => this.setState({ lang:l[0] }), style:pill(L === l[0]) })),
+      currencies:[['COP','COP'],['USD','USD']].map(c => ({ label:c[1], go:() => this.setState({ cur:c[0] }), style:pill(this.cur() === c[0]) })),
+      periods:[['mes',t.mes],['trim',t.trim]].map(p => ({
+        label:p[1], style:segStyle(this.state.period === p[0]),
+        go:() => { this.stopTour(); this.setState({ period:p[0] }); this.animate(); }
+      })),
+      demoBtnStyle:'display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .18s ease;'
+        + (on ? 'background:rgba(240,169,62,.16);border:1px solid #F0A93E;color:#8A5D0C;' : 'background:transparent;border:1px solid #4B3BD1;color:#4B3BD1;'),
+      dockTourBtn:'display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:999px;font:inherit;font-size:12.5px;font-weight:600;cursor:pointer;transition:all .2s ease;'
+        + (on ? 'background:rgba(240,169,62,.16);border:1px solid #F0A93E;color:#F0A93E;' : 'background:transparent;border:1px solid rgba(247,244,238,.28);color:#F7F4EE;'),
+      demoDotColor:on ? '#F0A93E' : '#4B3BD1',
+      demoDotAnim:on ? 'tsPulse 1.4s ease-in-out infinite' : 'none',
+      toggleDemo:() => this.toggleDemo(),
+      isResumen:m === 'resumen', isAuto:m === 'auto', isVentas:m === 'ventas', isInteg:m === 'integ', isReportes:m === 'rep',
+      hasKpis:kpis.length > 0, kpis,
+      points, linePath, areaPath, grid, targetY, targetTopPct,
+      agShowQ:ph === 'thinking' || answered, agThinking:ph === 'thinking', agAnswered:answered,
+      agIdle:!answered, agQuestion:agQ.q, agAnswer:agAnswerText, agChartTitle:t.agChart[agQ.kind],
+      agIsTarget:kind === 'target', agIsSavings:kind === 'savings',
+      agIsCompare:kind === 'compare', agIsForecast:kind === 'forecast',
+      agBars, agTargetTop, agPeakTop, agPeak:monthStr, agRows, agPairs, agFPoints,
+      agSolid:seg(0, 6), agDashed:seg(5, fcRaw.length), agSplitX:FX(5).toFixed(1),
+      agTyped:this.state.agTyped || (ph === 'typing' ? '' : t.agPlaceholder),
+      agTypedColor:this.state.agTyped ? '#F7F4EE' : '#8B8D98',
+      agCaret:(ph === 'typing' || ph === 'idle' || answered)
+        ? 'display:inline-block;width:1.5px;height:12px;background:#4B3BD1;margin-left:2px;vertical-align:-1px;animation:tsPulse .9s steps(1,end) infinite'
+        : 'display:none',
+      agFieldStyle:'display:flex;align-items:center;gap:9px;padding:9px 10px 9px 12px;border-radius:9px;background:rgba(247,244,238,.05);transition:border-color .2s ease;border:1px solid '
+        + (ph === 'typing' ? '#4B3BD1' : 'rgba(247,244,238,.14)'),
+      agBtnStyle:'flex:0 0 auto;padding:6px 12px;border-radius:7px;border:1px solid '
+        + (ph === 'typing' || ph === 'thinking' ? 'rgba(247,244,238,.18);color:#8B8D98;background:transparent;' : '#4B3BD1;color:#F7F4EE;background:#4B3BD1;')
+        + 'font:inherit;font-size:11.5px;font-weight:600;cursor:pointer;transition:all .18s ease',
+      agBtnLabel:answered ? t.agNext : (ph === 'typing' || ph === 'thinking') ? '···' : t.agAsk,
+      agAction:() => {
+        if (ph === 'typing' || ph === 'thinking') return;
+        this.stopTour();
+        this.ask(answered ? this.state.agIdx + 1 : this.state.agIdx);
+      },
+      feed:(es
+        ? [['El agente IA calificó 3 leads nuevos','hace 12 min'],['Automatización de facturación completada — 47 documentos','hace 40 min'],['Seguimiento post-venta enviado a 18 clientes','hace 2 h'],['Se sincronizaron 214 eventos de Google Calendar','hace 3 h'],['Distribuidora El Roble pasó a estado Cliente','hace 5 h'],['Reporte semanal de ROI generado y enviado','ayer']]
+        : [['AI agent qualified 3 new leads','12 min ago'],['Invoicing automation completed — 47 documents','40 min ago'],['Post-sale follow-up sent to 18 customers','2 h ago'],['214 Google Calendar events synced','3 h ago'],['Distribuidora El Roble moved to Customer','5 h ago'],['Weekly ROI report generated and sent','yesterday']]
+      ).map((f, i) => ({ text:f[0], time:f[1], dot:'#4B3BD1' }))
+        .reduce((list, item) => list.concat([item]),
+          this.state.actLog.map(k => ({ text:t.actLog[k], time:es ? 'ahora' : 'just now', dot:'#F0A93E' }))),
+      alerts:(es
+        ? [['Meta del mes cumplida','Ingresos superaron la meta de $180.000.000 COP nueve días antes del cierre.'],['Requiere atención','31 clientes activos sin compra en los últimos 60 días. No hay seguimiento automático configurado.']]
+        : [['Monthly target met','Revenue passed the $180,000,000 COP target nine days before close.'],['Needs attention','31 active customers with no purchase in 60 days. No automatic follow-up is configured.']]
+      ).map((al, i) => ({ title:al[0], body:al[1], glyph:i === 0 ? '●' : '▲',
+        accent:i === 0 ? '#F0A93E' : '#8B8D98',
+        bg:i === 0 ? 'rgba(240,169,62,.10)' : 'rgba(139,141,152,.10)',
+        border:i === 0 ? 'rgba(240,169,62,.42)' : 'rgba(139,141,152,.32)' })),
+      clients:(es
+        ? [['Distribuidora El Roble','Retail · $18.400.000','Cliente'],['Insumos Vallecaucanos','Mayorista · $12.900.000','Cliente'],['Textiles Marañón','Manufactura · en propuesta','Calificado'],['Logística Sur Andina','Transporte · en propuesta','Calificado'],['Café de Origen Nariño','Alimentos · primer contacto','Lead']]
+        : [['Distribuidora El Roble','Retail · $18,400,000','Customer'],['Insumos Vallecaucanos','Wholesale · $12,900,000','Customer'],['Textiles Marañón','Manufacturing · in proposal','Qualified'],['Logística Sur Andina','Logistics · in proposal','Qualified'],['Café de Origen Nariño','Food · first contact','Lead']]
+      ).map(c => {
+        const b = (c[2] === 'Cliente' || c[2] === 'Customer') ? badge('ok') : (c[2] === 'Calificado' || c[2] === 'Qualified') ? badge('ind') : badge('off');
+        return { name:c[0], meta:c[1], state:c[2], bg:b.bg, fg:b.fg };
+      }),
+      autos, cats, heatRows, heatLegend, hourLabels, funnel,
+      donut, donutTotal:this.n(totalSeg * a),
+      gaugeTrack, gaugeFill, gaugeValue:Math.round(22 * a) + '%',
+      gaugeTick:{ x1:tx1.toFixed(1), y1:ty1.toFixed(1), x2:tx2.toFixed(1), y2:ty2.toFixed(1) },
+      compare, integrations, syncEvents:this.n(d.sync * a),
+      tourOn:on, spotStyle, cursorStyle, calloutStyle, arrowStyle,
+      cursorAnim:this.state.clicking ? 'animation:tsClick .26s ease' : '',
+      showLabel:this.state.showLabel,
+      tourLabel:tourCopy[0], tourInsight:(tourCopy[1] || '').replace('{rev}', revStr),
+      tourDots:this.steps.map((s, i) => ({ w:i === this.state.step ? 18 : 6, bg:i === this.state.step ? '#F0A93E' : 'rgba(247,244,238,.28)' })),
+      tourCount:(this.state.step + 1) + '/' + this.steps.length
+    };
+  }
+}
+</script>
+</body>
+</html>

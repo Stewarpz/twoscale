@@ -15,3 +15,20 @@
 .cas-note{font-family:var(--fm);font-size:12px;color:var(--piedra);margin:24px 0 0}
 
 @media(max-width:820px){ .cas-grid{grid-template-columns:1fr} }
+
+
+/* Como cierre del acto 2 ya no abre página: hereda el ancho de Servicios. */
+.cas-closer {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 64px 24px 88px;
+  border-top: 1px solid var(--line);
+}
+.cas-h3 {
+  font-family: var(--fh);
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--crema);
+  margin: 8px 0 22px;
+  text-wrap: pretty;
+}

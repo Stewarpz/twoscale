@@ -1,0 +1,22 @@
+# Despliegue en Netlify. Sitio estático: no hay build.
+[build]
+  publish = "."
+  command = ""
+
+# Los .dc.html y las demos se sirven tal cual.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# Cache larga para lo versionable, corta para el HTML.
+[[headers]]
+  for = "/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

@@ -4,7 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Twoscale.IA · Automatización, IA y software a la medida</title>
-<meta name="description" content="Automatizamos ventas, atención y operaciones con IA práctica: workflows, agentes, chatbots de WhatsApp, webs y sistemas a la medida.">
+<meta name="description" content="Automatizamos ventas, atención y operaciones con IA práctica: workflows, agentes de IA, chatbots de WhatsApp, webs y sistemas a la medida. Medellín, Colombia.">
+<meta name="theme-color" content="#14161C">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="https://twoscale.ia/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Twoscale.IA · Automatización, IA y software a la medida">
+<meta property="og:description" content="Cada hora que tu equipo pierde en tareas repetitivas es dinero que no vuelve. Automatizamos esas horas.">
+  <meta property="og:image" content="https://twoscale.ia/og-image.png"> <!-- Reemplazar con URL absoluta a un PNG de 1200×630px -->
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,6 +24,10 @@
 
 <!-- 2. Broadsheet, encapsulado bajo .bs (solo para las maquetas de cliente) -->
 <link rel="stylesheet" href="vendor/broadsheet.css">
+
+<!-- 2b. Cerebro digital (capa de fondo del hero) -->
+<link rel="stylesheet" href="vendor/brain-network.css">
+<script src="vendor/brain-network.js" defer></script>
 
 <!-- 3. CSS de cada módulo. Orden irrelevante: no se pisan entre sí. -->
 <link rel="stylesheet" href="modules/header/header.css">
@@ -27,7 +40,6 @@
 <link rel="stylesheet" href="modules/services/services.css">
 <link rel="stylesheet" href="modules/workflow/workflow.css">
 <link rel="stylesheet" href="modules/mockups/mockups.css">
-<link rel="stylesheet" href="modules/industries/industries.css">
 <link rel="stylesheet" href="modules/about/about.css">
 <link rel="stylesheet" href="modules/cases/cases.css">
 <link rel="stylesheet" href="modules/contact/contact.css">
@@ -38,6 +50,16 @@
 <body>
 <!-- Barra de progreso de lectura -->
 <div class="scrollbar"></div>
+
+<!-- Fallback si JavaScript está deshabilitado -->
+<noscript>
+  <div style="background:#1C2029;color:#F7F4EE;padding:40px 24px;text-align:center;font-family:system-ui,sans-serif;font-size:16px;line-height:1.6;min-height:100vh;display:flex;align-items:center;justify-content:center">
+    <div>
+      <h1 style="font-size:28px;margin-bottom:12px">Twoscale<span style="color:#F0A93E">.IA</span></h1>
+      <p>Este sitio necesita JavaScript para funcionar. Actívalo en tu navegador o escríbenos a <a href="mailto:hola@twoscale.ia" style="color:#F0A93E">hola@twoscale.ia</a>.</p>
+    </div>
+  </div>
+</noscript>
 
 <!-- ==========================================================
      Esqueleto. Cada <div data-module> es un punto de montaje:
@@ -58,16 +80,15 @@
       <div data-module="process"></div>
     </div>
 
-    <!-- Servicios: método → prueba → sector -->
+    <!-- Servicios: acto 1 método · acto 2 prueba (workflow + maquetas + casos) -->
     <div data-page="servicios" hidden>
       <div data-module="services"></div>
       <div data-module="workflow"></div>
       <div data-module="mockups"></div>
-      <div data-module="industries"></div>
+      <div data-module="cases"></div>
     </div>
 
     <div data-page="nosotros" hidden><div data-module="about"></div></div>
-    <div data-page="casos"    hidden><div data-module="cases"></div></div>
     <div data-page="contacto" hidden><div data-module="contact"></div></div>
   </main>
 

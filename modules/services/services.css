@@ -71,3 +71,11 @@
 }
 @media(max-width:640px){ .svc-rail{grid-template-columns:repeat(2,1fr)} .svc-kpis{grid-template-columns:1fr 1fr} }
 @media(max-width:460px){ .svc-rail{grid-template-columns:1fr} .svc-kpis{grid-template-columns:1fr} }
+
+
+/* El arco Problema → Consecuencia → Solución pide tres columnas. */
+.svc-story-pas { grid-template-columns: 1fr 1fr 1fr; }
+.svc-lbl-warn { color: #e0685f; }
+
+@media (max-width: 1100px) { .svc-story-pas { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px)  { .svc-story-pas { grid-template-columns: 1fr; } }

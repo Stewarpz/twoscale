@@ -1,9 +1,14 @@
 /* modules/contact/contact.js — formulario, calculadora de retorno, agenda y FAQ.
 
-   El formulario y la agenda son maquetas de front-end: no hay backend todavía.
-   Cuando lo haya, solo cambia el manejador de submit. */
+   Flujo dual: envío AJAX al backend + redirección a WhatsApp tras éxito.
+   Configura FORM_ENDPOINT y WHATSAPP_NUMBER antes de desplegar. */
 
-import { FAQ } from '../../data/misc.js';
+import { FAQ, CONTACT_WORDS, TRUST } from '../../data/misc.js';
+
+/* ========== CONFIGURACIÓN — CAMBIAR ANTES DE PRODUCCIÓN ========== */
+const FORM_ENDPOINT = 'https://formspree.io/f/myeyonwe';
+const WHATSAPP_NUMBER = '573004032882';
+/* ================================================================= */
 
 const MONTHS = {
   es: ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'],
@@ -22,12 +27,60 @@ export default {
   mount(host, store) {
     const q = (r) => host.querySelector(`[data-role="${r}"]`);
 
-    /* ---------- formulario ---------- */
+    /* ---------- formulario con flujo dual ---------- */
     const form = q('form');
-    form.addEventListener('submit', (e) => {
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      form.hidden = true;
-      q('ok').hidden = false;
+
+      /* Validación nativa HTML5 */
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      /* Recopilar datos */
+      const data = Object.fromEntries(new FormData(form));
+
+      /* Estado de carga */
+      const originalText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = store.t('form_sending');
+      q('err').hidden = true;
+
+      try {
+        /* 1. Envío AJAX al backend */
+        const res = await fetch(FORM_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(data),
+        });
+
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+        /* 2. Éxito: mostrar confirmación */
+        form.hidden = true;
+        q('ok').hidden = false;
+
+        /* 3. Construir y abrir enlace de WhatsApp */
+        const msg = [
+          store.t('form_name') + ': ' + data.name,
+          store.t('form_email') + ': ' + data.email,
+          (store.t('form_phone') || 'Tel') + ': ' + data.phone,
+          data.organization ? (store.t('form_biz') + ': ' + data.organization) : '',
+          data.message ? (store.t('form_msg') + ': ' + data.message) : '',
+        ].filter(Boolean).join('\n');
+
+        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+        window.open(waUrl, '_blank', 'noopener,noreferrer');
+
+      } catch (err) {
+        console.error('[twoscale] form submit failed:', err);
+        q('err').hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
     });
 
     /* ---------- calculadora de retorno ---------- */
@@ -73,7 +126,7 @@ export default {
     /* ---------- datos de contacto ---------- */
     const renderContacts = () => {
       q('contacts').replaceChildren(...[
-        [store.t('contact_wa'),   '+57 300 000 0000'],
+        [store.t('contact_wa'),   '+57 300 403 2882'],
         [store.t('contact_mail'), 'hola@twoscale.ia'],
         [store.t('contact_city'), 'Medellín, Colombia'],
       ].map(([l, v]) => {
@@ -192,6 +245,39 @@ export default {
       box.append(confirm);
     };
 
+    /* ---------- palabra rotativa del título ----------
+       La primera se repite al final: el salto del bucle cae sobre un
+       fotograma idéntico y no se ve el corte. */
+    const renderWords = () => {
+      const track = q('words');
+      if (!track) return;
+      const words = CONTACT_WORDS[store.state.lang] || CONTACT_WORDS.es;
+      track.replaceChildren(...words.concat([words[0]]).map((w) => {
+        const s = document.createElement('span');
+        s.className = 'wordrot-item';
+        s.textContent = w;
+        return s;
+      }));
+    };
+
+    /* ---------- señales de confianza, una visible a la vez ---------- */
+    const renderTrust = () => {
+      const track = q('trust');
+      if (!track) return;
+      track.replaceChildren(...TRUST.concat([TRUST[0]]).map((t) => {
+        const row = document.createElement('div');
+        row.className = 'trustrot-item';
+        const v = document.createElement('span');
+        v.className = 'trustrot-v';
+        v.textContent = t.v;
+        const l = document.createElement('span');
+        l.className = 'trustrot-l';
+        l.textContent = store.pick(t.l);
+        row.append(v, l);
+        return row;
+      }));
+    };
+
     /* ---------- FAQ ---------- */
     const renderFaq = () => {
       q('faq').replaceChildren(...FAQ.map((f) => {
@@ -204,7 +290,7 @@ export default {
       }));
     };
 
-    const renderAll = () => { renderRoi(); renderContacts(); renderCal(); renderFaq(); };
+    const renderAll = () => { renderRoi(); renderContacts(); renderCal(); renderFaq(); renderWords(); renderTrust(); };
     renderAll();
     store.subscribe(renderAll);
   },

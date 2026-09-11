@@ -1,23 +1,35 @@
 <section class="cnt">
   <div class="cnt-head">
     <span class="sec-kicker" data-t="p_contact_k"></span>
-    <h1 class="cnt-h1" data-t="p_contact_t"></h1>
+    <h1 class="cnt-h1"><span data-t="p_contact_t"></span> <span class="wordrot"><span class="wordrot-track" data-role="words"></span></span></h1>
     <p class="sec-sub" data-t="p_contact_s"></p>
+  </div>
+
+  <!-- Señales de confianza: responden la objeción antes de que el visitante la formule -->
+  <div class="cnt-trust">
+    <div class="trustrot"><div class="trustrot-track" data-role="trust"></div></div>
+  </div>
+  <div class="trustrot-dots" aria-hidden="true">
+    <span class="trustrot-dot"></span><span class="trustrot-dot"></span><span class="trustrot-dot"></span>
   </div>
 
   <div class="cnt-grid contactgrid">
     <!-- Formulario -->
     <div class="cnt-panel" data-reveal="left">
-      <form class="cnt-form" data-role="form">
-        <label class="cnt-field"><span data-t="form_name"></span><input required></label>
-        <label class="cnt-field"><span data-t="form_email"></span><input type="email" required></label>
-        <label class="cnt-field"><span data-t="form_biz"></span><input></label>
-        <label class="cnt-field"><span data-t="form_msg"></span><textarea rows="4"></textarea></label>
+      <form class="cnt-form" data-role="form" method="POST" action="https://formspree.io/f/myeyonwe">
+        <label class="cnt-field" for="cf-name"><span data-t="form_name"></span><input id="cf-name" name="name" type="text" autocomplete="name" required minlength="2"></label>
+        <label class="cnt-field" for="cf-email"><span data-t="form_email"></span><input id="cf-email" name="email" type="email" autocomplete="email" required></label>
+        <label class="cnt-field" for="cf-phone"><span data-t="form_phone"></span><input id="cf-phone" name="phone" type="tel" autocomplete="tel" pattern="[+]?[0-9\s\-]{7,15}" required></label>
+        <label class="cnt-field" for="cf-org"><span data-t="form_biz"></span><input id="cf-org" name="organization" autocomplete="organization"></label>
+        <label class="cnt-field" for="cf-msg"><span data-t="form_msg"></span><textarea id="cf-msg" name="message" rows="4" required minlength="10"></textarea></label>
         <button type="submit" class="btn-amber cnt-submit" data-t="form_send"></button>
       </form>
       <div class="cnt-ok" data-role="ok" hidden>
         <span class="cnt-ok-icon">✅</span>
         <p data-t="form_ok"></p>
+      </div>
+      <div class="cnt-err" data-role="err" hidden>
+        <p data-t="form_error"></p>
       </div>
     </div>
 

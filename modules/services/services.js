@@ -300,6 +300,7 @@ export default {
       q('method').textContent = store.pick(x.method);
       q('name').textContent = store.pick(x.name);
       q('problem').textContent = store.pick(x.problem);
+      q('consequence').textContent = store.pick(x.consequence);
       q('solution').textContent = store.pick(x.solution);
 
       const drawer = ARTIFACTS[x.dia];

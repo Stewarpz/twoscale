@@ -1,0 +1,45 @@
+/* Twocales.IA — Cerebro digital. Estilos mínimos del contenedor.
+   Solo tres reglas son obligatorias: .tw-brain, .tw-brain-canvas y .tw-brain-content.
+   El resto (.tw-brain-veil, .tw-brain-stage) es recomendable pero opcional. */
+
+.tw-brain {
+  position: relative;      /* OBLIGATORIO: el canvas se posiciona contra este elemento */
+  overflow: hidden;        /* OBLIGATORIO: recorta el cerebro en los bordes */
+  isolation: isolate;
+  /* el fondo lo pinta la propia sección del sitio */
+}
+
+.tw-brain-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;    /* OBLIGATORIO: deja pasar los clics al contenido de encima */
+}
+
+/* Velo de legibilidad: apaga el cerebro justo donde va el texto.
+   Ajusta los porcentajes a la posición real de tus columnas. */
+.tw-brain-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(farthest-side at 20% 50%, rgba(20,22,28,.92) 0%, rgba(20,22,28,.78) 42%, rgba(20,22,28,0) 78%),
+    radial-gradient(closest-side at 80% 52%, rgba(20,22,28,.52), rgba(20,22,28,0)),
+    linear-gradient(#14161C 0%, rgba(20,22,28,0) 13%, rgba(20,22,28,0) 87%, #14161C 100%);
+}
+
+/* El contenido va encima. position: relative es lo que lo pone sobre el canvas. */
+.tw-brain-content {
+  position: relative;
+}
+
+/* Banda vacía sobre la que se centra el cerebro.
+   Pásala al constructor como { stage: '.tw-brain-stage' }.
+   El script le fija la altura necesaria; en escritorio es la columna central vacía
+   y al colapsar el grid se convierte en su propia franja, así el cerebro nunca
+   queda tapado por el contenido apilado. */
+.tw-brain-stage {
+  min-height: 560px;
+}

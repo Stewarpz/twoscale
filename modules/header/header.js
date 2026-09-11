@@ -5,7 +5,6 @@ export const ROUTES = [
   { id: 'home',      key: 'nav_home'  },
   { id: 'servicios', key: 'nav_serv'  },
   { id: 'nosotros',  key: 'nav_about' },
-  { id: 'casos',     key: 'nav_cases' },
   { id: 'contacto',  key: 'nav_contact' },
 ];
 
@@ -18,12 +17,13 @@ export default {
     const langBtn = host.querySelector('[data-role="lang"]');
     const burger  = host.querySelector('[data-role="burger"]');
 
+    let setDrawer = () => {};
     const makeLink = (route, cls) => {
       const a = document.createElement('a');
       a.className = cls;
       a.href = '#' + route.id;
       a.textContent = store.t(route.key);
-      a.addEventListener('click', () => { drawer.hidden = true; burger.setAttribute('aria-expanded', 'false'); });
+      a.addEventListener('click', () => { setDrawer(false); });
       return a;
     };
 
@@ -48,10 +48,18 @@ export default {
       store.set({ lang: store.state.lang === 'es' ? 'en' : 'es' });
     });
 
+    /* El cajón nunca usa [hidden]: se anima con transform y no ocupa layout,
+       así que abrirlo no empuja el contenido de la página. */
+    setDrawer = (open) => {
+      drawer.dataset.open = String(open);
+      drawer.setAttribute('aria-hidden', String(!open));
+      burger.setAttribute('aria-expanded', String(open));
+      burger.textContent = open ? '✕' : '☰';
+    };
+    setDrawer(false);
+
     burger.addEventListener('click', () => {
-      drawer.hidden = !drawer.hidden;
-      burger.setAttribute('aria-expanded', String(!drawer.hidden));
-      burger.textContent = drawer.hidden ? '☰' : '✕';
+      setDrawer(drawer.dataset.open !== 'true');
     });
 
     render();
