@@ -111,7 +111,7 @@ export default {
         box.className = 'cnt-slider';
         box.innerHTML =
           `<div class="cnt-slider-head"><span></span><span class="cnt-slider-v">${s.show}</span></div>` +
-          `<input type="range" min="${s.min}" max="${s.max}" value="${roi[s.key]}">`;
+          `<input type="range" min="${s.min}" max="${s.max}" value="${roi[s.key]}" aria-label="${s.label}">`;
         box.querySelector('span').textContent = s.label;
         box.querySelector('input').addEventListener('input', (e) => {
           roi[s.key] = parseFloat(e.target.value) || 0;

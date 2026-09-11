@@ -65,6 +65,8 @@ export const el = (tag, attrs = {}, children = []) => {
 /** Rellena todo [data-t] de un contenedor con la traducción de su clave. */
 export const fillText = (root) => {
   root.querySelectorAll('[data-t]').forEach((n) => { n.textContent = store.t(n.dataset.t); });
+  // Nombre accesible para controles que a veces solo muestran icono.
+  root.querySelectorAll('[data-t-aria]').forEach((n) => { n.setAttribute('aria-label', store.t(n.dataset.tAria)); });
 };
 
 /** Máscara CSS para pintar un logo de marca en el color que se le pida. */

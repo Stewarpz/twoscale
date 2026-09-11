@@ -8,8 +8,10 @@
 .cnt-form{display:flex;flex-direction:column;gap:16px}
 .cnt-field{display:flex;flex-direction:column;gap:7px}
 .cnt-field>span{font-family:var(--fm);font-size:11px;letter-spacing:1px;color:var(--piedra)}
-.cnt-field input,.cnt-field textarea{background:var(--grafito);border:1px solid var(--line-2);border-radius:11px;padding:13px 15px;color:var(--crema);font-size:15px;font-family:inherit;outline:none}
-.cnt-field input:focus-visible,.cnt-field textarea:focus-visible{border-color:var(--ambar)}
+.cnt-field input,.cnt-field textarea{background:var(--grafito);border:1px solid var(--line-2);border-radius:11px;padding:13px 15px;color:var(--crema);font-size:15px;font-family:inherit}
+/* El anillo de foco vuelve: el cambio de borde de 0,8px era invisible sobre
+   fondo oscuro y los 5 campos quedaban sin indicador (P-21). */
+.cnt-field input:focus-visible,.cnt-field textarea:focus-visible{outline:2px solid var(--ambar);outline-offset:2px;border-color:var(--ambar)}
 .cnt-field textarea{resize:vertical}
 .cnt-submit{border:none;cursor:pointer;padding:14px}
 .cnt-ok{display:flex;flex-direction:column;gap:12px;padding:30px 0;text-align:center}
@@ -53,15 +55,15 @@
 .cal-head{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:322px}
 .cal-month{font-family:var(--fh);font-weight:600;font-size:16px;text-transform:capitalize}
 .cal-nav{display:flex;gap:7px}
-.cal-nav button{width:32px;height:32px;display:grid;place-items:center;border-radius:9px;background:transparent;border:1px solid var(--line-2);color:var(--crema);cursor:pointer}
+.cal-nav button{width:44px;height:44px;display:grid;place-items:center;border-radius:9px;background:transparent;border:1px solid var(--line-2);color:var(--crema);cursor:pointer}
 .cal-nav button[disabled]{color:rgba(139,141,152,.35);cursor:default}
-.cal-dows,.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;max-width:322px}
+.cal-dows,.cal-days{display:grid;grid-template-columns:repeat(7,minmax(44px,1fr));gap:4px;max-width:none}
 .cal-dows{margin:18px 0 7px}
 .cal-dow{text-align:center;font-family:var(--fm);font-size:10px;letter-spacing:.5px;color:var(--piedra)}
-.cal-day{height:38px;display:grid;place-items:center;border-radius:9px;font-family:var(--fh);font-weight:600;font-size:13.5px;background:var(--panel-2);border:1px solid var(--line);color:var(--crema);cursor:pointer;transition:all .25s}
-.cal-day[disabled]{background:transparent;border-color:transparent;color:rgba(139,141,152,.4);cursor:default}
+.cal-day{min-height:44px;min-width:44px;display:grid;place-items:center;border-radius:9px;font-family:var(--fh);font-weight:600;font-size:13.5px;background:var(--panel-2);border:1px solid var(--line);color:var(--crema);cursor:pointer;transition:all .25s}
+.cal-day[aria-disabled="true"]{background:transparent;border-color:transparent;color:rgba(139,141,152,.7);cursor:default}
 .cal-day[aria-pressed="true"]{background:var(--ambar);border-color:var(--ambar);color:var(--grafito)}
-.cal-slots-wrap{max-width:322px;margin:20px 0 0;border-top:1px solid var(--line);padding-top:18px}
+.cal-slots-wrap{max-width:none;margin:20px 0 0;border-top:1px solid var(--line);padding-top:18px}
 .cal-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;max-width:322px;margin:12px 0 0}
 .cal-slot{font-family:var(--fm);font-size:13px;padding:11px 6px;border-radius:10px;background:var(--grafito);border:1px solid var(--line-2);color:var(--crema-dim);cursor:pointer;transition:all .25s}
 .cal-slot[aria-pressed="true"]{background:var(--ambar);border-color:var(--ambar);color:var(--grafito)}
@@ -160,3 +162,15 @@
 /* Acciones del panel de confirmación (P-16): el embudo no termina en pared. */
 .cnt-ok-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:18px 0 0}
 .cnt-ok-wa{font-size:14px;color:var(--ambar);text-decoration:underline}
+
+/* Área táctil y foco unificado del calendario y el estimador (P-21/P-22). */
+.cal-day:focus-visible,.cal-slot:focus-visible,.cal-confirm:focus-visible{outline:2px solid var(--ambar);outline-offset:2px}
+.cal-slot{min-height:44px}
+.cal-confirm{min-height:44px}
+.cnt-slider input[type=range]{height:44px;-webkit-appearance:none;appearance:none;background:transparent}
+.cnt-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--ambar);cursor:pointer;margin-top:-12px}
+.cnt-slider input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:var(--line-2)}
+/* Contraste del rótulo del resultado del estimador: 3,83:1 → sobre umbral. */
+.cnt-out-l{color:var(--crema-dim)}
+/* Espacio para que el lanzador flotante no tape contenido (P-23). */
+.cnt{padding-bottom:80px}

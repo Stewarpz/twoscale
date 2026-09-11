@@ -48,3 +48,5 @@
 
 /* El dashboard necesita más alto que la demo de Áurea. */
 .mck-iframe-tall { height: 900px; }
+/* Los marcos son paradas de tabulación: necesitan anillo (P-21). */
+.mck-iframe:focus-visible{outline:2px solid var(--ambar);outline-offset:3px}

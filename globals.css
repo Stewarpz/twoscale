@@ -98,3 +98,7 @@ input,button,textarea,select{font-family:inherit}
   .flowdot,.floaty,.gridbg{animation:none!important}
   html{scroll-behavior:auto}
 }
+/* Índigo aclarado para texto pequeño sobre fondos índigo oscuros: los pares
+   medidos estaban en 3,06:1 y 3,35:1, por debajo de 4,5:1 (P-21). */
+:root{--indigo-txt:#8E82F0}
+.hero-step-badge,.wf-edge-label{color:var(--indigo-txt)!important}
