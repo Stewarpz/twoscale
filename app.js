@@ -118,6 +118,13 @@ function applyRoute() {
   document.querySelectorAll('[data-page]').forEach((p) => {
     p.hidden = p.dataset.page !== store.state.page;
   });
+  // Un solo encabezado de nivel 1 accesible: el de la ruta visible. Antes
+  // coexistian cuatro H1 vivos, porque el enrutado solo conmuta visibilidad.
+  document.querySelectorAll('[data-route-title]').forEach((h) => {
+    const visible = !h.closest('[data-page]')?.hidden;
+    h.setAttribute('role', 'heading');
+    h.setAttribute('aria-level', visible ? '1' : '2');
+  });
 }
 
 /** Deja la vista al principio de la ruta destino. En contacto, sobre el

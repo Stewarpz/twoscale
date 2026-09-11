@@ -103,16 +103,7 @@
 .wordrot-item { display: block; height: 1.16em; line-height: 1.16em; color: var(--ambar); white-space: nowrap; }
 .cnt-h1 { line-height: 1.16; }
 
-/* ============ Señales de confianza, una a la vez ============ */
-@keyframes trustRoll {
-  0%,26.6%    { transform: translateY(0) }
-  33.3%,59.9% { transform: translateY(-25%) }
-  66.6%,93.2% { transform: translateY(-50%) }
-  100%        { transform: translateY(-75%) }
-}
-@keyframes trDot1 { 0%,27.7%{background:var(--ambar);width:17px} 33.4%,100%{background:#3a3a42;width:5px} }
-@keyframes trDot2 { 0%,27.7%{background:#3a3a42;width:5px} 33.4%,61%{background:var(--ambar);width:17px} 66.7%,100%{background:#3a3a42;width:5px} }
-@keyframes trDot3 { 0%,61%{background:#3a3a42;width:5px} 66.7%,94%{background:var(--ambar);width:17px} 100%{background:#3a3a42;width:5px} }
+/* ============ Señales de confianza, las tres a la vez ============ */
 
 .cnt-trust {
   max-width: 780px;
@@ -120,9 +111,9 @@
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
 }
-.trustrot { --trh: 78px; height: var(--trh); overflow: hidden; }
-.trustrot-track { animation: trustRoll 12s cubic-bezier(.72,0,.24,1) infinite; }
-.trustrot-item { height: var(--trh); display: flex; align-items: center; gap: 26px; }
+/* Rejilla estatica en lugar de carrusel rotativo (P-39). */
+.trustrot-track { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.trustrot-item { display: flex; align-items: baseline; gap: 12px; }
 .trustrot-v {
   flex: none; width: 118px; text-align: right;
   font-family: var(--fh); font-weight: 700;
@@ -130,14 +121,8 @@
   color: var(--ambar); line-height: 1.02;
 }
 .trustrot-l { flex: 1; min-width: 0; font-size: 17px; line-height: 1.5; color: var(--crema); text-wrap: pretty; }
-.trustrot-dots { max-width: 780px; display: flex; gap: 6px; margin: 16px 0 0; }
-.trustrot-dot { height: 5px; width: 5px; border-radius: 3px; background: #3a3a42; }
-.trustrot-dot:nth-child(1) { animation: trDot1 12s linear infinite; }
-.trustrot-dot:nth-child(2) { animation: trDot2 12s linear infinite; }
-.trustrot-dot:nth-child(3) { animation: trDot3 12s linear infinite; }
 
 @media (max-width: 1100px) {
-  .trustrot { --trh: 104px; }
   .trustrot-item { flex-direction: column; align-items: flex-start; justify-content: center; gap: 7px; }
   .trustrot-v { width: auto; text-align: left; }
 }
@@ -145,11 +130,6 @@
   .wordrot { height: auto; overflow: visible; }
   .wordrot-track { animation: none; }
   .wordrot-item:not(:first-child) { display: none; }
-  .trustrot { height: auto; overflow: visible; }
-  .trustrot-track { animation: none; }
-  .trustrot-item:last-child { display: none; }
-  .trustrot-item { border-top: 1px solid var(--line); }
-  .trustrot-dots { display: none; }
 }
 
 /* Captura de identidad antes de confirmar la reunión (P-14). */
@@ -174,3 +154,6 @@
 .cnt-out-l{color:var(--crema-dim)}
 /* Espacio para que el lanzador flotante no tape contenido (P-23). */
 .cnt{padding-bottom:80px}
+/* El rotador baja a subtítulo: su nombre accesible concatenaba las seis
+   palabras en una cadena sin sentido de 48 caracteres (P-30). */
+.cnt-h1-sub{font-size:17px;color:var(--crema-dim);max-width:60ch;text-wrap:pretty;margin:10px 0 0}

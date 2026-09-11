@@ -2,7 +2,7 @@
   <div class="abt-head aboutgrid">
     <div>
       <span class="sec-kicker" data-t="p_about_k"></span>
-      <h1 class="abt-h1" data-t="who_title"></h1>
+      <h2 class="abt-h1" data-route-title data-t="who_title"></h2>
     </div>
     <div>
       <p class="abt-lead" data-t="who_p1"></p>
@@ -11,26 +11,30 @@
     </div>
   </div>
 
-  <div class="abt-pillars pillargrid" data-stagger data-role="pillars"></div>
+  <!-- La rejilla de 4 bloques era un segundo catalogo de servicios que
+       reusaba la numeracion 01-04 sobre otro recorte del catalogo de 10
+       de #servicios: el 02 significaba una cosa en una ruta y otra en la
+       otra. Retirada (P-38). -->
 </section>
 
-<section class="abt-mission-wrap">
-  <div class="abt-mission" data-reveal="scale"><p data-t="about_mission"></p></div>
-</section>
+<!-- La frase puente repetia la promesa del hero y se interponia entre la
+     rejilla y los fundadores. Retirada (P-38). -->
 
 <section class="abt-block">
+  <h2 class="abt-h2" data-t="about_values_h"></h2>
   <div class="svc-lbl svc-lbl-cream" data-t="about_values"></div>
   <div class="abt-values pillargrid" data-stagger data-role="values"></div>
 </section>
 
 <section class="abt-block">
+  <h2 class="abt-h2" data-t="about_founders_h"></h2>
   <div class="svc-lbl svc-lbl-cream" data-t="about_founders"></div>
   <div class="abt-founders foundersgrid" data-stagger data-role="founders"></div>
 </section>
 
 <section class="abt-close-wrap">
   <div class="abt-close" data-reveal="scale">
-    <h2 data-t="about_close_t"></h2>
+    <p class="abt-close-t" data-t="about_close_t"></p>
     <a href="#contacto" class="btn-amber" data-t="about_close_cta"></a>
   </div>
 </section>

@@ -354,7 +354,10 @@ export default {
     const renderTrust = () => {
       const track = q('trust');
       if (!track) return;
-      track.replaceChildren(...TRUST.concat([TRUST[0]]).map((t) => {
+      // Sin duplicado de bucle: las tres se muestran a la vez. En carrusel,
+      // dos de las tres razones para rellenar el formulario quedaban
+      // ocultas justo encima del formulario (P-39).
+      track.replaceChildren(...TRUST.map((t) => {
         const row = document.createElement('div');
         row.className = 'trustrot-item';
         const v = document.createElement('span');

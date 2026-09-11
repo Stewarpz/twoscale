@@ -1,6 +1,5 @@
-/* modules/about/about.js — pilares, valores corporativos y fundadores. */
+/* modules/about/about.js — valores corporativos y fundadores. */
 
-import { PILLARS } from '../../data/process.js';
 import { VALUES, FOUNDERS } from '../../data/misc.js';
 
 /* Un ícono de línea por valor, en el orden en que VALUES los declara. */
@@ -22,18 +21,6 @@ export default {
     const q = (r) => host.querySelector(`[data-role="${r}"]`);
 
     const render = () => {
-      q('pillars').replaceChildren(...PILLARS.map((p) => {
-        const c = document.createElement('div');
-        c.className = 'abt-pillar';
-        c.innerHTML =
-          `<span class="abt-pillar-n">${p.n}</span>` +
-          '<h3 class="abt-pillar-t"></h3><p class="abt-pillar-d"></p><p class="abt-pillar-k"></p>';
-        c.querySelector('.abt-pillar-t').textContent = store.pick(p.t);
-        c.querySelector('.abt-pillar-d').textContent = store.pick(p.d);
-        c.querySelector('.abt-pillar-k').textContent = store.pick(p.k);
-        return c;
-      }));
-
       q('values').replaceChildren(...VALUES.map((v, i) => {
         const c = document.createElement('div');
         c.className = 'abt-value';
