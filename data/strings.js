@@ -92,7 +92,7 @@ export const STR = {
     p_login_k:'Área de cliente',p_login_t:'Tu operación, en un solo lugar',p_login_s:'Próximamente: dashboard con el estado de tus automatizaciones, métricas y soporte.',
     login_email:'Email',login_pass:'Contraseña',login_btn:'Ingresar',login_soon:'Próximamente',login_note:'Vista previa. El área de cliente estará disponible en una próxima versión.',
     form_phone:'WhatsApp o teléfono',form_sending:'Enviando…',form_error:'Error al enviar. Intenta de nuevo o escríbenos por WhatsApp.',
-    ag_error:'No se pudo enviar el resumen. Intenta de nuevo.',
+    ag_need_name:'Escribe tu nombre para continuar',ag_need_contact:'Necesitamos un WhatsApp o un correo para responderte',ag_bad_contact:'Escribe un WhatsApp (ej. +57 300 000 0000) o un correo válido',ag_error:'No se pudo enviar el resumen. Intenta de nuevo.',
     noscript_msg:'Este sitio necesita JavaScript para funcionar. Actívalo en tu navegador o escríbenos por WhatsApp al +57 300 403 2882.',
     faq_t:'Preguntas frecuentes'
   },
@@ -188,7 +188,7 @@ export const STR = {
     p_login_k:'Client area',p_login_t:'Your operation, in one place',p_login_s:'Coming soon: a dashboard with your automations status, metrics and support.',
     login_email:'Email',login_pass:'Password',login_btn:'Sign in',login_soon:'Coming soon',login_note:'Preview. The client area will be available in a future version.',
     form_phone:'WhatsApp or phone',form_sending:'Sending…',form_error:'Could not send. Try again or write to us on WhatsApp.',
-    ag_error:'Could not send the summary. Please try again.',
+    ag_need_name:'Type your name to continue',ag_need_contact:'We need a WhatsApp number or an email to reply',ag_bad_contact:'Type a WhatsApp number (e.g. +57 300 000 0000) or a valid email',ag_error:'Could not send the summary. Please try again.',
     noscript_msg:'This site requires JavaScript to work. Enable it in your browser or message us on WhatsApp at +57 300 403 2882.',
     faq_t:'Frequently asked questions'
   }

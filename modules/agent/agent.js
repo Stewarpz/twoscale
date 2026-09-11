@@ -35,7 +35,7 @@ export default {
     host.querySelector('[data-role="launcher-icon"]').insertAdjacentHTML('afterbegin', AGENT_ICON(19));
     host.querySelector('[data-role="avatar"]').insertAdjacentHTML('afterbegin', AGENT_ICON(20));
 
-    const state = { open: false, step: 0, picks: [], draft: '', typing: false, hidden: false };
+    const state = { open: false, step: 0, picks: [], draft: '', typing: false, hidden: false, sent: false };
     let typingTimer = null;
 
     const advance = (value) => {
@@ -46,6 +46,31 @@ export default {
       render();
       clearTimeout(typingTimer);
       typingTimer = setTimeout(() => { state.typing = false; render(); }, TYPING_MS);
+    };
+
+    /* Un envío por recorrido. La bandera solo se limpia en reset(). */
+    const enviarLead = (summary, wrap) => {
+      if (state.sent) return;
+      state.sent = true;
+      fetch(AGENT_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          source: 'agent',
+          // Identificador de envío: sin él, dos duplicados son
+          // indistinguibles en destino.
+          submissionId: `ag-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+          answers: summary,
+        }),
+      }).catch((err) => {
+        console.error('[twoscale] agent submit failed:', err);
+        state.sent = false;
+        const errMsg = document.createElement('p');
+        errMsg.className = 'ag-note';
+        errMsg.style.color = 'var(--ambar)';
+        errMsg.textContent = store.t('ag_error');
+        wrap.append(errMsg);
+      });
     };
 
     const reset = () => { state.step = 0; state.picks = []; state.draft = ''; state.typing = false; render(); };
@@ -96,7 +121,12 @@ export default {
       }
 
       log.replaceChildren(...nodes);
-      log.scrollTop = log.scrollHeight;
+      /* P-45: leer scrollHeight justo despues de reemplazar los hijos fuerza
+         un recalculo sincrono de layout en cada render del agente. Eran
+         463 ms de los 412 ms de reflujo total medidos tras corregir intro.js.
+         Aplazarlo al siguiente cuadro deja que el navegador haga el layout
+         una sola vez, por su cuenta. */
+      requestAnimationFrame(() => { log.scrollTop = log.scrollHeight; });
     };
 
     const renderFoot = (done, current) => {
@@ -124,24 +154,16 @@ export default {
         again.addEventListener('click', reset);
         wrap.append(cta, again);
 
-        /* Envío de datos al backend + WhatsApp */
         const summary = AGENT_FLOW.map((q, i) => ({
           key: store.pick(q.k),
           value: state.picks[i] || '—'
         }));
 
-        fetch(AGENT_ENDPOINT, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify({ source: 'agent', answers: summary }),
-        }).catch((err) => {
-          console.error('[twoscale] agent submit failed:', err);
-          const errMsg = document.createElement('p');
-          errMsg.className = 'ag-note';
-          errMsg.style.color = 'var(--ambar)';
-          errMsg.textContent = store.t('ag_error');
-          wrap.append(errMsg);
-        });
+        /* El envío NO vive aquí: renderFoot está suscrita al store y se
+           ejecuta un número indeterminado de veces. Dos pulsaciones del
+           conmutador de idioma generaban dos leads duplicados idénticos.
+           Se dispara una sola vez, desde enviarLead(). */
+        enviarLead(summary, wrap);
 
         /* Construir enlace de WhatsApp con resumen */
         const waMsgLines = summary.map((s) => `${s.key}: ${s.value}`);
@@ -188,13 +210,32 @@ export default {
         sendBtn.className = 'ag-send';
         sendBtn.setAttribute('aria-label', store.t('ag_send'));
         sendBtn.textContent = '→';
+        // I-72: los dos campos no tenian nombre accesible.
+        input.setAttribute('aria-label', store.pick(current.ph));
+        const aviso = document.createElement('p');
+        aviso.className = 'ag-note ag-invalid';
+        aviso.setAttribute('role', 'alert');
+        aviso.hidden = true;
+        const esContacto = current.id === 'contact';
+        const RE_CONTACTO = /^(\+?[0-9\s-]{7,15}|[^@\s]+@[^@\s]+\.[a-z]{2,})$/i;
         form.append(input, sendBtn);
         form.addEventListener('submit', (e) => {
           e.preventDefault();
           const v = state.draft.trim();
-          if (v) advance(v);
+          // I-71: antes, enviar vacio no avanzaba y no decia nada. El
+          // usuario quedaba bloqueado a un paso de completar.
+          if (!v) {
+            aviso.textContent = store.t(esContacto ? 'ag_need_contact' : 'ag_need_name');
+            aviso.hidden = false; input.focus(); return;
+          }
+          if (esContacto && !RE_CONTACTO.test(v)) {
+            aviso.textContent = store.t('ag_bad_contact');
+            aviso.hidden = false; input.focus(); return;
+          }
+          aviso.hidden = true;
+          advance(v);
         });
-        foot.append(form);
+        foot.append(form, aviso);
         requestAnimationFrame(() => input.focus());
       }
     };
