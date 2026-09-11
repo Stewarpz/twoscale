@@ -181,34 +181,23 @@ export default {
     /* ---------- calculadora de retorno ---------- */
     const roi = { hours: 10, emp: 3, cost: 12 };
 
-    const renderRoi = () => {
-      const monthlyHours = roi.hours * 4.33 * roi.emp;
-      const recover = Math.round(monthlyHours * 0.7);
-      const manual  = Math.round(monthlyHours * roi.cost);
-      const saving  = Math.round(recover * roi.cost);
+    const MANDOS = [
+      { key: 'hours', t: 'roi_hours', min: 1, max: 40, fmt: (v) => String(v) },
+      { key: 'emp',   t: 'roi_emp',   min: 1, max: 50, fmt: (v) => String(v) },
+      { key: 'cost',  t: 'roi_cost',  min: 3, max: 80, fmt: (v) => '$' + v },
+    ];
 
-      q('sliders').replaceChildren(...[
-        { key: 'hours', label: store.t('roi_hours'), min: 1, max: 40, show: roi.hours },
-        { key: 'emp',   label: store.t('roi_emp'),   min: 1, max: 50, show: roi.emp },
-        { key: 'cost',  label: store.t('roi_cost'),  min: 3, max: 80, show: '$' + roi.cost },
-      ].map((s) => {
-        const box = document.createElement('div');
-        box.className = 'cnt-slider';
-        box.innerHTML =
-          `<div class="cnt-slider-head"><span></span><span class="cnt-slider-v">${s.show}</span></div>` +
-          `<input type="range" min="${s.min}" max="${s.max}" value="${roi[s.key]}" aria-label="${s.label}">`;
-        box.querySelector('span').textContent = s.label;
-        box.querySelector('input').addEventListener('input', (e) => {
-          roi[s.key] = parseFloat(e.target.value) || 0;
-          renderRoi();
-        });
-        return box;
-      }));
-
+    /* Solo las tres cifras de salida. Se repinta en cada pulsacion del
+       deslizador, que es barato: tres celdas. */
+    const pintarSalida = () => {
+      const mensuales = roi.hours * 4.33 * roi.emp;
+      const recupera = Math.round(mensuales * 0.7);
+      const manual   = Math.round(mensuales * roi.cost);
+      const ahorro   = Math.round(recupera * roi.cost);
       q('roi-out').replaceChildren(...[
-        { v: nf(recover),       l: store.t('roi_recover'), hot: false, color: 'var(--crema)' },
-        { v: '$' + nf(manual),  l: store.t('roi_costlbl'), hot: false, color: 'var(--piedra)' },
-        { v: '$' + nf(saving),  l: store.t('roi_savelbl'), hot: true,  color: 'var(--crema)' },
+        { v: nf(recupera),     l: store.t('roi_recover'), hot: false, color: 'var(--crema)' },
+        { v: '$' + nf(manual), l: store.t('roi_costlbl'), hot: false, color: 'var(--piedra)' },
+        { v: '$' + nf(ahorro), l: store.t('roi_savelbl'), hot: true,  color: 'var(--crema)' },
       ].map((o) => {
         const cell = document.createElement('div');
         cell.className = 'cnt-out' + (o.hot ? ' cnt-out-hot' : '');
@@ -216,6 +205,33 @@ export default {
         cell.querySelector('.cnt-out-l').textContent = o.l;
         return cell;
       }));
+    };
+
+    /* Los deslizadores se construyen una sola vez, y se rehacen solo cuando
+       cambia el idioma. Antes cada pulsacion rehacia los tres: el navegador
+       perdia a mitad del gesto el elemento que estabas arrastrando, el
+       arrastre se cortaba en el primer pixel y solo quedaban los clics. */
+    const renderRoi = () => {
+      q('sliders').replaceChildren(...MANDOS.map((m) => {
+        const box = document.createElement('div');
+        box.className = 'cnt-slider';
+        box.innerHTML =
+          '<div class="cnt-slider-head"><span></span><span class="cnt-slider-v"></span></div>' +
+          `<input type="range" min="${m.min}" max="${m.max}" value="${roi[m.key]}" step="1">`;
+        const etiqueta = box.querySelector('.cnt-slider-head span');
+        const valor = box.querySelector('.cnt-slider-v');
+        const input = box.querySelector('input');
+        etiqueta.textContent = store.t(m.t);
+        valor.textContent = m.fmt(roi[m.key]);
+        input.setAttribute('aria-label', store.t(m.t));
+        input.addEventListener('input', () => {
+          roi[m.key] = parseFloat(input.value) || 0;
+          valor.textContent = m.fmt(roi[m.key]);
+          pintarSalida();
+        });
+        return box;
+      }));
+      pintarSalida();
     };
 
     /* ---------- datos de contacto ---------- */

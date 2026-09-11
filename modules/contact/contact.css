@@ -133,9 +133,15 @@
 .cnt-ok-wa{font-size:14px;color:var(--crema-dim);text-decoration:underline}
 
 /* Área táctil y foco unificado del calendario y el estimador (P-21/P-22). */
-.cnt-slider input[type=range]{height:44px;-webkit-appearance:none;appearance:none;background:transparent}
+/* pan-y deja que el dedo siga desplazando la pagina en vertical sobre el
+   control, pero el gesto horizontal va al deslizador y no al scroll. */
+.cnt-slider input[type=range]{height:44px;-webkit-appearance:none;appearance:none;background:transparent;touch-action:pan-y;cursor:pointer}
 .cnt-slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:var(--indigo-2);cursor:pointer;margin-top:-12px}
 .cnt-slider input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:4px;background:var(--line-2)}
+/* Firefox no entiende los pseudoelementos de arriba y se quedaba con el
+   control por defecto del sistema. */
+.cnt-slider input[type=range]::-moz-range-thumb{width:28px;height:28px;border:none;border-radius:50%;background:var(--indigo-2);cursor:pointer}
+.cnt-slider input[type=range]::-moz-range-track{height:4px;border-radius:4px;background:var(--line-2)}
 /* Contraste del rótulo del resultado del estimador: 3,83:1 → sobre umbral. */
 .cnt-out-l{color:var(--crema-dim)}
 /* Espacio para que el lanzador flotante no tape contenido (P-23). */
