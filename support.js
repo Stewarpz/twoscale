@@ -28,8 +28,13 @@
     const { props, preview } = parseDataProps(
       scriptEl?.getAttribute("data-props") ?? null
     );
+    // Si la plantilla viene envuelta en <template>, se lee de ahí: dentro de
+    // una plantilla el navegador no valida los atributos, de modo que las
+    // interpolaciones {{ }} no producen errores de parseo. Sin envoltura, se
+    // comporta como antes.
+    const tpl = dc.querySelector("template[data-dc-template]");
     return {
-      template: dc.innerHTML,
+      template: tpl ? tpl.innerHTML : dc.innerHTML,
       js: scriptEl ? scriptEl.textContent || "" : "",
       props,
       preview
@@ -40,7 +45,17 @@
     if (!openMatch) return null;
     const close = src.lastIndexOf("</x-dc>");
     if (close === -1 || close < openMatch.index) return null;
-    const template = src.slice(openMatch.index + openMatch[0].length, close);
+    let template = src.slice(openMatch.index + openMatch[0].length, close);
+    // Misma envoltura que en parseDcDocument: si la plantilla viene dentro de
+    // <template data-dc-template>, se desenvuelve aquí también. Sin ella, el
+    // motor recibiría la plantilla como contenido inerte y no renderizaría nada.
+    const tplOpen = /<template[^>]*\sdata-dc-template[^>]*>/.exec(template);
+    if (tplOpen) {
+      const tplClose = template.lastIndexOf("</template>");
+      if (tplClose > tplOpen.index) {
+        template = template.slice(tplOpen.index + tplOpen[0].length, tplClose);
+      }
+    }
     const doc = new DOMParser().parseFromString(src, "text/html");
     const scriptEl = doc.querySelector("script[data-dc-script]");
     const { props, preview } = parseDataProps(

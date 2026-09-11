@@ -8,6 +8,7 @@
 </head>
 <body>
 <x-dc>
+<template data-dc-template>
 <helmet>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -578,6 +579,10 @@
   </div>
 </div>
 
+<!-- La plantilla vive dentro de <template>: sus atributos no se validan
+     hasta que el motor los resuelve, asi que las interpolaciones {{ }}
+     dejan de producir errores de parseo en la consola. -->
+</template>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;es&quot;,&quot;en&quot;],&quot;default&quot;:&quot;es&quot;,&quot;tsType&quot;:&quot;'es'|'en'&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;defaultCurrency&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;COP&quot;,&quot;USD&quot;],&quot;default&quot;:&quot;COP&quot;,&quot;tsType&quot;:&quot;'COP'|'USD'&quot;,&quot;section&quot;:&quot;Demo&quot;},&quot;tourAutoplay&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Demo&quot;}}">
 class Component extends DCLogic {
