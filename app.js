@@ -9,11 +9,19 @@
 
 import { STR } from './data/strings.js';
 
+/** Idioma declarado en la direccion, si es uno de los dos que existen. */
+function langFromUrl() {
+  const v = new URLSearchParams(location.search).get('lang');
+  return v === 'en' || v === 'es' ? v : null;
+}
+
 /* ---------- store mínimo, sin dependencias ---------- */
 const listeners = new Set();
 export const store = {
   state: {
-    lang: localStorage.getItem('ts.lang') || 'es',
+    // El idioma de la direccion manda: es lo que hace enlazable y compartible
+    // la version en ingles, que antes solo existia como estado del navegador.
+    lang: langFromUrl() || localStorage.getItem('ts.lang') || 'es',
     page: location.hash.replace('#', '') || 'home',
   },
   /** Traduce una clave al idioma actual. */
@@ -32,7 +40,10 @@ export const store = {
   },
   set(patch) {
     Object.assign(this.state, patch);
-    if (patch.lang) localStorage.setItem('ts.lang', patch.lang);
+    if (patch.lang) {
+      localStorage.setItem('ts.lang', patch.lang);
+      applyLang(patch.lang);
+    }
     listeners.forEach((fn) => fn(this.state));
   },
   subscribe(fn) {
@@ -42,7 +53,9 @@ export const store = {
   go(page) {
     if (page === this.state.page) return;
     this.set({ page });
-    history.replaceState(null, '', '#' + page);
+    const url = new URL(location.href);
+    url.hash = page;
+    history.replaceState(null, '', url.pathname + url.search + url.hash);
     landRoute(page);
   },
 };
@@ -113,11 +126,38 @@ function mountModule(res) {
   host.dataset.ready = 'true';
 }
 
+/* ---------- idioma ---------- */
+/** El documento declaraba siempre español: un lector de pantalla leia el
+    contenido en ingles con fonetica española. Ademas el idioma queda escrito
+    en la direccion, para que la version en ingles se pueda enlazar. */
+function applyLang(lang) {
+  document.documentElement.lang = lang;
+  const url = new URL(location.href);
+  if (lang === 'es') url.searchParams.delete('lang');
+  else url.searchParams.set('lang', lang);
+  history.replaceState(null, '', url.pathname + url.search + url.hash);
+}
+
+/* ---------- metadatos por ruta ---------- */
+/** El documento tenia un solo titulo y una sola descripcion para las cuatro
+    rutas, asi que las tres interiores competian con la portada por el mismo
+    resultado de busqueda. */
+function applyMeta() {
+  const page = store.state.page;
+  const clave = ['home', 'servicios', 'nosotros', 'contacto'].includes(page) ? page : 'home';
+  document.title = store.t(`meta_${clave}_t`);
+  const desc = store.t(`meta_${clave}_d`);
+  document.querySelector('meta[name="description"]')?.setAttribute('content', desc);
+  document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
+  document.querySelector('meta[property="og:description"]')?.setAttribute('content', desc);
+}
+
 /* ---------- enrutado ---------- */
 function applyRoute() {
   document.querySelectorAll('[data-page]').forEach((p) => {
     p.hidden = p.dataset.page !== store.state.page;
   });
+  applyMeta();
   // Un solo encabezado de nivel 1 accesible: el de la ruta visible. Antes
   // coexistian cuatro H1 vivos, porque el enrutado solo conmuta visibilidad.
   document.querySelectorAll('[data-route-title]').forEach((h) => {
@@ -140,6 +180,7 @@ function landRoute(page) {
 
 /* ---------- arranque ---------- */
 (async function boot() {
+  applyLang(store.state.lang);
   // Antes de nada: las rutas que no corresponden al hash nacen ocultas y nunca
   // llegan a pintarse. Antes se aplicaba al final, y quien abría /#contacto
   // veía la portada entera durante unos tres segundos.

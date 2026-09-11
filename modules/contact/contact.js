@@ -35,14 +35,102 @@ export default {
     const form = q('form');
     const submitBtn = form.querySelector('button[type="submit"]');
 
+    /* Errores de validación visibles y anunciados (P-19).
+       Antes el navegador bloqueaba el envío sin marcar el campo, sin
+       asociarle mensaje y sin mover el foco: en lector de pantalla el
+       botón simplemente no hacía nada. */
+    const ERR_KEYS = {
+      name: 'form_err_name', email: 'form_err_email',
+      phone: 'form_err_phone', message: 'form_err_msg',
+    };
+    const campos = () => [...form.elements].filter((f) => f.name && ERR_KEYS[f.name]);
+
+    /* Con el formulario inválido el navegador bloquea el envío antes de emitir
+       «submit», así que el manejador de abajo nunca llegaba a correr. Apagamos
+       la validación interactiva nativa —desde JS, para que siga actuando si no
+       hay JS— y validamos con checkValidity() sobre los mismos atributos. */
+    form.noValidate = true;
+
+    const limpiarError = (f) => {
+      f.removeAttribute('aria-invalid');
+      f.removeAttribute('aria-describedby');
+      form.querySelector(`[data-err-for="${f.name}"]`)?.remove();
+    };
+
+    const marcarError = (f) => {
+      limpiarError(f);
+      const n = document.createElement('span');
+      n.className = 'cnt-field-err';
+      n.id = f.id + '-err';
+      n.dataset.errFor = f.name;
+      // data-t para que el cambio de idioma lo re-traduzca como al resto.
+      n.dataset.t = ERR_KEYS[f.name];
+      n.setAttribute('role', 'alert');
+      n.textContent = store.t(ERR_KEYS[f.name]);
+      f.insertAdjacentElement('afterend', n);
+      f.setAttribute('aria-invalid', 'true');
+      f.setAttribute('aria-describedby', n.id);
+    };
+
+    // El mensaje desaparece en cuanto el campo deja de ser inválido, no al
+    // siguiente intento de envío.
+    campos().forEach((f) => {
+      f.addEventListener('input', () => { if (f.checkValidity()) limpiarError(f); });
+    });
+
+    /* ---------- borrador local, 7 días (P-20) ---------- */
+    const DRAFT_KEY = 'ts.contact.draft';
+    const DRAFT_TTL = 7 * 24 * 60 * 60 * 1000;
+
+    const leerBorrador = () => {
+      try {
+        const raw = localStorage.getItem(DRAFT_KEY);
+        if (!raw) return null;
+        const d = JSON.parse(raw);
+        if (!d || typeof d.at !== 'number' || Date.now() - d.at > DRAFT_TTL) {
+          localStorage.removeItem(DRAFT_KEY);
+          return null;
+        }
+        return d.v;
+      } catch { return null; }
+    };
+    const borrarBorrador = () => { try { localStorage.removeItem(DRAFT_KEY); } catch {} };
+    const guardarBorrador = () => {
+      const v = Object.fromEntries(new FormData(form));
+      try {
+        if (Object.values(v).every((x) => !String(x).trim())) localStorage.removeItem(DRAFT_KEY);
+        else localStorage.setItem(DRAFT_KEY, JSON.stringify({ at: Date.now(), v }));
+      } catch { /* almacenamiento lleno o bloqueado: el formulario sigue usable */ }
+    };
+
+    const borrador = leerBorrador();
+    if (borrador) {
+      let repuesto = false;
+      for (const [k, val] of Object.entries(borrador)) {
+        const f = form.elements[k];
+        if (f && typeof val === 'string' && val.trim()) { f.value = val; repuesto = true; }
+      }
+      if (repuesto) q('draft').hidden = false;
+    }
+    form.addEventListener('input', guardarBorrador);
+    q('draft-reset').addEventListener('click', () => {
+      form.reset();
+      campos().forEach(limpiarError);
+      borrarBorrador();
+      q('draft').hidden = true;
+      form.elements.name?.focus();
+    });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
-      /* Validación nativa HTML5 */
+      /* Validación nativa HTML5, con la señalización propia encima */
       if (!form.checkValidity()) {
-        form.reportValidity();
+        const primero = campos().find((f) => !f.checkValidity());
+        if (primero) { marcarError(primero); primero.focus(); }
         return;
       }
+      campos().forEach(limpiarError);
 
       /* Recopilar datos */
       const data = Object.fromEntries(new FormData(form));
@@ -78,6 +166,8 @@ export default {
         });
         ok.hidden = false;
         ok.scrollIntoView({ block: 'center', behavior: 'auto' });
+        borrarBorrador();
+        q('draft').hidden = true;
 
         /* 3. Nada de abrir WhatsApp por nuestra cuenta: el traspaso de canal
            es una eleccion del usuario y vive en el enlace secundario del

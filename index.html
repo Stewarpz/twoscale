@@ -9,6 +9,12 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="canonical" href="https://twoscale.vercel.app/">
 
+<!-- La version en ingles vivia solo como estado del navegador: misma
+     direccion, sin forma de enlazarla ni de indexarla por separado. -->
+<link rel="alternate" hreflang="es" href="https://twoscale.vercel.app/">
+<link rel="alternate" hreflang="en" href="https://twoscale.vercel.app/?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://twoscale.vercel.app/">
+
 <meta property="og:type" content="website">
 <meta property="og:title" content="Twoscale.IA · Automatización, IA y software a la medida">
 <meta property="og:description" content="Cada hora que tu equipo pierde en tareas repetitivas es dinero que no vuelve. Automatizamos esas horas.">
@@ -47,6 +53,25 @@
 <link rel="stylesheet" href="modules/contact/contact.css" media="print" onload="this.media='all'">
 <link rel="stylesheet" href="modules/footer/footer.css">
 <link rel="stylesheet" href="modules/agent/agent.css">
+
+<!-- Datos estructurados de negocio. Sin direccion postal ni horario: no
+     estan confirmados y un dato inventado aqui es peor que su ausencia. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Twoscale.IA",
+  "url": "https://twoscale.vercel.app/",
+  "image": "https://twoscale.vercel.app/og-image.png",
+  "telephone": "+57 300 403 2882",
+  "areaServed": "Colombia",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Medellín",
+    "addressCountry": "CO"
+  }
+}
+</script>
 </head>
 
 <body>

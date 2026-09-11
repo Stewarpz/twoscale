@@ -13,6 +13,12 @@
    fondo oscuro y los 5 campos quedaban sin indicador (P-21). */
 .cnt-field input:focus-visible,.cnt-field textarea:focus-visible{outline:2px solid var(--ambar);outline-offset:2px;border-color:var(--ambar)}
 .cnt-field textarea{resize:vertical}
+/* Mensaje de validación por campo, y borde que acompaña al mensaje (P-19). */
+.cnt-field input[aria-invalid="true"],.cnt-field textarea[aria-invalid="true"]{border-color:#FFBE5C}
+.cnt-field-err{font-size:13px;line-height:1.45;color:#FFBE5C;text-wrap:pretty}
+/* Aviso de borrador recuperado (P-20). */
+.cnt-draft{display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;margin:0 0 14px;font-size:14px;color:var(--crema-dim)}
+.cnt-draft-reset{min-height:44px;display:inline-flex;align-items:center;padding:0 2px;background:none;border:none;cursor:pointer;font:inherit;color:var(--ambar);text-decoration:underline;text-underline-offset:3px}
 .cnt-submit{border:none;cursor:pointer;padding:14px}
 .cnt-ok{display:flex;flex-direction:column;gap:12px;padding:30px 0;text-align:center}
 .cnt-ok-icon{font-size:40px}

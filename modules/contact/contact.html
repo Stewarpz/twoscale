@@ -14,6 +14,10 @@
   <div class="cnt-grid contactgrid">
     <!-- Formulario -->
     <div class="cnt-panel" data-reveal="left">
+      <p class="cnt-draft" data-role="draft" hidden>
+        <span data-t="form_draft"></span>
+        <button type="button" class="cnt-draft-reset" data-role="draft-reset" data-t="form_draft_reset"></button>
+      </p>
       <form class="cnt-form" data-role="form" method="POST" action="https://formspree.io/f/myeyonwe">
         <label class="cnt-field" for="cf-name"><span data-t="form_name"></span><input id="cf-name" name="name" type="text" autocomplete="name" required minlength="2"></label>
         <label class="cnt-field" for="cf-email"><span data-t="form_email"></span><input id="cf-email" name="email" type="email" autocomplete="email" required></label>
