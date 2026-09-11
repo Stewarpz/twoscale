@@ -20,7 +20,10 @@ export const store = {
   t(key) {
     const val = STR[this.state.lang][key];
     if (val === undefined) console.warn(`[twoscale] missing translation: "${key}" (${this.state.lang})`);
-    return val ?? key;
+    // Solo devolvemos cadenas: un valor de otro tipo acabaría impreso como
+    // "[object Object]" al asignarlo a textContent.
+    if (typeof val !== 'string') return key;
+    return val;
   },
   /** Devuelve el valor del idioma actual de un objeto {es, en}. */
   pick(obj) {

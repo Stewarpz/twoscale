@@ -79,7 +79,7 @@ export const STR = {
     about_values:'Valores corporativos',about_founders:'Fundadores',
     about_close_t:'¿Ves tu operación reflejada aquí? Evaluémosla sin costo.',about_close_cta:'Hablar con un especialista',
     proof_cases_k:'RESULTADOS ILUSTRATIVOS',proof_cases_t:'Así se ve aplicado por sector.',
-    p_contact_k:{es:'Contacto',en:'Contact'},p_contact_t:'Hablemos de tu',p_contact_s:'Cuéntanos qué quieres automatizar y te proponemos una solución concreta.',
+    p_contact_k:'Contacto',p_contact_t:'Hablemos de tu',p_contact_s:'Cuéntanos qué quieres automatizar y te proponemos una solución concreta.',
     roi_t:'Estima tu ahorro',roi_s:'Un cálculo rápido y aproximado de lo que podrías recuperar automatizando tareas repetitivas.',
     roi_hours:'Horas semanales en tareas repetitivas',roi_emp:'Número de empleados',roi_cost:'Costo por hora (USD)',
     roi_recover:'Horas recuperables al mes',roi_costlbl:'Costo mensual del proceso manual',roi_savelbl:'Ahorro potencial al mes',roi_note:'Son estimaciones, no garantías. El impacto real depende de tu operación.',
