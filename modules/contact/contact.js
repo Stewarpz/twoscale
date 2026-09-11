@@ -150,7 +150,7 @@ export default {
     };
 
     /* ---------- agenda ---------- */
-    const cal = { offset: 0, day: null, slot: null, booked: false };
+    const cal = { offset: 0, day: null, slot: null, booked: false, name: '', mail: '' };
 
     const renderCal = () => {
       const box = q('cal');
@@ -217,9 +217,19 @@ export default {
         const b = document.createElement('button');
         b.className = 'cal-day';
         b.textContent = d;
-        b.disabled = off;
         b.setAttribute('aria-pressed', String(cal.day === iso));
-        if (!off) b.addEventListener('click', () => { cal.day = iso; cal.slot = null; renderCal(); });
+        if (off) {
+          // Pulsable pero no seleccionable: antes no devolvia nada y el
+          // usuario no distinguia el fallo de dedo del sitio roto.
+          b.setAttribute('aria-disabled', 'true');
+          b.classList.add('cal-day-off');
+          b.addEventListener('click', () => {
+            const e = box.querySelector('.cal-err');
+            if (e) { e.textContent = store.t('cal_weekend'); e.hidden = false; }
+          });
+        } else {
+          b.addEventListener('click', () => { cal.day = iso; cal.slot = null; renderCal(); });
+        }
         days.append(b);
       }
       box.append(days);
@@ -246,12 +256,77 @@ export default {
         box.append(hint);
       }
 
+      const ready = !!(cal.day && cal.slot);
+
+      /* Con día y hora elegidos pedimos nombre y correo: sin un identificador
+         no hay a quién confirmar, y antes la pantalla de éxito se pintaba sin
+         que saliera una sola petición del navegador. */
+      let nameI = null, mailI = null;
+      if (ready) {
+        const who = document.createElement('div');
+        who.className = 'cal-who';
+        who.innerHTML =
+          '<label class="cnt-field"><span></span><input type="text" name="cal_name" autocomplete="name" required></label>' +
+          '<label class="cnt-field"><span></span><input type="email" name="cal_email" autocomplete="email" required></label>';
+        const [ln, lm] = who.querySelectorAll('span');
+        ln.textContent = store.t('cal_name');
+        lm.textContent = store.t('cal_mail');
+        [nameI, mailI] = who.querySelectorAll('input');
+        nameI.value = cal.name; mailI.value = cal.mail;
+        nameI.addEventListener('input', (e) => { cal.name = e.target.value; });
+        mailI.addEventListener('input', (e) => { cal.mail = e.target.value; });
+        box.append(who);
+      }
+
+      const err = document.createElement('p');
+      err.className = 'cal-err';
+      err.setAttribute('role', 'alert');
+      err.hidden = true;
+      box.append(err);
+
       const confirm = document.createElement('button');
       confirm.className = 'cal-confirm';
-      confirm.textContent = store.t('cal_btn');
-      const ready = !!(cal.day && cal.slot);
       confirm.dataset.ready = String(ready);
-      if (ready) confirm.addEventListener('click', () => { cal.booked = true; renderCal(); });
+      confirm.disabled = !ready;                       // I-58: deshabilitado de verdad
+      if (ready) {
+        const [yy, mm, dd] = cal.day.split('-').map(Number);
+        const L2 = store.state.lang;
+        const pretty = L2 === 'es' ? `${dd} de ${MONTHS.es[mm - 1]}` : `${MONTHS.en[mm - 1]} ${dd}`;
+        confirm.textContent = `${store.t('cal_confirm_for')} ${pretty} · ${cal.slot}`;
+        confirm.addEventListener('click', async () => {
+          if (!nameI.value.trim() || !mailI.checkValidity()) {
+            const bad = !nameI.value.trim() ? nameI : mailI;
+            err.textContent = store.t(bad === nameI ? 'cal_name' : 'cal_mail');
+            err.hidden = false;
+            bad.focus();
+            return;
+          }
+          err.hidden = true;
+          confirm.disabled = true;
+          confirm.textContent = store.t('cal_sending');
+          try {
+            const res = await fetch(FORM_ENDPOINT, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify({
+                source: 'agenda', day: cal.day, slot: cal.slot,
+                name: nameI.value.trim(), email: mailI.value.trim(),
+              }),
+            });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            cal.booked = true;                          // solo tras respuesta correcta
+            renderCal();
+          } catch (e) {
+            console.error('[twoscale] reserva fallida:', e);
+            err.textContent = store.t('cal_err');
+            err.hidden = false;
+            confirm.disabled = false;
+            confirm.textContent = store.t('cal_btn');
+          }
+        });
+      } else {
+        confirm.textContent = store.t('cal_btn_wait');
+      }
       box.append(confirm);
     };
 

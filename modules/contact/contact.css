@@ -149,3 +149,11 @@
   .trustrot-item { border-top: 1px solid var(--line); }
   .trustrot-dots { display: none; }
 }
+
+/* Captura de identidad antes de confirmar la reunión (P-14). */
+.cal-who{display:grid;gap:10px;margin:18px 0 0}
+.cal-who .cnt-field span{display:block;font-family:var(--fm);font-size:12px;letter-spacing:.6px;color:var(--crema-dim);margin:0 0 6px}
+.cal-err{margin:12px 0 0;font-size:13px;color:#FFBE5C}
+.cal-confirm[disabled]{cursor:default}
+/* Día no seleccionable: no depende solo del contraste (P-21). */
+.cal-day-off{text-decoration:line-through;cursor:default}
