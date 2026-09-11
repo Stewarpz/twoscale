@@ -8,6 +8,10 @@ import { FAQ, CONTACT_WORDS, TRUST } from '../../data/misc.js';
 /* ========== CONFIGURACIÓN — CAMBIAR ANTES DE PRODUCCIÓN ========== */
 const FORM_ENDPOINT = 'https://formspree.io/f/myeyonwe';
 const WHATSAPP_NUMBER = '573004032882';
+/* Enlace directo a la conversación, usado en el bloque de contacto y en la
+   recuperación del error de envío. */
+const WA_LINK = `https://wa.me/${WHATSAPP_NUMBER}?text=` +
+  encodeURIComponent('Hola, quiero automatizar mi operación.');
 /* ================================================================= */
 
 const MONTHS = {
@@ -77,6 +81,7 @@ export default {
 
       } catch (err) {
         console.error('[twoscale] form submit failed:', err);
+        q('err-wa').href = WA_LINK;
         q('err').hidden = false;
         submitBtn.disabled = false;
         submitBtn.textContent = originalText;
@@ -125,16 +130,21 @@ export default {
 
     /* ---------- datos de contacto ---------- */
     const renderContacts = () => {
+      // El correo se retira mientras su dominio no resuelva: no recibe nada.
+      // El WhatsApp deja de ser texto inerte y pasa a ser un enlace pulsable.
       q('contacts').replaceChildren(...[
-        [store.t('contact_wa'),   '+57 300 403 2882'],
-        [store.t('contact_mail'), 'hola@twoscale.ia'],
-        [store.t('contact_city'), 'Medellín, Colombia'],
-      ].map(([l, v]) => {
+        [store.t('contact_wa'),   store.t('contact_wa_v'), WA_LINK],
+        [store.t('contact_city'), 'Medellín, Colombia',    null],
+      ].map(([l, v, href]) => {
         const c = document.createElement('div');
         c.className = 'cnt-contact';
-        c.innerHTML = '<div class="cnt-contact-l"></div><div class="cnt-contact-v"></div>';
+        c.innerHTML = '<div class="cnt-contact-l"></div>';
         c.querySelector('.cnt-contact-l').textContent = l;
-        c.querySelector('.cnt-contact-v').textContent = v;
+        const val = document.createElement(href ? 'a' : 'div');
+        val.className = 'cnt-contact-v';
+        val.textContent = v;
+        if (href) { val.href = href; val.target = '_blank'; val.rel = 'noopener'; }
+        c.append(val);
         return c;
       }));
     };

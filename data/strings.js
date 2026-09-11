@@ -83,7 +83,7 @@ export const STR = {
     roi_t:'Estima tu ahorro',roi_s:'Un cálculo rápido y aproximado de lo que podrías recuperar automatizando tareas repetitivas.',
     roi_hours:'Horas semanales en tareas repetitivas',roi_emp:'Número de empleados',roi_cost:'Costo por hora (USD)',
     roi_recover:'Horas recuperables al mes',roi_costlbl:'Costo mensual del proceso manual',roi_savelbl:'Ahorro potencial al mes',roi_note:'Son estimaciones, no garantías. El impacto real depende de tu operación.',
-    form_name:'Nombre',form_email:'Email',form_biz:'Tu negocio / industria',form_msg:'¿Qué quieres automatizar?',form_send:'Quiero automatizar mi negocio',form_ok:'¡Gracias! Te contactaremos muy pronto.',form_note:'Escribimos de vuelta en menos de 2 horas en horario laboral (GMT-5, lunes a viernes).',
+    form_name:'Nombre',form_email:'Email',form_biz:'Tu negocio / industria',form_msg:'¿Qué quieres automatizar?',form_send:'Quiero automatizar mi negocio',form_ok:'¡Gracias! Te contactaremos muy pronto.',contact_wa_v:'Escribir por WhatsApp · +57 300 403 2882',form_error_wa:'Escríbenos por WhatsApp',form_note:'Escribimos de vuelta en menos de 2 horas en horario laboral (GMT-5, lunes a viernes).',
     contact_wa:'WhatsApp',contact_mail:'Email',contact_city:'Ciudad',
     cal_k:'Agenda una reunión',cal_t:'Reserva 30 minutos con nosotros',cal_s:'Elige el día y la hora que te sirva. Revisamos tu operación y te decimos qué se puede automatizar y qué no vale la pena.',
     cal_b1:'Diagnóstico de tu proceso actual, sin costo',cal_b2:'Te decimos qué automatizar primero y por qué',cal_b3:'Sales con un alcance y un rango de precio concretos',
@@ -93,7 +93,7 @@ export const STR = {
     login_email:'Email',login_pass:'Contraseña',login_btn:'Ingresar',login_soon:'Próximamente',login_note:'Vista previa. El área de cliente estará disponible en una próxima versión.',
     form_phone:'WhatsApp o teléfono',form_sending:'Enviando…',form_error:'Error al enviar. Intenta de nuevo o escríbenos por WhatsApp.',
     ag_error:'No se pudo enviar el resumen. Intenta de nuevo.',
-    noscript_msg:'Este sitio necesita JavaScript para funcionar. Actívalo en tu navegador o escríbenos a hola@twoscale.ia.',
+    noscript_msg:'Este sitio necesita JavaScript para funcionar. Actívalo en tu navegador o escríbenos por WhatsApp al +57 300 403 2882.',
     faq_t:'Preguntas frecuentes'
   },
   en:{
@@ -179,7 +179,7 @@ export const STR = {
     roi_t:'Estimate your savings',roi_s:'A quick, rough estimate of what you could recover by automating repetitive tasks.',
     roi_hours:'Weekly hours on repetitive tasks',roi_emp:'Number of employees',roi_cost:'Cost per hour (USD)',
     roi_recover:'Recoverable hours per month',roi_costlbl:'Monthly cost of the manual process',roi_savelbl:'Potential monthly savings',roi_note:'These are estimates, not guarantees. Real impact depends on your operation.',
-    form_name:'Name',form_email:'Email',form_biz:'Your business / industry',form_msg:'What do you want to automate?',form_send:'Automate my business',form_ok:'Thanks! We will reach out very soon.',form_note:'We write back within 2 business hours (GMT-5, Monday to Friday).',
+    form_name:'Name',form_email:'Email',form_biz:'Your business / industry',form_msg:'What do you want to automate?',form_send:'Automate my business',form_ok:'Thanks! We will reach out very soon.',contact_wa_v:'Message us on WhatsApp · +57 300 403 2882',form_error_wa:'Message us on WhatsApp',form_note:'We write back within 2 business hours (GMT-5, Monday to Friday).',
     contact_wa:'WhatsApp',contact_mail:'Email',contact_city:'City',
     cal_k:'Book a meeting',cal_t:'Reserve 30 minutes with us',cal_s:'Pick the day and time that works for you. We review your operation and tell you what is worth automating and what is not.',
     cal_b1:'A free diagnosis of your current process',cal_b2:'We tell you what to automate first and why',cal_b3:'You leave with a concrete scope and price range',
@@ -189,7 +189,7 @@ export const STR = {
     login_email:'Email',login_pass:'Password',login_btn:'Sign in',login_soon:'Coming soon',login_note:'Preview. The client area will be available in a future version.',
     form_phone:'WhatsApp or phone',form_sending:'Sending…',form_error:'Could not send. Try again or write to us on WhatsApp.',
     ag_error:'Could not send the summary. Please try again.',
-    noscript_msg:'This site requires JavaScript to work. Enable it in your browser or write to us at hola@twoscale.ia.',
+    noscript_msg:'This site requires JavaScript to work. Enable it in your browser or message us on WhatsApp at +57 300 403 2882.',
     faq_t:'Frequently asked questions'
   }
 };
