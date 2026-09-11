@@ -112,6 +112,22 @@ async function fetchModule(name) {
   }
 }
 
+/* Un modulo de una ruta oculta no se rehace: conmutar el idioma rehacia los
+   catorce, incluidos los de las tres rutas que nadie estaba viendo. No hace
+   falta cola de pendientes, porque cambiar de ruta pasa siempre por el store
+   y vuelve a invocar a todos los suscriptores; applyRoute esta suscrito antes
+   que los modulos, asi que para entonces la ruta destino ya esta visible. */
+function storeFor(host) {
+  const page = host.closest('[data-page]');
+  if (!page) return store;
+  return {
+    __proto__: store,
+    subscribe(fn) {
+      return store.subscribe((state) => { if (!page.hidden) fn(state); });
+    },
+  };
+}
+
 function mountModule(res) {
   if (!res) return;
   const { name, host, markup, mod, err } = res;
@@ -122,7 +138,7 @@ function mountModule(res) {
   }
   if (markup) host.innerHTML = markup;
   fillText(host);
-  if (mod?.default?.mount) mod.default.mount(host, store);
+  if (mod?.default?.mount) mod.default.mount(host, storeFor(host));
   host.dataset.ready = 'true';
 }
 
@@ -160,6 +176,10 @@ function applyRoute() {
   applyMeta();
   // Un solo encabezado de nivel 1 accesible: el de la ruta visible. Antes
   // coexistian cuatro H1 vivos, porque el enrutado solo conmuta visibilidad.
+  // La ruta que se muestra se retraduce al mostrarse: asi conmutar el idioma
+  // no tiene que recorrer tambien las tres rutas ocultas (P-32).
+  const rutaVisible = document.querySelector(`[data-page="${store.state.page}"]`);
+  if (rutaVisible) fillText(rutaVisible);
   document.querySelectorAll('[data-route-title]').forEach((h) => {
     const visible = !h.closest('[data-page]')?.hidden;
     h.setAttribute('role', 'heading');
@@ -185,12 +205,20 @@ function landRoute(page) {
   // llegan a pintarse. Antes se aplicaba al final, y quien abría /#contacto
   // veía la portada entera durante unos tres segundos.
   applyRoute();
+  // Suscrito antes que los modulos a proposito: cuando sus renders corran, la
+  // ruta destino ya estara visible y la de origen oculta.
+  store.subscribe(applyRoute);
+  /* El cambio de idioma re-traduce lo declarativo y avisa a los modulos. Solo
+     recorre lo que se ve: cabecera, pie, agente y la ruta visible —esta
+     ultima, dentro de applyRoute—. Antes recorria los 95 elementos
+     traducibles del documento, 65 de ellos en rutas ocultas. */
+  const fijos = ['header', 'footer', 'agent']
+    .map((m) => document.querySelector(`[data-module="${m}"]`))
+    .filter(Boolean);
+  store.subscribe(() => fijos.forEach(fillText));
   const pending = MODULES.map(fetchModule);
   for (const p of pending) mountModule(await p);
   applyRoute();
-  store.subscribe(applyRoute);
-  // El cambio de idioma re-traduce todo lo declarativo y avisa a los módulos.
-  store.subscribe(() => fillText(document.body));
   window.addEventListener('hashchange', () => {
     const page = location.hash.replace('#', '') || 'home';
     if (page !== store.state.page) store.go(page);
