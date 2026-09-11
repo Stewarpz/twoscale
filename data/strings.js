@@ -1,7 +1,7 @@
 // Todo el copy del sitio, en español e inglés.
 export const STR = {
   es:{
-    nav_home:'Inicio',nav_serv:'Servicios',nav_chat:'Chatbots IA',nav_web:'Desarrollo Web',nav_apps:'Apps y Sistemas',nav_ind:'Industrias',nav_pack:'Paquetes',nav_about:'Nosotros',nav_cases:'Casos',nav_contact:'Contacto',nav_login:'Área cliente',nav_cta:'Agendar diagnóstico gratuito de 30 min',
+    nav_home:'Inicio',nav_serv:'Servicios',nav_chat:'Chatbots IA',nav_web:'Desarrollo Web',nav_apps:'Apps y Sistemas',nav_ind:'Industrias',nav_pack:'Paquetes',nav_about:'Nosotros',nav_cases:'Casos',nav_contact:'Contacto',nav_login:'Área cliente',nav_cta:'Agendar diagnóstico gratuito de 30 min',nav_cta_corto:'Agendar diagnóstico',
     hero_kicker:'Automatización e IA aplicada · Medellín, Colombia',hero_title_1:'Automatizamos tu operación',hero_title_2:'para que crezcas sin sumar horas.',
     hero_sub:'Workflows, agentes de IA y software a la medida para PYMES y empresas de servicios. Conectado a las herramientas que ya usas, funcionando en 14 días. Trabajamos con PYMES de Medellín y de toda Colombia, en tu mismo horario (GMT-5).',
     hero_cta1:'Agendar diagnóstico gratuito de 30 min',cta_wa:'Escribir por WhatsApp',cta_risk:'Sin costo, sin compromiso y sin permanencia. Sales con un alcance y un rango de precio concretos.',
@@ -108,7 +108,7 @@ export const STR = {
     faq_t:'Preguntas frecuentes'
   },
   en:{
-    nav_home:'Home',nav_serv:'Services',nav_chat:'AI Chatbots',nav_web:'Web Development',nav_apps:'Apps & Systems',nav_ind:'Industries',nav_pack:'Packages',nav_about:'About',nav_cases:'Work',nav_contact:'Contact',nav_login:'Client area',nav_cta:'Book a free 30-min diagnostic',
+    nav_home:'Home',nav_serv:'Services',nav_chat:'AI Chatbots',nav_web:'Web Development',nav_apps:'Apps & Systems',nav_ind:'Industries',nav_pack:'Packages',nav_about:'About',nav_cases:'Work',nav_contact:'Contact',nav_login:'Client area',nav_cta:'Book a free 30-min diagnostic',nav_cta_corto:'Book a diagnostic',
     hero_kicker:'Applied automation and AI · Medellín, Colombia',hero_title_1:'We automate your operation',hero_title_2:'so you grow without adding headcount.',
     hero_sub:'Workflows, AI agents and custom software for SMBs and service companies. Wired into the tools you already use, running in 14 days. We work with SMBs in Medellín and across Colombia, in your own time zone (GMT-5).',
     hero_cta1:'Book a free 30-min diagnostic',cta_wa:'Message us on WhatsApp',cta_risk:'No cost, no commitment, no lock-in. You leave with a concrete scope and price range.',

@@ -87,7 +87,7 @@
   padding: 48px 48px;
   text-align: center;
 }
-.abt-close .btn-amber { display: inline-block; margin-top: 24px; }
+.abt-close .btn-amber { display: inline-flex; margin-top: 24px; }
 
 @media (max-width: 1100px) {
   .abt-values { grid-template-columns: 1fr 1fr; }

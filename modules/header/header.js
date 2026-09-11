@@ -27,7 +27,14 @@ export default {
       return a;
     };
 
+    /* Por debajo de 520px el llamado a la accion de la barra medía 294px y
+       empujaba el boton de menu fuera de la pantalla: alli lleva la etiqueta
+       corta. En el cajon el texto sigue completo, que hay sitio de sobra. */
+    const estrecho = window.matchMedia('(max-width: 520px)');
+    const ctaBarra = host.querySelector('.hdr-inner .hdr-cta');
+
     const render = () => {
+      if (ctaBarra) ctaBarra.textContent = store.t(estrecho.matches ? 'nav_cta_corto' : 'nav_cta');
       links.replaceChildren(...ROUTES.map((r) => makeLink(r, 'hdr-link')));
       drawer.replaceChildren(...ROUTES.map((r) => makeLink(r, '')));
 
@@ -89,5 +96,6 @@ export default {
 
     render();
     store.subscribe(render);
+    estrecho.addEventListener('change', render);
   },
 };

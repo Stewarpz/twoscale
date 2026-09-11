@@ -329,7 +329,7 @@ export default {
         return s;
       });
       q('deliv').replaceChildren(...listOf(store.pick(x.deliv), '✓', AMBER));
-      q('meas').replaceChildren(...listOf(store.pick(x.meas), '→', 'var(--indigo-2)'));
+      q('meas').replaceChildren(...listOf(store.pick(x.meas), '→', 'var(--indigo-txt)'));
 
       const phases = store.pick(x.phases);
       const row = [];

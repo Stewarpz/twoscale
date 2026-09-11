@@ -16,7 +16,7 @@
 .hero-sub{font-size:clamp(17px,1.5vw,21px);color:var(--crema-dim);max-width:36em;margin:24px 0 0;text-wrap:pretty}
 
 .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin:32px 0 0}
-.btn-amber{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--grafito);background:var(--ambar);padding:12px 24px;border-radius:10px;text-decoration:none;transition:background .25s}
+.btn-amber{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--grafito);background:var(--ambar);min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:12px 24px;border-radius:10px;text-decoration:none;transition:background .25s}
 .btn-amber:hover{background:#ffbe5c;color:var(--grafito)}
 .btn-ghost{font-family:var(--fh);font-weight:600;font-size:14px;color:var(--crema);background:transparent;border:1px solid var(--line-2);padding:12px 24px;border-radius:10px;text-decoration:none;transition:border-color .25s,color .25s}
 .btn-ghost:hover{border-color:var(--ambar);color:var(--ambar)}

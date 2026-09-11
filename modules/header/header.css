@@ -47,6 +47,17 @@
   .menu-btn{display:inline-grid}
 }
 
+/* Por debajo de 520px la barra no daba de si: marca, idioma, llamado a la
+   accion y boton de menu sumaban 443px sobre 390 disponibles, y el boton de
+   menu —la unica navegacion que queda a ese ancho— caia fuera de la pantalla.
+   Se aprieta el interlineado horizontal y el llamado a la accion baja al
+   escalon de 12px; su etiqueta corta la pone header.js. */
+@media(max-width:520px){
+  .hdr-inner{padding:0 16px;gap:12px}
+  .hdr-actions{gap:8px}
+  .hdr-cta.mainnav{font-size:12px;padding:0 12px}
+}
+
 
 /* El cajón se ancla a la ventana bajo la barra, no a la barra: la barra
    vuelve a ser sticky (ver la declaración de arriba) y el cajón sigue sin
