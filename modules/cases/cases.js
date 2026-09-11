@@ -7,6 +7,7 @@ export default {
 
   mount(host, store) {
     const grid = host.querySelector('[data-role="grid"]');
+    if (!grid) return;   // el bloque ya no pinta tarjetas (P-34)
 
     const render = () => {
       grid.replaceChildren(...CASES.map((c) => {
