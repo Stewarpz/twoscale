@@ -79,22 +79,36 @@ const MODULES = [
   'about', 'contact', 'footer', 'agent',
 ];
 
-async function loadModule(name) {
+/* La descarga es simultánea; la inserción en el documento NO. Si cada módulo
+   se insertara al resolver su propia petición, el orden dependería de la red:
+   cuando hero ganaba la carrera a intro, la inserción posterior de intro lo
+   empujaba casi una pantalla y el desplazamiento acumulado llegaba a 0,92. */
+async function fetchModule(name) {
   const host = document.querySelector(`[data-module="${name}"]`);
-  if (!host) return;
+  if (!host) return null;
   try {
     const [markup, mod] = await Promise.all([
       fetch(`modules/${name}/${name}.html`).then((r) => (r.ok ? r.text() : '')),
       import(`./modules/${name}/${name}.js`).catch(() => null),
     ]);
-    if (markup) host.innerHTML = markup;
-    fillText(host);
-    if (mod?.default?.mount) mod.default.mount(host, store);
-    host.dataset.ready = 'true';
+    return { name, host, markup, mod };
   } catch (err) {
+    return { name, host, err };
+  }
+}
+
+function mountModule(res) {
+  if (!res) return;
+  const { name, host, markup, mod, err } = res;
+  if (err) {
     console.error(`[twoscale] módulo "${name}" falló:`, err);
     host.innerHTML = `<div style="padding:24px;color:#F0A93E;font-size:14px;font-family:monospace;border:1px solid rgba(240,169,62,.3);border-radius:12px;margin:12px 0">⚠️ Módulo «${name}» no pudo cargarse.</div>`;
+    return;
   }
+  if (markup) host.innerHTML = markup;
+  fillText(host);
+  if (mod?.default?.mount) mod.default.mount(host, store);
+  host.dataset.ready = 'true';
 }
 
 /* ---------- enrutado ---------- */
@@ -117,7 +131,12 @@ function landRoute(page) {
 
 /* ---------- arranque ---------- */
 (async function boot() {
-  await Promise.all(MODULES.map(loadModule));
+  // Antes de nada: las rutas que no corresponden al hash nacen ocultas y nunca
+  // llegan a pintarse. Antes se aplicaba al final, y quien abría /#contacto
+  // veía la portada entera durante unos tres segundos.
+  applyRoute();
+  const pending = MODULES.map(fetchModule);
+  for (const p of pending) mountModule(await p);
   applyRoute();
   store.subscribe(applyRoute);
   // El cambio de idioma re-traduce todo lo declarativo y avisa a los módulos.
