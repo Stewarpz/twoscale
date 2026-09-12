@@ -99,27 +99,31 @@
 
 /* ============ Señales de confianza, las tres a la vez ============ */
 
-.cnt-trust {
-  max-width: 780px;
-  margin: 32px 0 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+/* Las tres senales eran filas de texto suelto separadas por dos lineas: la
+   cifra no tenia donde apoyarse y el bloque se leia plano. Ahora cada una es
+   una tarjeta con la cifra dentro de un disco. El disco es neutro a
+   proposito: el ambar esta reservado a los botones de accion y el indigo
+   significa flujo automatizado, asi que teñirlo diluiria las dos cosas
+   (P-43). */
+.cnt-trust { max-width: 780px; margin: 32px 0 0; }
+.trustrot-track { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(212px, 1fr)); }
+.trustrot-item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 16px;
+  background: var(--grafito); border: 1px solid var(--line-2);
+  border-radius: 16px; padding: 24px;
+  transition: border-color .25s, background .25s;
 }
-/* Rejilla estatica en lugar de carrusel rotativo (P-39). */
-.trustrot-track { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
-.trustrot-item { display: flex; align-items: baseline; gap: 12px; }
+.trustrot-item:hover { background: var(--grafito-2); }
 .trustrot-v {
-  flex: none; width: 118px; text-align: right;
+  flex: none; width: 88px; height: 88px;
+  display: grid; place-items: center;
+  border-radius: 50%; border: 1px solid var(--line-2);
+  background: radial-gradient(circle at 32% 26%, var(--panel-2), var(--grafito-2));
   font-family: var(--fh); font-weight: 700;
-  font-size: 28px; letter-spacing: -1px; white-space: nowrap;
-  color: var(--crema); line-height: 1.02;
+  font-size: 21px; letter-spacing: -.5px; white-space: nowrap;
+  color: var(--crema); line-height: 1;
 }
-.trustrot-l { flex: 1; min-width: 0; font-size: 17px; line-height: 1.5; color: var(--crema); text-wrap: pretty; }
-
-@media (max-width: 1100px) {
-  .trustrot-item { flex-direction: column; align-items: flex-start; justify-content: center; gap: 7px; }
-  .trustrot-v { width: auto; text-align: left; }
-}
+.trustrot-l { min-width: 0; font-size: 14px; line-height: 1.5; color: var(--crema-dim); text-wrap: pretty; }
 @media (prefers-reduced-motion: reduce) {
   .wordrot { height: auto; overflow: visible; }
   .wordrot-track { animation: none; }
@@ -130,7 +134,12 @@
 /* Día no seleccionable: no depende solo del contraste (P-21). */
 /* Acciones del panel de confirmación (P-16): el embudo no termina en pared. */
 .cnt-ok-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin:16px 0 0}
-.cnt-ok-wa{font-size:14px;color:var(--crema-dim);text-decoration:underline}
+/* Era un enlace subrayado junto a un boton solido: parecia una nota al pie,
+   no la segunda accion que es. Pasa a boton secundario —contorno, sin
+   relleno— para que se lea como accion sin disputarle el peso al primario,
+   que es el unico ambar de la ruta. */
+.cnt-ok-wa{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 24px;border:1px solid var(--line-2);border-radius:10px;font-family:var(--fh);font-weight:600;font-size:14px;color:var(--crema);text-decoration:none;transition:border-color .25s,background .25s}
+.cnt-ok-wa:hover{border-color:var(--crema-dim);background:var(--panel);color:var(--crema)}
 
 /* Área táctil y foco unificado del calendario y el estimador (P-21/P-22). */
 /* pan-y deja que el dedo siga desplazando la pagina en vertical sobre el
