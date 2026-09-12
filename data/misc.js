@@ -59,7 +59,7 @@ export const FOUNDERS=[
 
 /* Palabra que rota en el título de Contacto. */
 export const CONTACT_WORDS={
-  es:['proceso','equipo','negocio','idea','clientes'],
+  es:['proceso','equipo','negocio','idea','cliente'],
   en:['process','team','business','idea','customers']
 };
 
